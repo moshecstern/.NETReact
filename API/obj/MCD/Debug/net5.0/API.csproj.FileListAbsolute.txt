@@ -1,0 +1,7 @@
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.csprojAssemblyReference.cache
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.AssemblyInfoInputs.cache
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.AssemblyInfo.cs
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.csproj.CoreCompileInputs.cache
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.MvcApplicationPartsAssemblyInfo.cache
