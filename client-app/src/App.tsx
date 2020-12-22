@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Header, Icon } from 'semantic-ui-react'
+
 // function App() {
 //   return (
 //     <div className="App">
@@ -25,7 +27,13 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <div className="app">
-      <h1>.NET React project</h1>
+        <Header as='h2' icon>
+    <Icon name='settings' />
+   NET REACT FUNTIMES
+    <Header.Subheader>
+      Manage your account settings and set e-mail preferences.
+    </Header.Subheader>
+  </Header>
     </div>
   )
 }
