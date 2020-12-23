@@ -1,7 +1,7 @@
 # .NETReact
 .NET Core, React Hooks with TypeScript and MobX for state management 
 
-
+To Seed, delete db and start project
 
 CTRL + . => quick fix menu
 
@@ -22,10 +22,11 @@ handles all the controllers abilities- formats the request for specification
 API/Controllers/{RouteName}Controller 
 handles where to send the requests => Application
 
+## MediatR
+Thin API Controllers
 
 ## MobX
 
-## MediatR
 
 ## backend 
 run backend only: cd API/    ==>   dotnet watch run

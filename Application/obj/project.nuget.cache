@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PwfFsNqWCc61UaHM8169Y2qAnO/HwDBjYpCHZ/RJT2aAIF9Kcz6VI1r6Q360HdOpQMgsVF0BgWeU5K9aQFzUfw==",
+  "dgSpecHash": "7KpN8BcwNIYVXyzQJAep6rbM1fTkODw7vSgVuVKtSQ0IPwrb1XPYQYpsUXN529aD7q1MDm7bfFz5qj9ADpMCdg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\9.0.0\\mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
