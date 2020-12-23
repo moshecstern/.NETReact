@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nltDxUcxG7VR/w31C+4qL9DC+5RvPBP7bczaZ5Atlc8PI2tmIcXdJRh3ly/suRDxIMtDHNaVOEzJgI9HhtDw6g==",
+  "dgSpecHash": "jEUVLaGcU057P6Wqj0pG1MxEdAKOYB/DJUknkL+/riIZ/Qv4jCtPYnmXmDP6vLsx/EvZo+/wekK2joNoJSsSGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Persistence\\Persistence.csproj",
+  "projectFilePath": "c:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.0\\microsoft.data.sqlite.core.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",

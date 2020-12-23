@@ -67,3 +67,4 @@ C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\De
 C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\ref\API.dll
 C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.pdb
 C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\obj\MCD\Debug\net5.0\API.genruntimeconfig.cache
+C:\Users\Moshe Stern\Documents\CodingMo\Udemy\.NETReact\.NETReact\API\bin\MCD\Debug\net5.0\appsettings.Development.json

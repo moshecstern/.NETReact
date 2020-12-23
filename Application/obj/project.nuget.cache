@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qEr782FoduStIzAxYFd6Pr4gXPTy3smbjYFYgdSindLyfBjhF+ohgLlqOn3h72eSOECEhYow8svgrN+I0G7mYQ==",
+  "dgSpecHash": "PwfFsNqWCc61UaHM8169Y2qAnO/HwDBjYpCHZ/RJT2aAIF9Kcz6VI1r6Q360HdOpQMgsVF0BgWeU5K9aQFzUfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
+  "projectFilePath": "c:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Moshe Stern\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\Moshe Stern\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\9.0.0\\mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.0\\microsoft.data.sqlite.core.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.0\\microsoft.entityframeworkcore.5.0.0.nupkg.sha512",
