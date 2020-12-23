@@ -16,6 +16,12 @@ call the seed in Persistance 'DataContext.cs'
 command terminal 'dotnet ef migrations add "ActivityEntityUpdated" -p Persistence/ -s API/'
 
 ## CQRS
+/Application/{API/RouteName}/{Create/edit} : Like models but with middleware
+handles all the controllers abilities- formats the request for specification
+
+API/Controllers/{RouteName}Controller 
+handles where to send the requests => Application
+
 
 ## MobX
 
