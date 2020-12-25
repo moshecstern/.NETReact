@@ -14,6 +14,7 @@ add 'Seed.cs' to Persistance folder,
 create structure to Domain in 'Activity.cs'
 call the seed in Persistance 'DataContext.cs'
 command terminal 'dotnet ef migrations add "ActivityEntityUpdated" -p Persistence/ -s API/'
+Drop DB: dotnet ef database drop -p Persistence/ -s API/
 
 ## CQRS
 /Application/{API/RouteName}/{Create/edit} : Like models but with middleware

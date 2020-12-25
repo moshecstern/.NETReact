@@ -1,10 +1,11 @@
-  import React, { useState, useEffect, Fragment } from "react";
+  import React, { useState, useEffect, Fragment, SyntheticEvent } from "react";
   import { Container, Header, Icon } from "semantic-ui-react";
   import "./styles.css";
   import { IActivity } from "../Models/activity";
-  import axios from "axios";
   import NavBar from "../features/nav/NavBar";
   import ActivityDashboard from "../features/activities/dashboard/ActivityDashboard";
+  import  Agent  from "../api/agent";
+  import LoadingComponent from "./LoadingComponent";
 
   const App = () => {
 
@@ -14,7 +15,9 @@
       null
     );
     const [editMode, setEditMode] = useState(false);
-
+    const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
+    const [target, setTarget] = useState('');
 
     // FUNCTIONS
     const handleSelectActivity = (id: string) => {
@@ -28,46 +31,57 @@
     }
     
     const handleCreateActivity = (activity: IActivity) => {
-      setActivities([...activities, activity]);
-      // spreading out existing array and adding this oone to it
-      setSelectedActivity(activity);
-      setEditMode(false);
+      setSubmitting(true);
+      Agent.Activities.create(activity).then(() => {
+        setActivities([...activities, activity]);
+        // spreading out existing array and adding this oone to it
+        setSelectedActivity(activity);
+        setEditMode(false);
+      }).then(() => setSubmitting(false))
     }
     
     const handleEditActivity = (activity: IActivity) => {
-      setActivities([...activities.filter(a => a.id !== activity.id), activity]);
-      // spreading out existing array and filter out the one we are updating, then add to that one
-      setSelectedActivity(activity);
-      setEditMode(false);
+      setSubmitting(true);
+      Agent.Activities.update(activity).then(() => {
+        setActivities([...activities.filter(a => a.id !== activity.id), activity]);
+        // spreading out existing array and filter out the one we are updating, then add to that one
+        setSelectedActivity(activity);
+        setEditMode(false);
+      }).then(() => setSubmitting(false))
     }
     
-    const handleDeleteActivity = (id: string) => {
-      setActivities([...activities.filter((a) => a.id !== id)])
+    const handleDeleteActivity = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
+      setTarget(event.currentTarget.name)
+      setSubmitting(true);
+      Agent.Activities.delete(id).then(() => {
+        setActivities([...activities.filter((a) => a.id !== id)])
+      }).then(() => setSubmitting(false))
     };
     
     // LIFECYCLE
     useEffect(() => {
-      axios
-        .get<IActivity[]>("http://localhost:5000/api/activities")
-        .then((response) => {
+      Agent.Activities.list()
+      .then(response => {
           let activities: IActivity[] = [];
           // datetime
-          response.data.forEach(activity => {
+          response.forEach((activity) => {
             activity.date = activity.date.split('.')[0];
             activities.push(activity);
           })
           setActivities(activities);
-        });
+        }).then(()=> setLoading(false));
     }, []);
 
-
+    if (loading) return <LoadingComponent content='Loading activities...'/>
     // APP
     return (
       // <div className="app">
       <Fragment>
+        <Container style={{ marginTop: '7em'}}>
+          
         <NavBar openCreateForm={handleOpenCreateForm} />
-        <Container style={{ marginTop: "7em" }}>
-          <div>
+    
+          
             <Header as="h2" icon>
               <Icon name="users" />
               <Header.Content>NET REACT FUNTIMES</Header.Content>
@@ -87,9 +101,13 @@
               createActivity={handleCreateActivity}
               editActivity={handleEditActivity}
               deleteActivity={handleDeleteActivity}
-            />
-          </div>
-        </Container>
+              submitting={submitting}
+              target={target}
+              />
+              </Container>
+
+    
+       
       </Fragment>
     );
   };

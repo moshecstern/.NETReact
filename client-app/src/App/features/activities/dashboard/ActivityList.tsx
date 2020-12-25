@@ -1,42 +1,62 @@
-import React from 'react'
-import { Button, Item, Label, Segment } from 'semantic-ui-react'
-import { IActivity } from '../../../Models/activity'
+import React, { SyntheticEvent } from "react";
+import { Button, Item, Label, Segment } from "semantic-ui-react";
+import { IActivity } from "../../../Models/activity";
 
 interface IProps {
-    activities: IActivity[];
-    selectActivity: (id: string) => void;
-    deleteActivity: (id: string) => void;
-};
-
-const ActivityList: React.FC<IProps> = ({activities, selectActivity, deleteActivity}) => {
-    return (
-        <Segment clearing>
-
-        <Item.Group divided>
-            {activities.map(activity => (
-
-                <Item key={activity.id}>
-          {/* <Item.Image size='tiny' src='/images/wireframe/image.png' /> */}
-
-          <Item.Content>
-            <Item.Header as='a'>{activity.title}</Item.Header>
-            <Item.Meta>{activity.date}</Item.Meta>
-            <Item.Description>
-              {/* <Image src='/images/wireframe/short-paragraph.png' /> */}
-                <div>{activity.description}</div>
-                <div>{activity.city}, {activity.venue}</div>
-            </Item.Description>
-            <Item.Extra>
-                <Button onClick={() => selectActivity(activity.id)} floated='right' content='View' color='blue' />
-                <Button onClick={() => deleteActivity(activity.id)} floated='right' content='Delete' color='red' />
-                <Label basic content={activity.category} />
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-            ))}
-      </Item.Group>
-        </Segment>
-    )
+  activities: IActivity[];
+  selectActivity: (id: string) => void;
+  deleteActivity: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
+  submitting: boolean;
+  target: string;
 }
 
-export default ActivityList
+const ActivityList: React.FC<IProps> = ({
+  activities,
+  selectActivity,
+  deleteActivity,
+  submitting,
+  target,
+}) => {
+  return (
+    <Segment clearing>
+      <Item.Group divided>
+        {activities.map((activity) => (
+          <Item key={activity.id}>
+            {/* <Item.Image size='tiny' src='/images/wireframe/image.png' /> */}
+
+            <Item.Content>
+              <Item.Header as="a">{activity.title}</Item.Header>
+              <Item.Meta>{activity.date}</Item.Meta>
+              <Item.Description>
+                {/* <Image src='/images/wireframe/short-paragraph.png' /> */}
+                <div>{activity.description}</div>
+                <div>
+                  {activity.city}, {activity.venue}
+                </div>
+              </Item.Description>
+              <Item.Extra>
+                <Button
+                  onClick={() => selectActivity(activity.id)}
+                  floated="right"
+                  content="View"
+                  color="blue"
+                />
+                <Button
+                  name={activity.id}
+                  loading={target === activity.id && submitting}
+                  onClick={(e) => deleteActivity(e, activity.id)}
+                  floated="right"
+                  content="Delete"
+                  color="red"
+                />
+                <Label basic content={activity.category} />
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        ))}
+      </Item.Group>
+    </Segment>
+  );
+};
+
+export default ActivityList;
