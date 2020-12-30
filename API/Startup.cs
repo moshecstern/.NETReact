@@ -1,5 +1,6 @@
 using System.Text;
 using System.Threading.Tasks;
+using API.Middleware;
 // using API.Middleware;
 // using API.SignalR;
 using Application.Activities;
@@ -7,6 +8,7 @@ using Application.Activities;
 // using Application.Profiles;
 // using AutoMapper;
 using Domain;
+using FluentValidation.AspNetCore;
 // using FluentValidation.AspNetCore;
 // using Infrastructure.Photos;
 // using Infrastructure.Security;
@@ -52,8 +54,11 @@ namespace API
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers();
-            
+            services.AddControllers()
+            .AddFluentValidation(cfg =>
+            {
+                cfg.RegisterValidatorsFromAssemblyContaining<Create>();
+            });
             // services.AddControllers(endpoints =>{
             //     endpoints
             // })
@@ -121,7 +126,7 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // app.UseMiddleware<ErrorHandlingMiddleware>();
-
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
             {
                 // app.UseDeveloperExceptionPage();
