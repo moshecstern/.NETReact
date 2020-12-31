@@ -59,26 +59,12 @@ namespace API
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
-            // services.AddControllers(endpoints =>{
-            //     endpoints
-            // })
-             
-            // services.AddAutoMapper(typeof(List.Handler));
-            // services.AddSignalR();
-            // services.AddMvc(opt =>
-            // {
-            //     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            //     opt.Filters.Add(new AuthorizeFilter(policy));
-                
-            // });
-                // .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Create>())
-                // .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // var builder = services.AddIdentityCore<AppUser>();
-            // var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
-            // identityBuilder.AddEntityFrameworkStores<DataContext>();
-            // identityBuilder.AddSignInManager<SignInManager<AppUser>>();
-
+            var builder = services.AddIdentityCore<AppUser>();
+            var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
+            identityBuilder.AddEntityFrameworkStores<DataContext>();
+            identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+            services.AddAuthentication();
             // services.AddAuthorization(opt => 
             // {
             //     opt.AddPolicy("IsActivityHost", policy =>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "egGYA8qg+d9R/vP4czKmN0WcMnm2eWkA5uijUvcP5H1wt+3uPl0ka6Vb7kWLZH6Aaw5gyHsC/48zVxaSioj+Qg==",
+  "dgSpecHash": "fL1+qKQy1KAjPVoNQGTUV59B7gAWbsICw3WZ/7UqMH/DmqFjWbKhoypyzjc7X+Qb67BaEvbFBj+lv9Y7FLVitA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\API\\API.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.0\\microsoft.aspnetcore.cryptography.internal.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.0\\microsoft.aspnetcore.cryptography.keyderivation.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.0.nupkg.sha512",
+    "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\5.0.0\\microsoft.aspnetcore.identity.ui.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.0\\microsoft.data.sqlite.core.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
@@ -36,6 +37,7 @@
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.dependencymodel\\5.0.0\\microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\5.0.0\\microsoft.extensions.fileproviders.embedded.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\5.0.0\\microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\5.0.0\\microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.extensions.identity.core\\5.0.0\\microsoft.extensions.identity.core.5.0.0.nupkg.sha512",
