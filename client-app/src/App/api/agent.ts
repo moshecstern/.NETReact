@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+// import { runInAction } from 'mobx';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { IActivity } from '../Models/activity';
@@ -21,7 +22,8 @@ axios.interceptors.response.use(undefined, error => {
     if (status === 500) {
         toast.error('Server error - please check terminal for more info')
     }
-})
+    throw error;
+});
 
 // End Middleware
 const responseBody = (response: AxiosResponse) => response.data;
