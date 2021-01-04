@@ -4,11 +4,13 @@ using API.Middleware;
 // using API.Middleware;
 // using API.SignalR;
 using Application.Activities;
+using Application.Interfaces;
 // using Application.Interfaces;
 // using Application.Profiles;
 // using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 // using FluentValidation.AspNetCore;
 // using Infrastructure.Photos;
 // using Infrastructure.Security;
@@ -54,17 +56,15 @@ namespace API
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers()
+            services.AddControllers(opt => 
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            })
             .AddFluentValidation(cfg =>
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
-
-            var builder = services.AddIdentityCore<AppUser>();
-            var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
-            identityBuilder.AddEntityFrameworkStores<DataContext>();
-            identityBuilder.AddSignInManager<SignInManager<AppUser>>();
-            services.AddAuthentication();
             // services.AddAuthorization(opt => 
             // {
             //     opt.AddPolicy("IsActivityHost", policy =>
@@ -74,17 +74,23 @@ namespace API
             // });
             // services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
-            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //     .AddJwtBearer(opt =>
-            //     {
-            //         opt.TokenValidationParameters = new TokenValidationParameters
-            //         {
-            //             ValidateIssuerSigningKey = true,
-            //             IssuerSigningKey = key,
-            //             ValidateAudience = false,
-            //             ValidateIssuer = false
-            //         };
+            var builder = services.AddIdentityCore<AppUser>();
+            var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
+            identityBuilder.AddEntityFrameworkStores<DataContext>();
+            identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt => 
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateAudience = false,
+                    ValidateIssuer = false
+                };
+            });
+
             //         opt.Events = new JwtBearerEvents
             //         {
             //             OnMessageReceived = context => 
@@ -101,8 +107,8 @@ namespace API
             //         };
             //     });
 
-            // services.AddScoped<IJwtGenerator, JwtGenerator>();
-            // services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<IUserAccessor, UserAccessor>();
             // services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             // services.AddScoped<IProfileReader, ProfileReader>();
             // services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
@@ -128,6 +134,7 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

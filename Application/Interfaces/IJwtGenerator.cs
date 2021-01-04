@@ -1,7 +1,10 @@
-// namespace Application.Interfaces
-// {
-//     public class IJwtGenerator
-//     {
-//         string GetCurrentUsername();
-//     }
-// }
+using Domain;
+
+namespace Application.Interfaces
+{
+    public interface IJwtGenerator
+    {
+        // string GetCurrentUsername();
+     string CreateToken(AppUser user);
+    }
+}

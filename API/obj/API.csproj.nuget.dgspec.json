@@ -33,6 +33,9 @@
             "projectReferences": {
               "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj": {
                 "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj"
+              },
+              "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -49,10 +52,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[5.0.0, )",
-              "noWarn": [
-                "NU1605"
-              ]
+              "version": "[5.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
               "target": "Package",
@@ -216,6 +216,73 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Moshe Stern\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Moshe Stern\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.8.0, )"
             }
           },
           "imports": [
