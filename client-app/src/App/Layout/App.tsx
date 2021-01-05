@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Container, Header, Icon } from "semantic-ui-react";
+import React, { Fragment, useContext, useEffect } from "react";
+import { Container } from "semantic-ui-react";
 import "./styles.css";
 import NavBar from "../features/nav/NavBar";
 import { observer } from "mobx-react-lite";
@@ -10,29 +10,46 @@ import ActivityForm from "../features/activities/form/ActivityForm";
 import ActivityDetails from "../features/activities/details/ActivityDetails";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
+import LoginForm from '../features/user/LoginForm';
+import { RootStoreContext } from "../stores/rootStore";
+import LoadingComponent from "./LoadingComponent";
+import ModalContainer from "../common/modals/ModalContainer";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
+  const rootStore = useContext(RootStoreContext);
+  const {setAppLoaded, token, appLoaded} = rootStore.commonStore;
+  const {getUser} = rootStore.userStore;
+
+  useEffect(() => {
+    if (token) {
+      getUser().finally(() => setAppLoaded())
+    }else {
+      setAppLoaded();
+    }
+  }, [getUser, setAppLoaded, token])
+  if (!appLoaded) return <LoadingComponent content='Loading App' />
 
   // APP
   return (
     // <div className="app">
     <Fragment>
+      <ModalContainer />
       <ToastContainer position='bottom-right'/>
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
         render={() => (
           <Fragment>
-            <Container style={{ marginTop: "7em" }}>
               <NavBar />
+            <Container style={{ marginTop: "7em" }}>
 
-              <Header as="h2" icon>
+              {/* <Header as="h2" icon>
                 <Icon name="users" />
                 <Header.Content>NET REACT FUNTIMES</Header.Content>
                 <Header.Subheader>
                   Manage your account settings and set e-mail preferences.
                 </Header.Subheader>
-              </Header>
+              </Header> */}
               <Switch>
 
               <Route exact path="/activities" component={ActivityDashboard} />
@@ -42,6 +59,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 path={["/createActivity", "/manage/:id"]}
                 component={ActivityForm}
                 />
+                <Route path="/login" component={LoginForm} />
               <Route  component={NotFound} />
                 </Switch>
             </Container>

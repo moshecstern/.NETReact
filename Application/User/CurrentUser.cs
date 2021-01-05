@@ -26,8 +26,16 @@ namespace Application.User
 
             public async Task<User> Handle(Query request, CancellationToken cancellationToken)
             {
-                // handler logic goes here
+                  
                 var user = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());
+
+                // var refreshToken = _jwtGenerator.GenerateRefreshToken();
+                // user.RefreshTokens.Add(refreshToken);
+                // await _userManager.UpdateAsync(user);
+
+                // return new User(user, _jwtGenerator, refreshToken.Token);
+            
+                // handler logic goes here
                 return new User
                 {
                     DisplayName = user.DisplayName,

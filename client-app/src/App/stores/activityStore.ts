@@ -1,10 +1,10 @@
-import { createContext, SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 import {
     observable,
     action,
     computed,
-    makeAutoObservable,
-    configure,
+    // makeAutoObservable,
+    // reaction,
     runInAction,
 } from "mobx";
 import { IActivity } from "../Models/activity";
@@ -14,13 +14,20 @@ import { toast } from "react-toastify";
 import {RootStore} from './rootStore';
 // import { act } from 'react-dom/test-utils';
 
-configure({ enforceActions: "always" });
 
 export default class ActivityStore {
     rootStore: RootStore;
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
-        makeAutoObservable(this);
+        // makeAutoObservable(this);
+        // reaction(
+        //     () => this.predicate.keys(),
+        //     () => {
+        //       this.page = 0;
+        //       this.activityRegistry.clear();
+        //       this.loadActivities();
+        //     }
+        //   )
     }
     @observable activityRegistry = new Map();
     // @observable activities: IActivity[] = [];

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
-import {
-  ActivityFormValues,
-} from "../../../Models/activity";
+import {ActivityFormValues} from "../../../Models/activity";
 import { v4 as uuid } from "uuid";
 // import LoadingComponent from "../../../../LoadingComponent";
 import { observer } from "mobx-react-lite";

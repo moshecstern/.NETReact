@@ -20,7 +20,6 @@ const ActivityDashboard: React.FC = () => {
     if (loadingInitial)
       return <LoadingComponent content="Loading activities..." />;
   return (
-    <div>
       <Grid>
         <Grid.Column width={10}>
           <ActivityList />
@@ -29,7 +28,6 @@ const ActivityDashboard: React.FC = () => {
           <h2>Activity filters</h2>
         </Grid.Column>
       </Grid>
-    </div>
   );
 };
 export default observer(ActivityDashboard);
