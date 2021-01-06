@@ -62,6 +62,8 @@ Design and Security
 #### Fluent Validation (AspCoreNet)
 Security/ Validation
 
+#### Auto Mapper 
+
 #### MediatR
 Thin API Controllers => Dependency Injection
 Application Folder
@@ -90,6 +92,8 @@ handles where to send the requests => Application
 ### Application Folder
 Business Logic
 
+#### Auto Mapper 
+
 ##### API Handlers 
 Activities, Errors, User
 Fluent Validation (AspCoreNet) => Security/ Validation
@@ -108,6 +112,7 @@ Entity
 
 Config
 
+Proxies
 
 #### Seeding Data
 
