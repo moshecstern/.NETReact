@@ -90,7 +90,7 @@ namespace API
 
             var builder = services.AddIdentityCore<AppUser>(options => 
             {
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);

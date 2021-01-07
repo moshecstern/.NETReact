@@ -1,23 +1,22 @@
 import axios, { AxiosResponse } from 'axios';
-// import { config } from 'process';
-// import { runInAction } from 'mobx';
-import { toast } from 'react-toastify';
-import { history } from '../..';
 import { IActivity, IActivitiesEnvelope } from '../models/activity';
+import { history } from '../..';
+import { toast } from 'react-toastify';
 import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
-// Middleware
-axios.interceptors.request.use((config) => {
-  const token = window.localStorage.getItem('jwt');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-}, error => {
-  return Promise.reject(error);
-})
-
+axios.interceptors.request.use(
+  config => {
+    const token = window.localStorage.getItem('jwt');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 axios.interceptors.response.use(undefined, error => {
   if (error.message === 'Network Error' && !error.response) {
@@ -45,23 +44,32 @@ axios.interceptors.response.use(undefined, error => {
   throw error.response;
 });
 
-// End Middleware
 const responseBody = (response: AxiosResponse) => response.data;
 
-// const sleep = (ms: number) => (response: AxiosResponse) => 
-//     new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(response), ms))
-
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
-  post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
-  put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
-  del: (url: string) => axios.delete(url).then(responseBody),
+  get: (url: string) =>
+    axios
+      .get(url)
+      .then(responseBody),
+  post: (url: string, body: {}) =>
+    axios
+      .post(url, body)
+      .then(responseBody),
+  put: (url: string, body: {}) =>
+    axios
+      .put(url, body)
+      .then(responseBody),
+  del: (url: string) =>
+    axios
+      .delete(url)
+      .then(responseBody),
   postForm: (url: string, file: Blob) => {
     let formData = new FormData();
     formData.append('File', file);
-    return axios.post(url, formData, {
-      headers: { 'Content-type': 'multipart/form-data' }
-    })
+    return axios
+      .post(url, formData, {
+        headers: { 'Content-type': 'multipart/form-data' }
+      })
       .then(responseBody);
   }
 };
@@ -71,18 +79,21 @@ const Activities = {
     axios.get('/activities', { params: params }).then(responseBody),
   details: (id: string) => requests.get(`/activities/${id}`),
   create: (activity: IActivity) => requests.post('/activities', activity),
-  update: (activity: IActivity) => requests.put(`/activities/${activity.id}`, activity),
+  update: (activity: IActivity) =>
+    requests.put(`/activities/${activity.id}`, activity),
   delete: (id: string) => requests.del(`/activities/${id}`),
   attend: (id: string) => requests.post(`/activities/${id}/attend`, {}),
   unattend: (id: string) => requests.del(`/activities/${id}/attend`)
-}
+};
 
 const User = {
   current: (): Promise<IUser> => requests.get('/user'),
-  login: (user: IUserFormValues): Promise<IUser> => requests.post('/user/login', user),
+  login: (user: IUserFormValues): Promise<IUser> =>
+    requests.post(`/user/login`, user),
+  register: (user: IUserFormValues): Promise<IUser> =>
+    requests.post(`/user/register`, user),
   fbLogin: (accessToken: string) =>
-  requests.post(`/user/facebook`, { accessToken }),
-  register: (user: IUserFormValues): Promise<IUser> => requests.post('/user/register', user),
+    requests.post(`/user/facebook`, { accessToken }),
   refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),
   verifyEmail: (token: string, email: string): Promise<void> =>
     requests.post(`/user/verifyEmail`, { token, email }),
@@ -108,9 +119,8 @@ const Profiles = {
     requests.get(`/profiles/${username}/activities?predicate=${predicate}`)
 };
 
-const agent = {
+export default {
   Activities,
   User,
   Profiles
-}
-export default agent
+};
