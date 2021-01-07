@@ -21,8 +21,8 @@ export default class UserStore {
 
     @action login = async (values: IUserFormValues) => {
         try {
+            console.log("requesting user userStore 52 + values: ");
             const user = await agent.User.login(values);
-            console.log("requesting user userStore 52 + values: ")
             runInAction(() => {
                 this.user = user;
             });
@@ -38,12 +38,12 @@ export default class UserStore {
     }
     @action register = async (values: IUserFormValues) => {
         try {
-            const user = await agent.User.register(values);
-            this.rootStore.commonStore.setToken(user.token);
+            await agent.User.register(values);
+            // this.rootStore.commonStore.setToken(user.token);
             this.rootStore.modalStore.closeModal();
             history.push(`/user/registerSuccess?email=${values.email}`);
         } catch (error) {
-            // console.log(error);
+            console.log(error);
             throw error;
         }
     }
@@ -81,23 +81,23 @@ export default class UserStore {
         }
       }
 
-    // @action fbLogin = async (response: any) => {
-    //     this.loading = true;
-    //     try {
-    //       const user = await agent.User.fbLogin(response.accessToken);
-    //       runInAction(() => {
-    //         this.user = user;
-    //         this.rootStore.commonStore.setToken(user.token);
-    //         this.startRefreshTokenTimer(user);
-    //         this.rootStore.modalStore.closeModal();
-    //         this.loading = false;
-    //       })
-    //       history.push('/activities');
-    //     } catch (error) {
-    //       this.loading = false;
-    //       throw error;
-    //     }
-    //   }
+    @action fbLogin = async (response: any) => {
+        this.loading = true;
+        try {
+          const user = await agent.User.fbLogin(response.accessToken);
+          runInAction(() => {
+            this.user = user;
+            this.rootStore.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
+            this.rootStore.modalStore.closeModal();
+            this.loading = false;
+          })
+          history.push('/activities');
+        } catch (error) {
+          this.loading = false;
+          throw error;
+        }
+      }
     
       private startRefreshTokenTimer(user: IUser) {
         const jwtToken = JSON.parse(atob(user.token.split('.')[1]));

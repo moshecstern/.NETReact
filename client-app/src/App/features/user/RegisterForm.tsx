@@ -7,7 +7,6 @@ import { IUserFormValues } from "../../models/user";
 import { FORM_ERROR } from "final-form";
 import { combineValidators, isRequired } from "revalidate";
 import ErrorMessage from '../../common/form/ErrorMessage';
-import { observer } from "mobx-react-lite";
 
 const validate = combineValidators({
   email: isRequired("Email"),
@@ -66,7 +65,7 @@ const RegisterForm = () => {
             color="teal"
             fluid
             loading={submitting}
-            positive
+            // positive
             content="Register"
           />
           {/* <pre>{JSON.stringify(form.getState(), null, 2)}</pre> */}
@@ -76,4 +75,4 @@ const RegisterForm = () => {
   );
 };
 
-export default observer(RegisterForm);
+export default RegisterForm;

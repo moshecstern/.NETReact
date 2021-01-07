@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Container } from "semantic-ui-react";
-import "./styles.css";
+// import "./styles.css";
 import NavBar from "../features/nav/NavBar";
 import { observer } from "mobx-react-lite";
 import {
@@ -15,10 +15,13 @@ import ActivityForm from "../features/activities/form/ActivityForm";
 import ActivityDetails from "../features/activities/details/ActivityDetails";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
-// import LoginForm from '../features/user/LoginForm';
 import { RootStoreContext } from "../stores/rootStore";
 import LoadingComponent from "./LoadingComponent";
 import ModalContainer from "../common/modals/ModalContainer";
+import ProfilePage from "../features/profiles/ProfilePage";
+import PrivateRoute from "./PrivateRoute";
+import RegisterSuccess from "../features/user/RegisterSuccess";
+import VerifyEmail from "../features/user/VerifyEmail";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -47,15 +50,22 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
             <NavBar />
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <Route exact path="/activities" component={ActivityDashboard} />
-                <Route path="/activities/:id" component={ActivityDetails} />
-                <Route
+                <PrivateRoute exact path="/activities" component={ActivityDashboard} />
+                <PrivateRoute path="/activities/:id" component={ActivityDetails} />
+                <PrivateRoute
                   key={location.key}
                   path={["/createActivity", "/manage/:id"]}
                   component={ActivityForm}
                 />
-                {/* <Route path="/login" component={LoginForm} /> */}
-                <Route component={NotFound} />
+                <PrivateRoute
+                  path="/profile/:username"
+                  component={ProfilePage}
+                />
+                <Route
+                  path="/user/registerSuccess"
+                  component={RegisterSuccess}
+                />
+                <Route path="/user/verifyEmail" component={VerifyEmail} />                <Route component={NotFound} />
               </Switch>
             </Container>
           </Fragment>
