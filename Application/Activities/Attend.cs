@@ -33,7 +33,7 @@ namespace Application.Activities
                 var activity = await _context.Activities.FindAsync(request.Id);
                 if (activity == null) 
                     throw new RestException(HttpStatusCode.NotFound, 
-                    new {Activity = "Could nit find activity"});
+                    new {Activity = "Could not find activity"});
                 var user = await _context.Users.SingleOrDefaultAsync(x => 
                     x.UserName == _userAccessor.GetCurrentUsername());
 

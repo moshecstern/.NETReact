@@ -3,10 +3,11 @@ import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../common/form/TextInput";
 import { Form, Button, Header } from "semantic-ui-react";
 import { RootStoreContext } from "../../stores/rootStore";
-import { IUserFormValues } from "../../Models/user";
+import { IUserFormValues } from "../../models/user";
 import { FORM_ERROR } from "final-form";
 import { combineValidators, isRequired } from "revalidate";
 import ErrorMessage from '../../common/form/ErrorMessage';
+import { observer } from "mobx-react-lite";
 
 const validate = combineValidators({
   email: isRequired("Email"),
@@ -75,4 +76,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default observer(RegisterForm);

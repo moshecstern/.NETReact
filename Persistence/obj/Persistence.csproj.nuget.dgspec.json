@@ -118,13 +118,17 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.Extensions.Configuration.Json": {
+            "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[3.1.0-rc1.final, )"
             }
           },
           "imports": [

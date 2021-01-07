@@ -3,8 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 // import { runInAction } from 'mobx';
 import { toast } from 'react-toastify';
 import { history } from '../..';
-import { IActivity } from '../Models/activity';
-import { IUser, IUserFormValues } from '../Models/user';
+import { IActivity } from '../models/activity';
+import { IUser, IUserFormValues } from '../models/user';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -20,21 +20,29 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(undefined, error => {
     if (error.message === 'Network Error' && !error.response) {
-        toast.error('Network Error - API may be down')
+      toast.error('Network error - make sure API is running!');
     }
-    const {status, data, config} = error.response;
-    if (error.response.status === 404) {
-        history.push('/notfound');
+    const { status, data, config, headers } = error.response;
+    if (status === 404) {
+      history.push('/notfound');
     }
-    // console.log(error.response);
-    if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
-        history.push('/notfound')
+    if (status === 401 && headers['www-authenticate'] === 'Bearer error="invalid_token", error_description="The token is expired"') {
+      window.localStorage.removeItem('jwt');
+      history.push('/')
+      toast.info('Your session has expired, please login again')
+    }
+    if (
+      status === 400 &&
+      config.method === 'get' &&
+      data.errors.hasOwnProperty('id')
+    ) {
+      history.push('/notfound');
     }
     if (status === 500) {
-        toast.error('Server error - please check terminal for more info')
+      toast.error('Server error - check the terminal for more info!');
     }
     throw error.response;
-});
+  });
 
 // End Middleware
 const responseBody = (response: AxiosResponse) => response.data;
@@ -55,6 +63,8 @@ const Activities = {
     create: (activity: IActivity) => requests.post('/activities', activity),
     update: (activity: IActivity) => requests.put(`/activities/${activity.id}`, activity),
     delete: (id: string) => requests.del(`/activities/${id}`),
+    attend: (id: string) => requests.post(`/activities/${id}/attend`, {}),
+    unattend: (id: string) => requests.del(`/activities/${id}/attend`)
 }
 
 const User = {

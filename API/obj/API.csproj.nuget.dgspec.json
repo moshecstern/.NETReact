@@ -54,13 +54,6 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
-              "target": "Package",
-              "version": "[5.0.0, )",
-              "noWarn": [
-                "NU1605"
-              ]
-            },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -69,13 +62,9 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "NWebsec.AspNetCore.Middleware": {
               "target": "Package",
-              "version": "[5.0.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[3.0.0, )"
             }
           },
           "imports": [
@@ -148,15 +137,15 @@
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[6.1.1, )"
+              "version": "[7.0.0, )"
             },
             "FluentValidation.AspNetCore": {
               "target": "Package",
-              "version": "[8.6.2, )"
+              "version": "[8.5.1, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -284,6 +273,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.14.0, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.22.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.8.0, )"
@@ -359,13 +356,17 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.Extensions.Configuration.Json": {
+            "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[3.1.0-rc1.final, )"
             }
           },
           "imports": [

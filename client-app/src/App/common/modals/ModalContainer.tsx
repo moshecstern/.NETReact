@@ -12,7 +12,7 @@ const ModalContainer = () => {
                {body}
            </Modal.Content>
        </Modal>
-    )
-}
+    );
+};
 
 export default observer(ModalContainer)

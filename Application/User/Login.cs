@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,24 +43,24 @@ namespace Application.User
 
             public async Task<User> Handle(Query request, CancellationToken cancellationToken)
             {
-                // handler logic goes here
                 var user = await _userManager.FindByEmailAsync(request.Email);
+
                 if (user == null)
                     throw new RestException(HttpStatusCode.Unauthorized);
 
-                var results = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                if (!user.EmailConfirmed) throw new RestException(HttpStatusCode.BadRequest, new {Email = "Email is not confirmed"});
 
-                if (results.Succeeded)
+                var result = await _signInManager
+                    .CheckPasswordSignInAsync(user, request.Password, false);
+
+                if (result.Succeeded)
                 {
-                    // Genarate TOken TODO
-                    return new User
-                    {
-                        DisplayName = user.DisplayName,
-                        Token = _jwtGenerator.CreateToken(user),
-                        Username = user.UserName,
-                        Image = null
-                    };
+                    var refreshToken = _jwtGenerator.GenerateRefreshToken();
+                    user.RefreshTokens.Add(refreshToken);
+                    await _userManager.UpdateAsync(user);
+                    return new User(user, _jwtGenerator, refreshToken.Token);
                 }
+
                 throw new RestException(HttpStatusCode.Unauthorized);
             }
         }

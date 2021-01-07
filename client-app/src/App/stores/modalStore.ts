@@ -1,5 +1,4 @@
 import { RootStore } from "./rootStore"
-
 import { observable, action } from 'mobx';
 
 export default class ModalStore {

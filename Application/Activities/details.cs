@@ -25,7 +25,8 @@ namespace Application.Activities
             public Handler(DataContext context, IMapper mapper)
             {
             _mapper = mapper;
-            _context = context;
+            this._context = context;
+            // fix take out '.this'
             }
 
             public async Task<ActivityDto> Handle(Query request, CancellationToken

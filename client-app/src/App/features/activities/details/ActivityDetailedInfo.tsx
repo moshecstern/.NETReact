@@ -1,6 +1,6 @@
 import React from 'react'
 import { Segment, Grid, Icon } from 'semantic-ui-react'
-import { IActivity } from '../../../Models/activity'
+import { IActivity } from '../../../models/activity'
 import {format} from 'date-fns'
 
 

@@ -1,18 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>9f7a288c-989b-48b1-b134-a36a7a884a22</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.0" NoWarn="NU1605" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0"/>
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Application\Application.csproj"/>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
   </ItemGroup>
 </Project>

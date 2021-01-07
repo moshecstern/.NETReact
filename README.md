@@ -151,5 +151,22 @@ API/Controllers/{RouteName}Controller
 handles where to send the requests => Application
 
 
+### adding env var to dotnet
+in api folder, ' dotnet user-secrets set "varName" "varValue" '
+dotnet user-secrets list      , (to view all user secrets in specified location)
+
+### Cloudinary
+For photo uploads
+
+set catagery within env in api folder using ':' before variable name
+cd API/  ,  dotnet user-secrets set "Cloudinary:CloudName" "varValue"
+            dotnet user-secrets set "Cloudinary:ApiKey" "varValue"
+            dotnet user-secrets set "Cloudinary:ApiSecret" "varValue"
+
+            dotnet user-secrets list      , (to view all user secrets in specified location)
+
+
+
+
 
 
