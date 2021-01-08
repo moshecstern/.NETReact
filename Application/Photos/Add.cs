@@ -13,7 +13,7 @@ namespace Application.Photos
 {
     public class Add
     {
-        public class Command : IRequest<Domain.Photo>
+        public class Command : IRequest<Photo>
         {
             public IFormFile File { get; set; }
         }

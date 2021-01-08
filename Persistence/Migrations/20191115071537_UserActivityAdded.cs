@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class userActivityadded : Migration
+    public partial class UserActivityAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,10 @@ namespace Persistence.Migrations
                 name: "UserActivities",
                 columns: table => new
                 {
-                    AppUserId = table.Column<string>(type: "TEXT", nullable: false),
-                    ActivityId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    DateJoined = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsHost = table.Column<bool>(type: "INTEGER", nullable: false)
+                    AppUserId = table.Column<string>(nullable: false),
+                    ActivityId = table.Column<Guid>(nullable: false),
+                    DateJoined = table.Column<DateTime>(nullable: false),
+                    IsHost = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

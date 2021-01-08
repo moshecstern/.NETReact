@@ -1,5 +1,6 @@
 # .NETReact
 .NET Core with Identity & JWT for Authentication, React Hooks with TypeScript and MobX for state management 
+Cloudinary for Image uploads, transformations, ect.
 
 
 ## Frontend Packages
@@ -18,6 +19,15 @@ For api on frontend
 
 ### React Router Dom
 Standard Routing
+
+### Cloudinary
+Image Uploads
+
+### React DropZone
+Drag and drop images for upload
+
+### React Cropper
+To resize image to perfection before upload
 
 ### date-fns & React-Widgets
 for nice date and time picker

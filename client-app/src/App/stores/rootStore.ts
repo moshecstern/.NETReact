@@ -5,6 +5,8 @@ import { configure } from "mobx";
 import CommonStore from './commonStore';
 import ModalStore from './modalStore';
 import ProfileStore from './profileStore';
+import JobStore from './jobStore';
+import BlogStore from './blogStore';
 
 configure({ enforceActions: "always" });
 
@@ -14,6 +16,8 @@ export class RootStore {
     commonStore: CommonStore;
     modalStore: ModalStore;
     profileStore: ProfileStore;
+    jobStore: JobStore;
+    blogStore: BlogStore;
 
     constructor() {
         this.activityStore = new ActivityStore(this);
@@ -21,6 +25,8 @@ export class RootStore {
         this.commonStore = new CommonStore(this);
         this.modalStore = new ModalStore(this);
         this.profileStore = new ProfileStore(this);
+        this.jobStore = new JobStore(this);
+        this.blogStore = new BlogStore(this);
     }
 }
 export const RootStoreContext = createContext(new RootStore());

@@ -4,6 +4,8 @@ import { history } from '../..';
 import { toast } from 'react-toastify';
 import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
+import { IJobs, IJobsEnvelope } from '../models/jobs';
+import { IBlog, IBlogsEnvelope } from '../models/blog';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -74,6 +76,7 @@ const requests = {
   }
 };
 
+
 const Activities = {
   list: (params: URLSearchParams): Promise<IActivitiesEnvelope> =>
     axios.get('/activities', { params: params }).then(responseBody),
@@ -117,10 +120,39 @@ const Profiles = {
     requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
   listActivities: (username: string, predicate: string) =>
     requests.get(`/profiles/${username}/activities?predicate=${predicate}`)
-};
+  
+  // post message/id 
+  
+  };
 
-export default {
+  const Jobs = {
+    list: (params: URLSearchParams): Promise<IJobsEnvelope> =>
+      axios.get('/jobs', { params: params }).then(responseBody),
+    details: (id: string) => requests.get(`/jobs/${id}`),
+    create: (job: IJobs) => requests.post('/jobs', job),
+    update: (job: IJobs) =>
+      requests.put(`/jobs/${job.id}`, job),
+    delete: (id: string) => requests.del(`/jobs/${id}`),
+    apply: (id: string) => requests.post(`/jobs/${id}/apply`, {}),
+    unapply: (id: string) => requests.del(`/jobs/${id}/unapply`)
+  };
+
+  const Blogs = {
+    list: (params: URLSearchParams): Promise<IBlogsEnvelope> =>
+      axios.get('/blogs', { params: params }).then(responseBody),
+    details: (id: string) => requests.get(`/blogs/${id}`),
+    create: (activity: IBlog) => requests.post('/blogs', activity),
+    update: (activity: IBlog) =>
+      requests.put(`/blogs/${activity.id}`, activity),
+    delete: (id: string) => requests.del(`/blogs/${id}`),
+    like: (id: string) => requests.post(`/blogs/${id}/like`, {}),
+    unlike: (id: string) => requests.del(`/blogs/${id}/unlike`)
+  };
+
+export default  {
   Activities,
   User,
-  Profiles
+  Profiles,
+  Jobs,
+  Blogs
 };

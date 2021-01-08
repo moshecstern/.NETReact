@@ -1,4 +1,6 @@
 import { IActivity, IAttendee } from "../../models/activity";
+import { IBlog } from "../../models/blog";
+import { IJobs } from "../../models/jobs";
 import { IUser } from "../../models/user";
 
 export const combineDateAndTime = (date: Date, time: Date) => {
@@ -24,6 +26,28 @@ export const setActivityProps = (activity: IActivity, user: IUser) => {
       a => a.username === user.username && a.isHost
     )
     return activity;
+}
+
+export const setBlogProps = (blog: IBlog, user: IUser) => {
+  blog.date = new Date(blog.date);
+  blog.isLiked = blog.liked.some(
+    a => a.username === user.username
+  )
+  blog.isHost = blog.liked.some(
+    a => a.username === user.username && a.isHost
+  )
+  return blog;
+}
+
+export const setJobProps = (job: IJobs, user: IUser) => {
+  job.date = new Date(job.date);
+  job.appliedbool = job.Applied.some(
+    a => a.username === user.username
+  )
+  job.isHost = job.Applied.some(
+    a => a.username === user.username && a.isHost
+  )
+  return job;
 }
 
 export const createAttendee = (user: IUser): IAttendee => {
