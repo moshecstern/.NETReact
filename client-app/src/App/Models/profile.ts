@@ -2,6 +2,7 @@ export interface IProfile {
     displayName: string;
     username: string;
     bio: string;
+    LongBio: string;
     image: string;
     following: boolean;
     followersCount: number;
@@ -9,6 +10,9 @@ export interface IProfile {
     photos: IPhoto[];
     messages: IMessages[];
     experience: IExperience[];
+    isBusiness: boolean;
+    // blogs: IBlogs[];
+    // jobs: IJobs[];
   }
   // add above messages, postedJobs, appliedJobs, experience, blogs
 
@@ -25,11 +29,26 @@ export interface IProfile {
     date: Date;
   }
 
+  export interface IUserJob {
+    id: string;
+    title: string;
+    category: string;
+    date: Date;
+  }
+
+  export interface IUserBlog {
+    id: string;
+    title: string;
+    category: string;
+    date: Date;
+  }
+
   export interface IExperience {
     id: string;
     catagory: string;
     dateStarted: Date;
     dateEnded: Date;
+    city: string;
     title: string;
     main: string;
     main2: string;

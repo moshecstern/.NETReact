@@ -15,6 +15,8 @@ namespace Application.Profiles
         {
             public string DisplayName { get; set; }
             public string Bio { get; set; }
+            public string LongBio {get; set; }
+            public bool isBusiness {get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -41,6 +43,10 @@ namespace Application.Profiles
 
                 user.DisplayName = request.DisplayName ?? user.DisplayName;
                 user.Bio = request.Bio ?? user.Bio;
+                user.LongBio = request.LongBio ?? user.Bio;
+                user.isBusiness = request.isBusiness;
+                // fix
+                // user.isBusiness = request.isBusiness ?? user.isBusiness;
 
                 var success = await _context.SaveChangesAsync() > 0;
 

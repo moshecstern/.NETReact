@@ -30,7 +30,15 @@ const ProfileDescription = () => {
           {editMode ? (
             <ProfileEditForm updateProfile={updateProfile} profile={profile!} />
           ) : (
+            <div>
+              {profile! && profile?.isBusiness === true ? ( 
+            <span>Business</span>
+               ):(
+                <span>Personal</span>
+               ) }
             <span>{profile!.bio}</span>
+            <span>{profile!.LongBio}</span>
+            </div>
           )}
         </Grid.Column>
       </Grid>

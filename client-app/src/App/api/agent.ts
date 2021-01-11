@@ -119,7 +119,13 @@ const Profiles = {
   listFollowings: (username: string, predicate: string) =>
     requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
   listActivities: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/activities?predicate=${predicate}`)
+    requests.get(`/profiles/${username}/activities?predicate=${predicate}`),
+    listJobs: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/jobs?predicate=${predicate}`),
+    listExperiences: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/experiences?predicate=${predicate}`),
+    listBlogs: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/blogs?predicate=${predicate}`)
   
   // post message/id 
   

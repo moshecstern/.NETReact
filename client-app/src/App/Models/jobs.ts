@@ -15,6 +15,8 @@ export interface IJobs {
     isHost: boolean;
     Applied: IApplied[];
     comments: IComment[];
+    // employees: IEmployee[];
+    // isHiring: boolean;
 }
 
 export interface IComment {
@@ -55,5 +57,11 @@ export interface IApplied {
     following?: boolean;
 }
 
-
+// export interface IEmployee {
+//     username: string;
+//     displayName: string;
+//     image: string;
+//     isHost: boolean;
+//     following?: boolean;
+// }
 

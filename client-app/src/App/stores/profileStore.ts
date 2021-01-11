@@ -1,6 +1,7 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed, reaction } from 'mobx';
-import { IProfile, IPhoto, IUserActivity } from '../models/profile';
+import { IProfile, IPhoto, IUserActivity, IExperience, IUserJob, IUserBlog } from '../models/profile';
+
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
 
@@ -30,6 +31,13 @@ export default class ProfileStore {
   @observable activeTab: number = 0;
   @observable userActivities: IUserActivity[] = [];
   @observable loadingActivities = false;
+
+  @observable userJobs: IUserJob[] = [];
+  @observable loadingJobs = false;
+  @observable userBlogs: IUserBlog[] = [];
+  @observable loadingBlogs = false;
+  @observable userExperience: IExperience[] = [];
+  @observable loadingExperience = false;
 
   @computed get isCurrentUser() {
     if (this.rootStore.userStore.user && this.profile) {
@@ -117,6 +125,8 @@ export default class ProfileStore {
     }
   };
 
+
+
   @action deletePhoto = async (photo: IPhoto) => {
     this.loading = true;
     try {
@@ -203,4 +213,74 @@ export default class ProfileStore {
       });
     }
   };
+
+  // new content here
+
+  
+  @action loadUserBlogs = async (username: string, predicate?: string) => {
+    this.loadingBlogs = true;
+    try {
+      const blogs = await agent.Profiles.listBlogs(username, predicate!);
+      runInAction(() => {
+        this.userBlogs = blogs;
+        this.loadingBlogs = false;
+      })
+    } catch (error) {
+      toast.error('Problem loading blogs')
+      runInAction(() => {
+        this.loadingBlogs = false;
+      })
+    }
+  }
+
+  @action loadUserJobs = async (username: string, predicate?: string) => {
+    this.loadingJobs = true;
+    try {
+      const jobs = await agent.Profiles.listJobs(username, predicate!);
+      runInAction(() => {
+        this.userJobs = jobs;
+        this.loadingJobs = false;
+      })
+    } catch (error) {
+      toast.error('Problem loading jobs')
+      runInAction(() => {
+        this.loadingJobs = false;
+      })
+    }
+  }
+
+  @action loadUserExperience = async (username: string, predicate?: string) => {
+    this.loadingExperience = true;
+    try {
+      const expeirence = await agent.Profiles.listExperiences(username, predicate!);
+      runInAction(() => {
+        this.userExperience = expeirence;
+        this.loadingExperience = false;
+      })
+    } catch (error) {
+      toast.error('Problem loading Experiences')
+      runInAction(() => {
+        this.loadingExperience = false;
+      })
+    }
+  }
+
+//   @action setBusinessPhoto = async (photo: IPhoto) => {
+//     this.loading = true;
+//     try {
+//       await agent.Profiles.setMainPhoto(photo.id);
+//       runInAction(() => {
+//         this.rootStore.userStore.user!.image = photo.url;
+//         this.profile!.photos.find(a => a.isMain)!.isMain = false;
+//         this.profile!.photos.find(a => a.id === photo.id)!.isMain = true;
+//         this.profile!.image = photo.url;
+//         this.loading = false;
+//       });
+//     } catch (error) {
+//       toast.error('Problem setting photo as main');
+//       runInAction(() => {
+//         this.loading = false;
+//       });
+//     }
+//   };
 }

@@ -37,6 +37,18 @@ const ProfileEditForm: React.FC<IProps> = ({ updateProfile, profile }) => {
             placeholder='Bio'
             value={profile!.bio}
           />
+             <Field
+            name='longBio'
+            component={TextAreaInput}
+            rows={5}
+            placeholder='Long Bio'
+            value={profile!.LongBio}
+          />
+          {/* <Button 
+          content='Are You a Business?'
+          value={profile!.isBusiness}
+          // onClick={() => }
+          /> */}
           <Button 
             loading={submitting}
             floated='right'
