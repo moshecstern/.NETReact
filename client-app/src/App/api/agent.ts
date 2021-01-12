@@ -6,6 +6,7 @@ import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
 import { IJobs, IJobsEnvelope } from '../models/jobs';
 import { IBlog, IBlogsEnvelope } from '../models/blog';
+import { IExperience, IExperiencesEnvelope } from '../models/experience';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -155,10 +156,23 @@ const Profiles = {
     unlike: (id: string) => requests.del(`/blogs/${id}/unlike`)
   };
 
+  const Experiences = {
+    list: (params: URLSearchParams): Promise<IExperiencesEnvelope> =>
+      axios.get('/experiences', { params: params }).then(responseBody),
+    details: (id: string) => requests.get(`/experiences/${id}`),
+    create: (experience: IExperience) => requests.post('/experiences', experience),
+    update: (experience: IExperience) =>
+      requests.put(`/experiences/${experience.id}`, experience),
+    delete: (id: string) => requests.del(`/experiences/${id}`),
+    like: (id: string) => requests.post(`/experiences/${id}/like`, {}),
+    unlike: (id: string) => requests.del(`/experiences/${id}/unlike`)
+  };
+
 export default  {
   Activities,
   User,
   Profiles,
   Jobs,
-  Blogs
+  Blogs,
+  Experiences
 };

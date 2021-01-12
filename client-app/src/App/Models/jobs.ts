@@ -11,7 +11,7 @@ export interface IJobs {
     category: string;
     date: Date;
     city: string;
-    appliedbool: boolean;
+    applied: boolean;
     isHost: boolean;
     Applied: IApplied[];
     comments: IComment[];
@@ -31,7 +31,7 @@ export interface IComment {
 export interface IJobsFormValues extends Partial<IJobs> {
     time?: Date;
 }
-export class JobsFormValues implements IJobsFormValues {
+export class JobFormValues implements IJobsFormValues {
     id?: string = undefined;
     title: string = '';
     category: string = "";

@@ -1,6 +1,7 @@
 import { IActivity, IAttendee } from "../../models/activity";
 import { IBlog } from "../../models/blog";
 import { IJobs } from "../../models/jobs";
+import { IExperience } from "../../models/profile";
 import { IUser } from "../../models/user";
 
 export const combineDateAndTime = (date: Date, time: Date) => {
@@ -30,10 +31,10 @@ export const setActivityProps = (activity: IActivity, user: IUser) => {
 
 export const setBlogProps = (blog: IBlog, user: IUser) => {
   blog.date = new Date(blog.date);
-  blog.isLiked = blog.liked.some(
+  blog.liked = blog.Liked.some(
     a => a.username === user.username
   )
-  blog.isHost = blog.liked.some(
+  blog.isHost = blog.Liked.some(
     a => a.username === user.username && a.isHost
   )
   return blog;
@@ -41,7 +42,7 @@ export const setBlogProps = (blog: IBlog, user: IUser) => {
 
 export const setJobProps = (job: IJobs, user: IUser) => {
   job.date = new Date(job.date);
-  job.appliedbool = job.Applied.some(
+  job.applied = job.Applied.some(
     a => a.username === user.username
   )
   job.isHost = job.Applied.some(
@@ -49,6 +50,16 @@ export const setJobProps = (job: IJobs, user: IUser) => {
   )
   return job;
 }
+// export const setExperienceProps = (experience: IExperience, user: IUser) => {
+//   experience.date = new Date(experience.date);
+//   experience.applied = experience.Applied.some(
+//     a => a.username === user.username
+//   )
+//   experience.isHost = experience.Liked.some(
+//     a => a.username === user.username && a.isHost
+//   )
+//   return experience;
+// }
 
 export const createAttendee = (user: IUser): IAttendee => {
     return {

@@ -198,7 +198,7 @@ export default class blogStore {
       attendee.isHost = true;
       let attendees = [];
       attendees.push(attendee);
-      blog.liked = attendees;
+      blog.Liked = attendees;
       blog.isHost = true;
       runInAction('create blog', () => {
         this.blogRegistry.set(blog.id, blog);
@@ -262,8 +262,8 @@ export default class blogStore {
       await agent.Blogs.like(this.blog!.id);
       runInAction(() => {
         if (this.blog) {
-          this.blog.liked.push(attendee);
-          this.blog.isLiked = true;
+          this.blog.Liked.push(attendee);
+          this.blog.liked = true;
           this.blogRegistry.set(this.blog.id, this.blog);
           this.loading = false;
         }
@@ -282,10 +282,10 @@ export default class blogStore {
       await agent.Blogs.unlike(this.blog!.id);
       runInAction(() => {
         if (this.blog) {
-          this.blog.liked = this.blog.liked.filter(
+          this.blog.Liked = this.blog.Liked.filter(
             a => a.username !== this.rootStore.userStore.user!.username
           );
-          this.blog.isLiked = false;
+          this.blog.liked = false;
           this.blogRegistry.set(this.blog.id, this.blog);
           this.loading = false;
         }

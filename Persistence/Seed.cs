@@ -46,6 +46,133 @@ namespace Persistence
                 }
             }
 
+            if (!context.Jobs.Any())
+            {
+                var jobs = new List<Job>
+                {
+                    new Job
+                    {
+                        Title = "Job number 1",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "Sign here for exclusive job offers",
+                        Category = "drinks",
+                        City = "London",
+                        // Venue = "Pub",
+                        UserJob = new List<UserJob>
+                        {
+                            new UserJob
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DatePosted = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    },
+                    new Job
+                    {
+                        Title = "Job number 2",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "Sign here for exclusive job offers and more",
+                        Category = "drinks",
+                        City = "England",
+                        // Venue = "Pub",
+                        UserJob = new List<UserJob>
+                        {
+                            new UserJob
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DatePosted = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    },
+                        new Job
+                    {
+                        Title = "Job number 3",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "gggggggg job offers and more",
+                        Category = "drinks",
+                        City = "Venice",
+                        // Venue = "Pub",
+                        UserJob = new List<UserJob>
+                        {
+                            new UserJob
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DatePosted = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    }
+                };
+                await context.Jobs.AddRangeAsync(jobs);
+                await context.SaveChangesAsync();
+            }
+
+                        if (!context.Blogs.Any())
+            {
+                var blogs = new List<Blog>
+                {
+                    new Blog
+                    {
+                        Title = "Blog number 1",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "Sign here for exclusive job offers",
+                        Category = "drinks",
+                        // City = "London",
+                        // Venue = "Pub",
+                        UserBlog = new List<UserBlog>
+                        {
+                            new UserBlog
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DatePublished = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    },
+                    new Blog
+                    {
+                        Title = "Blog number 2",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "Sign here for exclusive job offers and more",
+                        Category = "drinks",
+                        // City = "England",
+                        // Venue = "Pub",
+                        UserBlog = new List<UserBlog>
+                        {
+                            new UserBlog
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DatePublished = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    },
+                        new Blog
+                    {
+                        Title = "Blog number 3",
+                        Date = DateTime.Now.AddMonths(-2),
+                        Description = "gggggggg job offers and more",
+                        Category = "drinks",
+                        // City = "Venice",
+                        // Venue = "Pub",
+                        UserBlog = new List<UserBlog>
+                        {
+                            new UserBlog
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DatePublished = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    }
+                };
+                await context.Blogs.AddRangeAsync(blogs);
+                await context.SaveChangesAsync();
+            }
+
+
             if (!context.Activities.Any())
             {
                 var activities = new List<Activity>

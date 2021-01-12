@@ -13,6 +13,12 @@ import HomePage from "../features/home/HomePage";
 import ActivityDashboard from "../features/activities/dashboard/ActivityDashboard";
 import ActivityForm from "../features/activities/form/ActivityForm";
 import ActivityDetails from "../features/activities/details/ActivityDetails";
+import BlogForm from "../features/blogs/form/BlogForm";
+import BlogDetails from "../features/blogs/details/BlogDetails";
+import BlogDashboard from "../features/blogs/dashboard/BlogDashboard";
+import JobForm from "../features/jobs/form/JobForm";
+import JobDetails from "../features/jobs/details/JobDetails";
+import JobDashboard from "../features/jobs/dashboard/JobDashboard";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
@@ -50,12 +56,47 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
             <NavBar />
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <PrivateRoute exact path="/activities" component={ActivityDashboard} />
-                <PrivateRoute path="/activities/:id" component={ActivityDetails} />
+                <PrivateRoute
+                  exact
+                  path="/activities"
+                  component={ActivityDashboard}
+                />
+                <PrivateRoute
+                  path="/activities/:id"
+                  component={ActivityDetails}
+                />
                 <PrivateRoute
                   key={location.key}
                   path={["/createActivity", "/manage/:id"]}
                   component={ActivityForm}
+                />
+                <PrivateRoute
+                  exact
+                  path="/jobs"
+                  component={JobDashboard}
+                />
+                <PrivateRoute
+                  path="/jobs/:id"
+                  component={JobDetails}
+                />
+                <PrivateRoute
+                  key={location.key}
+                  path={["/createJob", "/manage/:id"]}
+                  component={JobForm}
+                />
+                <PrivateRoute
+                  exact
+                  path="/blogs"
+                  component={BlogDashboard}
+                />
+                <PrivateRoute
+                  path="/blogs/:id"
+                  component={BlogDetails}
+                />
+                <PrivateRoute
+                  key={location.key}
+                  path={["/createBlog", "/manage/:id"]}
+                  component={BlogForm}
                 />
                 <PrivateRoute
                   path="/profile/:username"
@@ -65,7 +106,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path="/user/registerSuccess"
                   component={RegisterSuccess}
                 />
-                <Route path="/user/verifyEmail" component={VerifyEmail} />                <Route component={NotFound} />
+                <Route path="/user/verifyEmail" component={VerifyEmail} />{" "}
+                <Route component={NotFound} />
               </Switch>
             </Container>
           </Fragment>

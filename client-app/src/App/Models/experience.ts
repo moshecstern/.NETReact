@@ -1,21 +1,27 @@
 
-export interface IBlogsEnvelope {
-    blogs: IBlog[];
-    blogCount: number;
+export interface IExperiencesEnvelope {
+    experiences: IExperience[];
+    experienceCount: number;
   }
 
-export interface IBlog {
+export interface IExperience {
     id: string;
     title: string;
-    description: string;
     main: string;
     main2: string;
     category: string;
     date: Date;
+    dateStarted: Date;
+    dateEnded: Date;
     isHost: boolean;
     Liked: IAttendee[];
     comments: IComment[];
     liked: boolean;
+    link1: string;
+    link1Name: string;
+    link2: string;
+    link2Name: string;
+    image: string;
 }
 
 export interface IComment {
@@ -27,10 +33,10 @@ export interface IComment {
     image: string;
   }
 
-export interface IBlogFormValues extends Partial<IBlog> {
+export interface IExperienceFormValues extends Partial<IExperience> {
     time?: Date;
 }
-export class BlogFormValues implements IBlogFormValues {
+export class experienceFormValues implements IExperienceFormValues {
     id?: string = undefined;
     title: string = '';
     category: string = "";
@@ -38,7 +44,7 @@ export class BlogFormValues implements IBlogFormValues {
     date?: Date = undefined;
     time?: Date = undefined;
 
-    constructor(init?: IBlogFormValues) {
+    constructor(init?: IExperienceFormValues) {
         if (init && init.date){
             init.time = init.date
         }

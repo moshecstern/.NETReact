@@ -21,7 +21,7 @@ export default class jobStore {
       () => {
         this.page = 0;
         this.jobRegistry.clear();
-        this.loadjobs();
+        this.loadJobs();
       }
     )
   }
@@ -137,7 +137,7 @@ export default class jobStore {
     );
   }
 
-  @action loadjobs = async () => {
+  @action loadJobs = async () => {
     this.loadingInitial = true;
     try {
       const jobsEnvelope = await agent.Jobs.list(this.axiosParams);
@@ -157,7 +157,7 @@ export default class jobStore {
     }
   };
 
-  @action loadjob = async (id: string) => {
+  @action loadJob = async (id: string) => {
     let job = this.getjob(id);
     if (job) {
       this.job = job;
@@ -190,7 +190,7 @@ export default class jobStore {
     return this.jobRegistry.get(id);
   };
 
-  @action createjob = async (job: IJobs) => {
+  @action createJob = async (job: IJobs) => {
     this.submitting = true;
     try {
       await agent.Jobs.create(job);
@@ -214,7 +214,7 @@ export default class jobStore {
     }
   };
 
-  @action editjob = async (job: IJobs) => {
+  @action editJob = async (job: IJobs) => {
     this.submitting = true;
     try {
       await agent.Jobs.update(job);
@@ -263,7 +263,7 @@ export default class jobStore {
       runInAction(() => {
         if (this.job) {
           this.job.Applied.push(attendee);
-          this.job.appliedbool = true;
+          this.job.applied = true;
           this.jobRegistry.set(this.job.id, this.job);
           this.loading = false;
         }
@@ -285,7 +285,7 @@ export default class jobStore {
           this.job.Applied = this.job.Applied.filter(
             a => a.username !== this.rootStore.userStore.user!.username
           );
-          this.job.appliedbool = false;
+          this.job.applied = false;
           this.jobRegistry.set(this.job.id, this.job);
           this.loading = false;
         }

@@ -7,6 +7,7 @@ import ModalStore from './modalStore';
 import ProfileStore from './profileStore';
 import JobStore from './jobStore';
 import BlogStore from './blogStore';
+import ExperienceStore from './experienceStore';
 
 configure({ enforceActions: "always" });
 
@@ -18,6 +19,7 @@ export class RootStore {
     profileStore: ProfileStore;
     jobStore: JobStore;
     blogStore: BlogStore;
+    experienceStore: ExperienceStore;
 
     constructor() {
         this.activityStore = new ActivityStore(this);
@@ -27,6 +29,7 @@ export class RootStore {
         this.profileStore = new ProfileStore(this);
         this.jobStore = new JobStore(this);
         this.blogStore = new BlogStore(this);
+        this.experienceStore = new ExperienceStore(this);
     }
 }
 export const RootStoreContext = createContext(new RootStore());
