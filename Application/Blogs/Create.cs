@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
@@ -8,18 +9,19 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Blogs
 {
     public class Create
     {
-      public class Command : IRequest
+public class Command : IRequest
         {
             public Guid Id { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
             public string Category { get; set; }
+            public string Main { get; set; }
+            public string Main2 { get; set; }
             public DateTime Date { get; set; }
-            public string City { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -30,7 +32,8 @@ namespace Application.Jobs
                 RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
-                RuleFor(x => x.City).NotEmpty();
+                // RuleFor(x => x.Main).NotEmpty();
+                // RuleFor(x => x.Main2).NotEmpty();
             }
         }
         public class Handler : IRequestHandler<Command>
@@ -46,33 +49,35 @@ namespace Application.Jobs
             public async Task<Unit> Handle(Command request,
                  CancellationToken cancellationToken)
             {
-                var job = new Job
+                var blog = new Blog
                 {
                     Id = request.Id,
                     Title = request.Title,
                     Description = request.Description,
                     Category = request.Category,
                     Date = request.Date,
-                    City = request.City,
+                    Main = request.Main,
+                    Main2 = request.Main2,
+                    // edit not sure how to make optional here
                 };
-                _context.Jobs.Add(job);
+                _context.Blogs.Add(blog);
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                 x.UserName == _userAccessor.GetCurrentUsername());
 
-                var applicant = new UserJob
+                var publisher = new UserBlog
                 {
                     AppUser = user,
-                    Job = job,
+                    Blog = blog,
                     IsHost = true,
-                    DatePosted = DateTime.Now
+                    DatePublished = DateTime.Now
                 };
 
-                _context.UserJobs.Add(applicant);
+                _context.UserBlogs.Add(publisher);
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
-        }  
+        }         
     }
 }

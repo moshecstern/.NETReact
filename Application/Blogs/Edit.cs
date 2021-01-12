@@ -7,7 +7,7 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Blogs
 {
     public class Edit
     {
@@ -15,10 +15,12 @@ namespace Application.Jobs
         {
             public Guid Id { get; set; }
             public string Title { get; set; }
+            public string Main { get; set; }
+            public string Main2 { get; set; }
             public string Description { get; set; }
             public string Category { get; set; }
             public DateTime? Date { get; set; }
-            public string City { get; set; }
+            // public string City { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -29,7 +31,7 @@ namespace Application.Jobs
                 RuleFor(x => x.Description).NotEmpty();
                 RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
-                RuleFor(x => x.City).NotEmpty();
+                // RuleFor(x => x.City).NotEmpty();
             }
         }
         public class Handler : IRequestHandler<Command>
@@ -43,17 +45,19 @@ namespace Application.Jobs
                  CancellationToken cancellationToken)
             {
                 // handler logic
-                var job = await _context.Jobs.FindAsync(request.Id);
-                if (job == null)
+                var blog = await _context.Blogs.FindAsync(request.Id);
+                if (blog == null)
                     throw new RestException(HttpStatusCode.NotFound, new
                     {
-                        Job = "Not Found"
+                        blog = "Not Found"
                     });
-                job.Title = request.Title ?? job.Title;
-                job.Category = request.Category ?? job.Category;
-                job.Description = request.Description ?? job.Description;
-                job.Date = request.Date ?? job.Date;
-                job.City = request.City ?? job.City;
+                blog.Title = request.Title ?? blog.Title;
+                blog.Category = request.Category ?? blog.Category;
+                blog.Description = request.Description ?? blog.Description;
+                blog.Date = request.Date ?? blog.Date;
+                blog.Main = request.Main ?? blog.Main;
+                blog.Main2 = request.Main2 ?? blog.Main2;
+                // blog.City = request.City ?? blog.City;
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;

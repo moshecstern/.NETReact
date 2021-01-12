@@ -1,11 +1,11 @@
-namespace Application.Jobs
+namespace Application.Experiences
 {
-    public class AppliedDto
+    public class LikedDto
     {
         public string Username { get; set; }
         public string DisplayName { get; set; }
         public string Image { get; set; }
         public bool IsHost { get; set; }
-        public string Applied { get; set; }
+        public string Liked { get; set; }
     }
 }

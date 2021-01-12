@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Application.Comments;
 using Application.JobComments;
 
 namespace Application.Jobs

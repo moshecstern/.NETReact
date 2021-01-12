@@ -8,18 +8,28 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Experiences
 {
     public class Create
     {
-      public class Command : IRequest
+        public class Command : IRequest
         {
             public Guid Id { get; set; }
             public string Title { get; set; }
-            public string Description { get; set; }
+            // public string Description { get; set; }
             public string Category { get; set; }
+            public string Main { get; set; }
+            public string Main2 { get; set; }
             public DateTime Date { get; set; }
+            public DateTime DateEnded { get; set; }
+            public DateTime DateStarted { get; set; }
+            public string Image { get; set; }
             public string City { get; set; }
+            public string Skills { get; set; }
+            public string Link1 { get; set; }
+            public string Link2 { get; set; }
+            public string Link1Name { get; set; }
+            public string Link2Name { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -29,8 +39,10 @@ namespace Application.Jobs
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
-                RuleFor(x => x.Description).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
+                // RuleFor(x => x.Main).NotEmpty();
+                // RuleFor(x => x.Main2).NotEmpty();
+                // edit rules for whats required
             }
         }
         public class Handler : IRequestHandler<Command>
@@ -46,33 +58,42 @@ namespace Application.Jobs
             public async Task<Unit> Handle(Command request,
                  CancellationToken cancellationToken)
             {
-                var job = new Job
+                var experience = new Experience
                 {
                     Id = request.Id,
                     Title = request.Title,
-                    Description = request.Description,
+                    City = request.City,
                     Category = request.Category,
                     Date = request.Date,
-                    City = request.City,
+                    DateStarted = request.DateStarted,
+                    DateEnded = request.DateEnded,
+                    Main = request.Main,
+                    Main2 = request.Main2,
+                    Link1 = request.Link1,
+                    Link2 = request.Link2,
+                    Link1Name = request.Link1Name,
+                    Link2Name = request.Link2Name,
+                    Image = request.Image,
+                    // edit not sure how to make optional here
                 };
-                _context.Jobs.Add(job);
+                _context.Experiences.Add(experience);
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                 x.UserName == _userAccessor.GetCurrentUsername());
 
-                var applicant = new UserJob
+                var publisher = new UserExperience
                 {
                     AppUser = user,
-                    Job = job,
+                    Experience = experience,
                     IsHost = true,
                     DatePosted = DateTime.Now
                 };
 
-                _context.UserJobs.Add(applicant);
+                _context.UserExperiences.Add(publisher);
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
-        }  
+        }
     }
 }

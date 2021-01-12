@@ -6,11 +6,11 @@ using Application.Errors;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Experiences
 {
     public class Delete
     {
-        public class Command : IRequest
+   public class Command : IRequest
         {
             public Guid Id { get; set; }
         }
@@ -25,15 +25,15 @@ namespace Application.Jobs
                  CancellationToken cancellationToken)
             {
                 // handler logic
-                var job = await _context.Jobs.FindAsync(request.Id);
-                if (job == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { job = "Not Found" });
-                _context.Remove(job);
+                var experience = await _context.Experiences.FindAsync(request.Id);
+                if (experience == null)
+                    throw new RestException(HttpStatusCode.NotFound, new {experience = "Not Found"});
+                _context.Remove(experience);
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
-        }
+        }     
     }
 }

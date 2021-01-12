@@ -8,11 +8,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Experiences
 {
-    public class Unapply
+    public class Unlike
     {
-        public class Command : IRequest
+public class Command : IRequest
         {
             public Guid Id { get; set; }
         }
@@ -29,25 +29,25 @@ namespace Application.Jobs
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var job = await _context.Jobs.FindAsync(request.Id);
+                var experience = await _context.Experiences.FindAsync(request.Id);
 
-                if (job == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { Job = "Could not find job" });
+                if (experience == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { experience = "Could not find blog" });
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());
 
-                var applied = await _context.UserJobs
-                    .SingleOrDefaultAsync(x => x.JobId == job.Id &&
+                var liked = await _context.UserExperiences
+                    .SingleOrDefaultAsync(x => x.ExperienceId == experience.Id &&
                         x.AppUserId == user.Id);
 
-                if (applied == null)
+                if (liked == null)
                     return Unit.Value;
 
-                if (applied.IsHost)
-                    throw new RestException(HttpStatusCode.BadRequest, new { applied = "You cannot remove yourself as host" });
+                if (liked.IsHost)
+                    throw new RestException(HttpStatusCode.BadRequest, new { experience = "You cannot remove yourself as host" });
 
-                _context.UserJobs.Remove(applied);
+                _context.UserExperiences.Remove(liked);
 
                 var success = await _context.SaveChangesAsync() > 0;
 
@@ -55,8 +55,6 @@ namespace Application.Jobs
 
                 throw new Exception("Problem saving changes");
             }
-
-        }
-
+        }       
     }
 }

@@ -9,11 +9,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Blogs
+namespace Application.Experiences
 {
     public class Like
     {
-        public class Command : IRequest
+public class Command : IRequest
         {
             public Guid Id { get; set; }
         }
@@ -30,34 +30,34 @@ namespace Application.Blogs
                  CancellationToken cancellationToken)
             {
                 // handler logic
-                var blog = await _context.Blogs.FindAsync(request.Id);
-                if (blog == null)
+                var experience = await _context.Experiences.FindAsync(request.Id);
+                if (experience == null)
                     throw new RestException(HttpStatusCode.NotFound,
-                    new { Blog = "Could not find Blog" });
+                    new { experience = "Could not find experience" });
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());
 
-                var liked = await _context.UserBlogs
-                    .SingleOrDefaultAsync(x => x.BlogId == blog.Id &&
+                var liked = await _context.UserExperiences
+                    .SingleOrDefaultAsync(x => x.ExperienceId == experience.Id &&
                     x.AppUserId == user.Id);
 
                 if (liked != null)
-                    throw new RestException(HttpStatusCode.BadRequest, new { Liked = "Already attending this activity" });
+                    throw new RestException(HttpStatusCode.BadRequest, new { Liked = "Already liked this Experience" });
 
-                liked = new UserBlog
+                liked = new UserExperience
                 {
-                    Blog = blog,
+                    Experience = experience,
                     AppUser = user,
                     IsHost = false,
-                    DatePublished = DateTime.Now
+                    DatePosted = DateTime.Now
                 };
 
-                _context.UserBlogs.Add(liked);
+                _context.UserExperiences.Add(liked);
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
-        }
+        }        
     }
 }

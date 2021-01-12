@@ -13,7 +13,7 @@ namespace Application.Jobs
 {
     public class Apply
     {
-public class Command : IRequest
+        public class Command : IRequest
         {
             public Guid Id { get; set; }
         }
@@ -31,25 +31,25 @@ public class Command : IRequest
             {
                 // handler logic
                 var job = await _context.Jobs.FindAsync(request.Id);
-                if (job == null) 
-                    throw new RestException(HttpStatusCode.NotFound, 
-                    new {Job = "Could not find Job"});
-                var user = await _context.Users.SingleOrDefaultAsync(x => 
+                if (job == null)
+                    throw new RestException(HttpStatusCode.NotFound,
+                    new { Job = "Could not find Job" });
+                var user = await _context.Users.SingleOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());
 
                 var applied = await _context.UserJobs
-                    .SingleOrDefaultAsync(x => x.JobId == job.Id && 
+                    .SingleOrDefaultAsync(x => x.JobId == job.Id &&
                     x.AppUserId == user.Id);
 
                 if (applied != null)
-                    throw new RestException(HttpStatusCode.BadRequest, new {applied = "Already applied to this job"});
+                    throw new RestException(HttpStatusCode.BadRequest, new { applied = "Already applied to this job" });
 
                 applied = new UserJob
                 {
                     Job = job,
                     AppUser = user,
                     IsHost = false,
-                    DateJoined = DateTime.Now
+                    DatePosted = DateTime.Now
                 };
 
                 _context.UserJobs.Add(applied);
@@ -58,6 +58,6 @@ public class Command : IRequest
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
-        }               
+        }
     }
 }

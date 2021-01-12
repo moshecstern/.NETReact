@@ -6,11 +6,11 @@ using Application.Errors;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.Blogs
 {
     public class Delete
     {
-        public class Command : IRequest
+public class Command : IRequest
         {
             public Guid Id { get; set; }
         }
@@ -25,10 +25,10 @@ namespace Application.Jobs
                  CancellationToken cancellationToken)
             {
                 // handler logic
-                var job = await _context.Jobs.FindAsync(request.Id);
-                if (job == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { job = "Not Found" });
-                _context.Remove(job);
+                var blog = await _context.Blogs.FindAsync(request.Id);
+                if (blog == null)
+                    throw new RestException(HttpStatusCode.NotFound, new {blog = "Not Found"});
+                _context.Remove(blog);
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;

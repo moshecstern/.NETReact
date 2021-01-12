@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Application.BlogComments;
-using Application.Profiles;
 
 namespace Application.Blogs
 {
@@ -13,10 +12,11 @@ namespace Application.Blogs
         public string Category { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public string City { get; set; }
+        public string Main { get; set; }
+        public string Main2 { get; set; }
 
         [JsonPropertyName("liked")]
-        public ICollection<UserBlogDto> UserBlogs { get; set; }
+        public ICollection<LikedDto> UserBlogs { get; set; }
         public ICollection<BlogCommentsDto> BlogComments { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace Domain
         public virtual AppUser AppUser { get; set; }
         public Guid ExperienceId { get; set; }
         public virtual Experience Experience { get; set; }
-
+        public DateTime DatePosted { get; set; }
+        public bool IsHost { get; set; }
     }
 }

@@ -10,16 +10,16 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Blogs
+namespace Application.Experiences
 {
     public class List
     {
-        public class BlogsEnvelope
+        public class ExperiencesEnvelope
         {
-            public List<BlogDto> Blogs { get; set; }
-            public int BlogCount { get; set; }
+            public List<ExperienceDto> Experiences { get; set; }
+            public int ExperienceCount { get; set; }
         }
-        public class Query : IRequest<BlogsEnvelope>
+        public class Query : IRequest<ExperiencesEnvelope>
         {
             public Query(int? limit, int? offset, bool liked, bool isHost, DateTime? startDate)
             {
@@ -36,7 +36,7 @@ namespace Application.Blogs
             public DateTime? StartDate { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, BlogsEnvelope>
+        public class Handler : IRequestHandler<Query, ExperiencesEnvelope>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -48,31 +48,31 @@ namespace Application.Blogs
                 _context = context;
             }
 
-            public async Task<BlogsEnvelope> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<ExperiencesEnvelope> Handle(Query request, CancellationToken cancellationToken)
             {
-                var queryable = _context.Blogs
+                var queryable = _context.Experiences
                     .Where(x => x.Date >= request.StartDate)
                     .OrderBy(x => x.Date)
                     .AsQueryable();
 
                 if (request.Liked && !request.IsHost)
                 {
-                    queryable = queryable.Where(x => x.UserBlog.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
+                    queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
                 }
 
                 if (request.IsHost && !request.Liked)
                 {
-                    queryable = queryable.Where(x => x.UserBlog.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
+                    queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
                 }
 
-                var Blogs = await queryable
+                var Experiences = await queryable
                     .Skip(request.Offset ?? 0)
                     .Take(request.Limit ?? 3).ToListAsync();
 
-                return new BlogsEnvelope
+                return new ExperiencesEnvelope
                 {
-                    Blogs = _mapper.Map<List<Blog>, List<BlogDto>>(Blogs),
-                    BlogCount = queryable.Count()
+                    Experiences = _mapper.Map<List<Experience>, List<ExperienceDto>>(Experiences),
+                    ExperienceCount = queryable.Count()
                 };
             }
         }

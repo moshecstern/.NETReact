@@ -3,22 +3,21 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
+using AutoMapper;
 using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
-using AutoMapper;
 
-namespace Application.Activities
+namespace Application.Experiences
 {
     public class Details
     {
-        public class Query : IRequest<ActivityDto>
+        public class Query : IRequest<ExperienceDto>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, ActivityDto>
+        public class Handler : IRequestHandler<Query, ExperienceDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -29,21 +28,21 @@ namespace Application.Activities
                 // fix take out '.this'
             }
 
-            public async Task<ActivityDto> Handle(Query request, CancellationToken
+            public async Task<ExperienceDto> Handle(Query request, CancellationToken
              cancellationToken)
             {
-                var activity = await _context.Activities
+                var experience = await _context.Experiences
                 .FindAsync(request.Id);
 
-                if (activity == null)
+                if (experience == null)
                     throw new RestException(HttpStatusCode.NotFound, new
                     {
-                        activity = "Not Found"
+                        experience = "Not Found"
                     });
-                var activityToReturn = _mapper.Map<Activity, ActivityDto>(activity);
+                var experienceToReturn = _mapper.Map<Experience, ExperienceDto>(experience);
 
-                return activityToReturn;
+                return experienceToReturn;
             }
-        }
+        }        
     }
 }
