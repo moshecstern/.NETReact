@@ -34,6 +34,7 @@ namespace Application.Profiles
                 Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 Photos = user.Photos,
                 Bio = user.Bio,
+                LongBio = user.LongBio,
                 FollowersCount = user.Followers.Count(),
                 FollowingCount = user.Followings.Count(),
             };
@@ -42,6 +43,11 @@ namespace Application.Profiles
             {
                 profile.IsFollowed = true;
             }
+            if (currentUser.isBusiness == true)
+            {
+                profile.IsBusiness = true;
+            }
+            // fix will it work? 
 
             return profile;
         }

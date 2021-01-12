@@ -1,25 +1,25 @@
 using System;
 using System.Threading.Tasks;
-using Application.Jobs;
+using Application.Blogs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class JobsController : BaseController
+    public class BlogsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List.JobsEnvelope>> List(int? limit,
-            int? offset, bool applied, bool isHost, DateTime? startDate)
+        public async Task<ActionResult<List.BlogsEnvelope>> List(int? limit,
+                  int? offset, bool liked, bool isHost, DateTime? startDate)
         {
             return await Mediator.Send(new List.Query(limit,
-                offset, applied, isHost, startDate));
+                offset, liked, isHost, startDate));
         }
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<JobDto>> Details(Guid id)
+        public async Task<ActionResult<BlogDto>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
         }
@@ -45,16 +45,16 @@ namespace API.Controllers
             return await Mediator.Send(new Delete.Command { Id = id });
         }
 
-        [HttpPost("{id}/apply")]
-        public async Task<ActionResult<Unit>> Apply(Guid id)
+        [HttpPost("{id}/like")]
+        public async Task<ActionResult<Unit>> Like(Guid id)
         {
-            return await Mediator.Send(new Apply.Command { Id = id });
+            return await Mediator.Send(new Like.Command { Id = id });
         }
 
-        [HttpDelete("{id}/unapply")]
-        public async Task<ActionResult<Unit>> Unapply(Guid id)
+        [HttpDelete("{id}/unlike")]
+        public async Task<ActionResult<Unit>> Unlike(Guid id)
         {
-            return await Mediator.Send(new Unapply.Command { Id = id });
+            return await Mediator.Send(new Unlike.Command { Id = id });
         }
     }
 }

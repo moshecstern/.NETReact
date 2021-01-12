@@ -10,6 +10,8 @@ namespace Application.Profiles
         public string Username { get; set; }
         public string Image { get; set; }
         public string Bio { get; set; }
+        public string LongBio { get; set; }
+        public bool IsBusiness { get; set; }
 
         [JsonPropertyName("following")]
         public bool IsFollowed { get; set; }
