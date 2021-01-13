@@ -49,7 +49,7 @@ namespace Application.Jobs
                     Job = job,
                     AppUser = user,
                     IsHost = false,
-                    DatePosted = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserJobs.Add(applied);

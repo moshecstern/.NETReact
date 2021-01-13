@@ -21,6 +21,8 @@ export const NavBar: React.FC = () => {
         </Menu.Item>
 
         <Menu.Item name="activities" as={NavLink} to={"/activities"} />
+        <Menu.Item name="jobs" as={NavLink} to={"/jobs"} />
+        <Menu.Item name="blogs" as={NavLink} to={"/blogs"} />
 
         <Menu.Item>
           <Button

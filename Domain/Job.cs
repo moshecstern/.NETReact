@@ -11,7 +11,7 @@ namespace Domain
         public string Description { get; set; }
          public string Category { get; set; }
         public DateTime Date { get; set; }
-        public virtual ICollection<UserJob> UserJob {get; set;}
+        public virtual ICollection<UserJob> UserJobs {get; set;}
         public virtual ICollection<JobComment> JobComments {get; set;}
     }
 }

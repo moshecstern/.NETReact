@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Card, Grid, Header, Tab, Image, TabProps } from 'semantic-ui-react';
 import { RootStoreContext } from '../../stores/rootStore';
-import {IUserExperience} from '../../models/profile';
+import {IUserJob} from '../../models/profile';
 import { format } from 'date-fns';
 
 const panes = [
@@ -11,18 +11,18 @@ const panes = [
     { menuItem: 'Hosting', pane: { key: 'hosted' } }
   ];
 
-const ProfileExperience = () => {
+const ProfileJobs = () => {
     const rootStore = useContext(RootStoreContext);
     const {
-        loadUserExperiences,
+        loadUserJobs,
         profile,
-        loadingExperiences,
-        userExperiences
+        loadingJobs,
+        userJobs
     } = rootStore.profileStore!;
 
     useEffect(() => {
-        loadUserExperiences(profile!.username);
-    }, [loadUserExperiences, profile])
+        loadUserJobs(profile!.username);
+    }, [loadUserJobs, profile])
 
     const handleTabChange = (
         e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -40,13 +40,13 @@ const ProfileExperience = () => {
             predicate = 'future';
             break;
         }
-        loadUserExperiences(profile!.username, predicate);
+        loadUserJobs(profile!.username, predicate);
       };
     return (
-<Tab.Pane loading={loadingExperiences}>
+<Tab.Pane loading={loadingJobs}>
       <Grid>
         <Grid.Column width={16}>
-          <Header floated='left' icon='calendar' content={'Experience'} />
+          <Header floated='left' icon='calendar' content={'Jobs'} />
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab
@@ -56,21 +56,21 @@ const ProfileExperience = () => {
           />
           <br />
           <Card.Group itemsPerRow={4}>
-            {userExperiences.map((experience: IUserExperience) => (
+            {userJobs.map((job: IUserJob) => (
               <Card
                 as={Link}
-                to={`/activities/${experience.id}`}
-                key={experience.id}
+                to={`/activities/${job.id}`}
+                key={job.id}
               >
                 <Image
-                  src={`/assets/categoryImages/${experience.category}.jpg`}
+                  src={`/assets/categoryImages/${job.category}.jpg`}
                   style={{ minHeight: 100, objectFit: 'cover' }}
                 />
                 <Card.Content>
-                  <Card.Header textAlign='center'>{experience.title}</Card.Header>
+                  <Card.Header textAlign='center'>{job.title}</Card.Header>
                   <Card.Meta textAlign='center'>
-                    <div>{format(new Date(experience.date), 'do LLL')}</div>
-                    <div>{format(new Date(experience.date), 'h:mm a')}</div>
+                    <div>{format(new Date(job.date), 'do LLL')}</div>
+                    <div>{format(new Date(job.date), 'h:mm a')}</div>
                   </Card.Meta>
                 </Card.Content>
               </Card>
@@ -82,4 +82,4 @@ const ProfileExperience = () => {
     )
 }
 
-export default ProfileExperience
+export default ProfileJobs

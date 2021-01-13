@@ -18,13 +18,13 @@ const JobDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   history,
 }) => {
   const rootStore = useContext(RootStoreContext);
-  const {loadJob, loadingInitial, job} = rootStore.jobStore;
+  const {loadJob, loadingInitialJob, job} = rootStore.jobStore;
 
   useEffect(() => {
     loadJob(match.params.id);
   }, [loadJob, match.params.id, history]);
 
-  if (loadingInitial || !job)
+  if (loadingInitialJob || !job)
     return <LoadingComponent content="Loading job..." />;
 
   if (!job)
@@ -39,7 +39,7 @@ const JobDetails: React.FC<RouteComponentProps<DetailParams>> = ({
    </Grid.Column>
    <Grid.Column width={6}>
       <JobDetailedSidebar
-        applicants={job.Applied}
+        applicants={job.applied}
       />
    </Grid.Column>
  </Grid>

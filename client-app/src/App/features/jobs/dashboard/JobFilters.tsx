@@ -19,8 +19,8 @@ const JobFilters = () => {
           content={'All Jobs'}
         />
         <Menu.Item
-          active={predicate.has('applied')}
-          onClick={() => setPredicate('applied', 'true')}
+          active={predicate.has('isApplied')}
+          onClick={() => setPredicate('isApplied', 'true')}
           color={'blue'}
           name={'username'}
           content={"I Applied"}

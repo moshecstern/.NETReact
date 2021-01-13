@@ -70,7 +70,7 @@ public class Command : IRequest
                     AppUser = user,
                     Blog = blog,
                     IsHost = true,
-                    DatePublished = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserBlogs.Add(publisher);

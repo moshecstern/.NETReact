@@ -13,9 +13,9 @@ export interface IBlog {
     category: string;
     date: Date;
     isHost: boolean;
-    Liked: IAttendee[];
+    isLiked: boolean;
+    liked: ILikedBlog[];
     comments: IComment[];
-    liked: boolean;
 }
 
 export interface IComment {
@@ -46,7 +46,7 @@ export class BlogFormValues implements IBlogFormValues {
     } 
 }
 
-export interface IAttendee {
+export interface ILikedBlog {
     username: string;
     displayName: string;
     image: string;

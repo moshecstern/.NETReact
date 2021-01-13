@@ -1,22 +1,21 @@
 
 export interface IJobsEnvelope {
-    jobs: IJobs[];
-    JobsCount: number;
+    jobs: IJob[];
+    jobCount: number;
   }
 
-export interface IJobs {
+
+export interface IJob {
     id: string;
     title: string;
     description: string;
     category: string;
     date: Date;
     city: string;
-    applied: boolean;
+    isApplied: boolean;
     isHost: boolean;
-    Applied: IApplied[];
+    applied: IApplied[];
     comments: IComment[];
-    // employees: IEmployee[];
-    // isHiring: boolean;
 }
 
 export interface IComment {
@@ -28,7 +27,7 @@ export interface IComment {
     image: string;
   }
 
-export interface IJobsFormValues extends Partial<IJobs> {
+export interface IJobsFormValues extends Partial<IJob> {
     time?: Date;
 }
 export class JobFormValues implements IJobsFormValues {
@@ -39,7 +38,7 @@ export class JobFormValues implements IJobsFormValues {
     date?: Date = undefined;
     time?: Date = undefined;
     city: string = "";
-    venue:string = "";
+    // venue:string = "";
 
     constructor(init?: IJobsFormValues) {
         if (init && init.date){

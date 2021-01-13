@@ -1,6 +1,6 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed, reaction } from 'mobx';
-import { IProfile, IPhoto, IUserActivity, IExperience, IUserJob, IUserBlog } from '../models/profile';
+import { IProfile, IPhoto, IUserActivity, IUserExperience, IUserJob, IUserBlog } from '../models/profile';
 
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
@@ -36,8 +36,8 @@ export default class ProfileStore {
   @observable loadingJobs = false;
   @observable userBlogs: IUserBlog[] = [];
   @observable loadingBlogs = false;
-  @observable userExperience: IExperience[] = [];
-  @observable loadingExperience = false;
+  @observable userExperiences: IUserExperience[] = [];
+  @observable loadingExperiences = false;
 
   @computed get isCurrentUser() {
     if (this.rootStore.userStore.user && this.profile) {
@@ -249,18 +249,18 @@ export default class ProfileStore {
     }
   }
 
-  @action loadUserExperience = async (username: string, predicate?: string) => {
-    this.loadingExperience = true;
+  @action loadUserExperiences = async (username: string, predicate?: string) => {
+    this.loadingExperiences = true;
     try {
-      const expeirence = await agent.Profiles.listExperiences(username, predicate!);
+      const experiences = await agent.Profiles.listExperiences(username, predicate!);
       runInAction(() => {
-        this.userExperience = expeirence;
-        this.loadingExperience = false;
+        this.userExperiences = experiences;
+        this.loadingExperiences = false;
       })
     } catch (error) {
       toast.error('Problem loading Experiences')
       runInAction(() => {
-        this.loadingExperience = false;
+        this.loadingExperiences = false;
       })
     }
   }

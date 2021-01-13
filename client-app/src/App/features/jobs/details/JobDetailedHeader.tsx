@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
-import { IJobs } from '../../../models/jobs';
+import { IJob } from '../../../models/jobs';
 import {format} from 'date-fns';
 import { RootStoreContext } from '../../../stores/rootStore';
 
@@ -19,8 +19,8 @@ const jobImageTextStyle = {
   color: 'white'
 };
 
-const JobDetailedHeader: React.FC<{job: IJobs}> = ({job}) => {
-  const host = job.Applied.filter(x => x.isHost)[0];
+const JobDetailedHeader: React.FC<{job: IJob}> = ({job}) => {
+  const host = job.applied.filter(x => x.isHost)[0];
   const rootStore = useContext(RootStoreContext);
   const { applyjob, unlikeJob, loading } = rootStore.jobStore;
     return (
@@ -53,7 +53,7 @@ const JobDetailedHeader: React.FC<{job: IJobs}> = ({job}) => {
               <Button as={Link} to={`/manage/${job.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
-              ) : job.applied ? (
+              ) : job.isApplied ? (
                 <Button loading={loading} onClick={unlikeJob}>Cancel application</Button>
                 ) : (
                 <Button loading={loading} onClick={applyjob} color='teal'>Apply</Button>

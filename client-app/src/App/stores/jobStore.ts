@@ -1,11 +1,11 @@
 import { observable, action, computed, runInAction, reaction, toJS } from 'mobx';
 import { SyntheticEvent } from 'react';
-import { IJobs } from '../models/jobs';
+import { IJob } from '../models/jobs';
 import agent from '../api/agent';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 import { RootStore } from './rootStore';
-import { createAttendee, setJobProps } from '../common/util/util';
+import { createApplicant, setJobProps } from '../common/util/util';
 import {HubConnection, HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
 
 const LIMIT = 2;
@@ -27,9 +27,9 @@ export default class jobStore {
   }
 
   @observable jobRegistry = new Map();
-  @observable job: IJobs | null = null;
-  @observable loadingInitial = false;
-  @observable submitting = false;
+  @observable job: IJob | null = null;
+  @observable loadingInitialJob = false;
+  @observable submittingJob = false;
   @observable target = '';
   @observable loading = false;
   @observable.ref hubConnection: HubConnection | null = null;
@@ -119,7 +119,9 @@ export default class jobStore {
     );
   }
 
-  groupjobsByDate(jobs: IJobs[]) {
+  groupjobsByDate(jobs: IJob[]) {
+    console.log("grouping by date " + jobs);
+    
     const sortedjobs = jobs.sort(
       (a, b) => a.date.getTime() - b.date.getTime()
     );
@@ -132,27 +134,32 @@ export default class jobStore {
             : [job];
           return jobs;
         },
-        {} as { [key: string]: IJobs[] }
+        {} as { [key: string]: IJob[] }
       )
     );
   }
 
   @action loadJobs = async () => {
-    this.loadingInitial = true;
+    this.loadingInitialJob = true;
     try {
       const jobsEnvelope = await agent.Jobs.list(this.axiosParams);
-      const {jobs, JobsCount} = jobsEnvelope;
-      runInAction('loading jobs', () => {
+      const {jobs, jobCount} = jobsEnvelope;
+      console.log("This is how many are comming back * " +jobCount+" * these are the jobs coming back"+ jobs)
+      console.log(jobs)
+      runInAction(() => {
         jobs.forEach(job => {
           setJobProps(job, this.rootStore.userStore.user!);
           this.jobRegistry.set(job.id, job);
+           console.log(jobs)
+        console.log("jobs after");
         });
-        this.jobCount = JobsCount;
-        this.loadingInitial = false;
+       
+        this.jobCount = jobCount;
+        this.loadingInitialJob = false;
       });
     } catch (error) {
-      runInAction('load jobs error', () => {
-        this.loadingInitial = false;
+      runInAction(() => {
+        this.loadingInitialJob = false;
       });
     }
   };
@@ -163,19 +170,19 @@ export default class jobStore {
       this.job = job;
       return toJS(job);
     } else {
-      this.loadingInitial = true;
+      this.loadingInitialJob = true;
       try {
         job = await agent.Jobs.details(id);
-        runInAction('getting job', () => {
+        runInAction(() => {
           setJobProps(job, this.rootStore.userStore.user!);
           this.job = job;
           this.jobRegistry.set(job.id, job);
-          this.loadingInitial = false;
+          this.loadingInitialJob = false;
         });
         return job;
       } catch (error) {
-        runInAction('get job error', () => {
-          this.loadingInitial = false;
+        runInAction(() => {
+          this.loadingInitialJob = false;
         });
         console.log(error);
       }
@@ -187,48 +194,49 @@ export default class jobStore {
   };
 
   getjob = (id: string) => {
+    console.log(id)
     return this.jobRegistry.get(id);
   };
 
-  @action createJob = async (job: IJobs) => {
-    this.submitting = true;
+  @action createJob = async (job: IJob) => {
+    this.submittingJob = true;
     try {
       await agent.Jobs.create(job);
-      const attendee = createAttendee(this.rootStore.userStore.user!);
+      const attendee = createApplicant(this.rootStore.userStore.user!);
       attendee.isHost = true;
       let attendees = [];
       attendees.push(attendee);
-      job.Applied = attendees;
+      job.applied = attendees;
       job.isHost = true;
-      runInAction('create job', () => {
+      runInAction(() => {
         this.jobRegistry.set(job.id, job);
-        this.submitting = false;
+        this.submittingJob = false;
       });
       history.push(`/jobs/${job.id}`);
     } catch (error) {
-      runInAction('create job error', () => {
-        this.submitting = false;
+      runInAction(() => {
+        this.submittingJob = false;
       });
-      toast.error('Problem submitting data');
+      toast.error('Problem submittingJob data');
       console.log(error.response);
     }
   };
 
-  @action editJob = async (job: IJobs) => {
-    this.submitting = true;
+  @action editJob = async (job: IJob) => {
+    this.submittingJob = true;
     try {
       await agent.Jobs.update(job);
-      runInAction('editing job', () => {
+      runInAction(() => {
         this.jobRegistry.set(job.id, job);
         this.job = job;
-        this.submitting = false;
+        this.submittingJob = false;
       });
       history.push(`/jobs/${job.id}`);
     } catch (error) {
-      runInAction('edit job error', () => {
-        this.submitting = false;
+      runInAction(() => {
+        this.submittingJob = false;
       });
-      toast.error('Problem submitting data');
+      toast.error('Problem submittingJob data');
       console.log(error);
     }
   };
@@ -237,18 +245,18 @@ export default class jobStore {
     event: SyntheticEvent<HTMLButtonElement>,
     id: string
   ) => {
-    this.submitting = true;
+    this.submittingJob = true;
     this.target = event.currentTarget.name;
     try {
       await agent.Jobs.delete(id);
-      runInAction('deleting job', () => {
+      runInAction(() => {
         this.jobRegistry.delete(id);
-        this.submitting = false;
+        this.submittingJob = false;
         this.target = '';
       });
     } catch (error) {
-      runInAction('delete job error', () => {
-        this.submitting = false;
+      runInAction(() => {
+        this.submittingJob = false;
         this.target = '';
       });
       console.log(error);
@@ -256,14 +264,14 @@ export default class jobStore {
   };
 
   @action applyjob = async () => {
-    const attendee = createAttendee(this.rootStore.userStore.user!);
+    const attendee = createApplicant(this.rootStore.userStore.user!);
     this.loading = true;
     try {
       await agent.Jobs.apply(this.job!.id);
       runInAction(() => {
         if (this.job) {
-          this.job.Applied.push(attendee);
-          this.job.applied = true;
+          this.job.applied.push(attendee);
+          this.job.isApplied = true;
           this.jobRegistry.set(this.job.id, this.job);
           this.loading = false;
         }
@@ -282,10 +290,10 @@ export default class jobStore {
       await agent.Jobs.unapply(this.job!.id);
       runInAction(() => {
         if (this.job) {
-          this.job.Applied = this.job.Applied.filter(
+          this.job.applied = this.job.applied.filter(
             a => a.username !== this.rootStore.userStore.user!.username
           );
-          this.job.applied = false;
+          this.job.isApplied = false;
           this.jobRegistry.set(this.job.id, this.job);
           this.loading = false;
         }

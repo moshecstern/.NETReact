@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { RootStore } from './rootStore';
 // import { createAttendee } from '../common/util/util';
 // import {HubConnection, HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
-import { createAttendee } from '../common/util/util';
+import { setExperienceProps } from '../common/util/util';
 
 const LIMIT = 2;
 
@@ -144,10 +144,10 @@ export default class experienceStore {
       const experienceEnvelope = await agent.Experiences.list(this.axiosParams);
       const {experiences, experienceCount} = experienceEnvelope;
       runInAction('loading experiences', () => {
-        // experiences.forEach(experience => {
-        //   setexperienceProps(experience, this.rootStore.userStore.user!);
-        //   this.experienceRegistry.set(experience.id, experience);
-        // });
+        experiences.forEach(experience => {
+          setExperienceProps(experience, this.rootStore.userStore.user!);
+          this.experienceRegistry.set(experience.id, experience);
+        });
         this.experienceCount = experienceCount;
         this.loadingInitial = false;
       });
@@ -195,11 +195,11 @@ export default class experienceStore {
     this.submitting = true;
     try {
       await agent.Experiences.create(experience);
-      const attendee = createAttendee(this.rootStore.userStore.user!);
-      attendee.isHost = true;
-    //   let attendees = [];
-    //   attendees.push(attendee);
-    //   experience.Applied = attendees;
+      // const attendee = createAttendee(this.rootStore.userStore.user!);
+      // attendee.isHost = true;
+      // let attendees = [];
+      // attendees.push(attendee);
+      // experience.Applied = attendees;
       experience.isHost = true;
       runInAction('create experience', () => {
         this.experienceRegistry.set(experience.id, experience);

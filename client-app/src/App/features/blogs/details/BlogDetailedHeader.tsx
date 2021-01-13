@@ -20,7 +20,7 @@ const blogImageTextStyle = {
 };
 
 const BlogDetailedHeader: React.FC<{blog: IBlog}> = ({blog}) => {
-  const host = blog.Liked.filter(x => x.isHost)[0];
+  const host = blog.liked.filter(x => x.isHost)[0];
   const rootStore = useContext(RootStoreContext);
   const { likeBlog, unlikeBlog, loading } = rootStore.blogStore;
     return (
@@ -53,7 +53,7 @@ const BlogDetailedHeader: React.FC<{blog: IBlog}> = ({blog}) => {
               <Button as={Link} to={`/manage/${blog.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
-              ) : blog.liked ? (
+              ) : blog.isLiked ? (
                 <Button loading={loading} onClick={unlikeBlog}>Cancel attendance</Button>
                 ) : (
                 <Button loading={loading} onClick={likeBlog} color='teal'>Join Blog</Button>

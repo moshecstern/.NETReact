@@ -30,15 +30,15 @@ namespace API.Controllers
         {
             return await Mediator.Send(new ListJobs.Query{Username = username, Predicate = predicate});
         }
-        //   [HttpGet("{username}/experiences")]
-        // public async Task<ActionResult<List<UserExperienceDto>>> GetUserExperiences(string username, string predicate)
-        // {
-        //     return await Mediator.Send(new ListExperience.Query{Username = username, Predicate = predicate});
-        // }
-        //   [HttpGet("{username}/blogs")]
-        // public async Task<ActionResult<List<UserBlogDto>>> GetUserBlogs(string username, string predicate)
-        // {
-        //     return await Mediator.Send(new ListBlog.Query{Username = username, Predicate = predicate});
-        // }
+          [HttpGet("{username}/experiences")]
+        public async Task<ActionResult<List<UserExperienceDto>>> GetUserExperiences(string username, string predicate)
+        {
+            return await Mediator.Send(new ListExperiences.Query{Username = username, Predicate = predicate});
+        }
+          [HttpGet("{username}/blogs")]
+        public async Task<ActionResult<List<UserBlogDto>>> GetUserBlogs(string username, string predicate)
+        {
+            return await Mediator.Send(new ListBlogs.Query{Username = username, Predicate = predicate});
+        }
     }
 }

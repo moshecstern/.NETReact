@@ -16,7 +16,7 @@ const JobDashboard: React.FC = () => {
     const rootStore = useContext(RootStoreContext);
     const {
       loadJobs,
-      loadingInitial,
+      loadingInitialJob,
       setPage,
       page,
       totalPages
@@ -39,7 +39,7 @@ const JobDashboard: React.FC = () => {
   return (
       <Grid>
         <Grid.Column width={10}>
-          {loadingInitial && page === 0 ? (
+          {loadingInitialJob && page === 0 ? (
             <JobListItemPlaceholder />
           ) : (
             <InfiniteScroll
@@ -49,6 +49,7 @@ const JobDashboard: React.FC = () => {
             initialLoad={false}
               >
                 <JobList />
+                {/* <h1>Hello</h1> */}
               </InfiniteScroll>
           )}
         </Grid.Column>

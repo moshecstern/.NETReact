@@ -12,4 +12,4 @@ namespace Domain
         public bool IsHost { get; set; }
     }
 
-    }
+}

@@ -8,7 +8,7 @@ import BlogListItemAttendees from './BlogListItemAttendees';
 // import { RootStore } from "../../../stores/rootStore";
 
 const BlogListItem: React.FC<{ blog: IBlog }> = ({ blog }) => {
-  const host = blog.Liked.filter(x => x.isHost)[0];
+  const host = blog.liked.filter(x => x.isHost)[0];
   return (
     <Segment.Group>
       <Segment>
@@ -53,7 +53,7 @@ const BlogListItem: React.FC<{ blog: IBlog }> = ({ blog }) => {
       </Segment>
       <Segment secondary>
             <BlogListItemAttendees
-              peopleWhoLiked={blog.Liked}
+              peopleWhoLiked={blog.liked}
             />
       </Segment>
       <Segment clearing>

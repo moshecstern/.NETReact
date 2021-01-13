@@ -65,7 +65,7 @@ namespace Application.Jobs
                     AppUser = user,
                     Job = job,
                     IsHost = true,
-                    DatePosted = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserJobs.Add(applicant);

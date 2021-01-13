@@ -9,7 +9,7 @@ export interface IProfile {
     followingCount: number;
     photos: IPhoto[];
     messages: IMessages[];
-    experience: IExperience[];
+    // experiences: IExperience[];
     isBusiness: boolean;
     // blogs: IBlogs[];
     // jobs: IJobs[];
@@ -43,22 +43,11 @@ export interface IProfile {
     date: Date;
   }
 
-  export interface IExperience {
+  export interface IUserExperience {
     id: string;
-    catagory: string;
-    dateStarted: Date;
-    dateEnded: Date;
-    city: string;
     title: string;
-    main: string;
-    main2: string;
-    image: string;
-    photo: IPhoto[];
-    skills: ISkills[];
-    link1: string;
-    link1Name: string;
-    link2: string;
-    link2Name: string;
+    category: string;
+    date: Date;
   }
 
   export interface IMessages {

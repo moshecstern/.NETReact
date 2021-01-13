@@ -21,17 +21,17 @@ namespace Application.Experiences
         }
         public class Query : IRequest<ExperiencesEnvelope>
         {
-            public Query(int? limit, int? offset, bool liked, bool isHost, DateTime? startDate)
+            public Query(int? limit, int? offset, bool isLiked, bool isHost, DateTime? startDate)
             {
                 Limit = limit;
                 Offset = offset;
-                Liked = liked;
+                IsLiked = isLiked;
                 IsHost = isHost;
                 StartDate = startDate ?? DateTime.Now;
             }
             public int? Limit { get; set; }
             public int? Offset { get; set; }
-            public bool Liked { get; set; }
+            public bool IsLiked { get; set; }
             public bool IsHost { get; set; }
             public DateTime? StartDate { get; set; }
         }
@@ -55,23 +55,23 @@ namespace Application.Experiences
                     .OrderBy(x => x.Date)
                     .AsQueryable();
 
-                if (request.Liked && !request.IsHost)
+                if (request.IsLiked && !request.IsHost)
                 {
                     queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
                 }
 
-                if (request.IsHost && !request.Liked)
+                if (request.IsHost && !request.IsLiked)
                 {
                     queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
                 }
 
-                var Experiences = await queryable
+                var experiences = await queryable
                     .Skip(request.Offset ?? 0)
                     .Take(request.Limit ?? 3).ToListAsync();
 
                 return new ExperiencesEnvelope
                 {
-                    Experiences = _mapper.Map<List<Experience>, List<ExperienceDto>>(Experiences),
+                    Experiences = _mapper.Map<List<Experience>, List<ExperienceDto>>(experiences),
                     ExperienceCount = queryable.Count()
                 };
             }

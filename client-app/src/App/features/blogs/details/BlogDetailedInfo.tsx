@@ -15,6 +15,8 @@ const BlogDetailedInfo: React.FC<{blog: IBlog}> = ({blog}) => {
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <p>{blog.description}</p>
+                        <p>{blog.main}</p>
+                        
                       </Grid.Column>
                     </Grid>
                   </Segment>
@@ -36,7 +38,7 @@ const BlogDetailedInfo: React.FC<{blog: IBlog}> = ({blog}) => {
                         <Icon name='marker' size='large' color='teal' />
                       </Grid.Column>
                       <Grid.Column width={11}>
-                        {/* <span>{blog.venue}, {blog.city}</span> */}
+                        <span>{blog.main2}</span>
                       </Grid.Column>
                     </Grid>
                   </Segment>

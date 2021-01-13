@@ -42,7 +42,7 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
   const {
     createJob,
     editJob,
-    submitting,
+    submittingJob,
     loadJob,
   } = rootStore.jobStore;
 
@@ -127,14 +127,14 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   placeholder="City"
                   value={job.city}
                 />
-                <Field
+                {/* <Field
                   name="venue"
                   placeholder="Venue"
                   value={job.venue}
                   component={TextInput}
-                />
+                /> */}
                 <Button
-                  loading={submitting}
+                  loading={submittingJob}
                   disabled={loading || invalid || pristine}
                   floated="right"
                   positive

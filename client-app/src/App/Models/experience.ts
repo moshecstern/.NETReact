@@ -14,9 +14,9 @@ export interface IExperience {
     dateStarted: Date;
     dateEnded: Date;
     isHost: boolean;
-    Liked: IAttendee[];
+    isLiked: boolean;
+    liked: IAttendee[];
     comments: IComment[];
-    liked: boolean;
     link1: string;
     link1Name: string;
     link2: string;

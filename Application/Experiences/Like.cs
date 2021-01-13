@@ -49,7 +49,7 @@ public class Command : IRequest
                     Experience = experience,
                     AppUser = user,
                     IsHost = false,
-                    DatePosted = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserExperiences.Add(liked);

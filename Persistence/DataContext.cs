@@ -80,8 +80,9 @@ namespace Persistence
 
             builder.Entity<UserJob>()
                 .HasOne(a => a.Job)
-                .WithMany(u => u.UserJob)
+                .WithMany(u => u.UserJobs)
                 .HasForeignKey(a => a.JobId);
+      
 
             // Blogs
                         builder.Entity<UserBlog>(x => x.HasKey(ua =>
@@ -94,7 +95,7 @@ namespace Persistence
 
             builder.Entity<UserBlog>()
                 .HasOne(a => a.Blog)
-                .WithMany(u => u.UserBlog)
+                .WithMany(u => u.UserBlogs)
                 .HasForeignKey(a => a.BlogId);
             // Experiences
                         builder.Entity<UserExperience>(x => x.HasKey(ua =>

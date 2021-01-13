@@ -21,17 +21,17 @@ namespace Application.Blogs
         }
         public class Query : IRequest<BlogsEnvelope>
         {
-            public Query(int? limit, int? offset, bool liked, bool isHost, DateTime? startDate)
+            public Query(int? limit, int? offset, bool isLiked, bool isHost, DateTime? startDate)
             {
                 Limit = limit;
                 Offset = offset;
-                Liked = liked;
+                IsLiked = isLiked;
                 IsHost = isHost;
                 StartDate = startDate ?? DateTime.Now;
             }
             public int? Limit { get; set; }
             public int? Offset { get; set; }
-            public bool Liked { get; set; }
+            public bool IsLiked { get; set; }
             public bool IsHost { get; set; }
             public DateTime? StartDate { get; set; }
         }
@@ -55,23 +55,23 @@ namespace Application.Blogs
                     .OrderBy(x => x.Date)
                     .AsQueryable();
 
-                if (request.Liked && !request.IsHost)
+                if (request.IsLiked && !request.IsHost)
                 {
-                    queryable = queryable.Where(x => x.UserBlog.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
+                    queryable = queryable.Where(x => x.UserBlogs.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
                 }
 
-                if (request.IsHost && !request.Liked)
+                if (request.IsHost && !request.IsLiked)
                 {
-                    queryable = queryable.Where(x => x.UserBlog.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
+                    queryable = queryable.Where(x => x.UserBlogs.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
                 }
 
-                var Blogs = await queryable
+                var blogs = await queryable
                     .Skip(request.Offset ?? 0)
                     .Take(request.Limit ?? 3).ToListAsync();
 
                 return new BlogsEnvelope
                 {
-                    Blogs = _mapper.Map<List<Blog>, List<BlogDto>>(Blogs),
+                    Blogs = _mapper.Map<List<Blog>, List<BlogDto>>(blogs),
                     BlogCount = queryable.Count()
                 };
             }

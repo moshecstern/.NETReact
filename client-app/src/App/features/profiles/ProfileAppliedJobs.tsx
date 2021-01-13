@@ -1,10 +1,9 @@
 import React from 'react'
+import ProfileJobs from './ProfileJobs';
 
 const ProfileAppliedJobs = () => {
     return (
-        <div>
-            <h2>If you have applied to any jobs, it will appear here</h2>
-        </div>
+        <ProfileJobs />
     )
 }
 

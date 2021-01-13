@@ -31,6 +31,12 @@ const HomePage = () => {
             <Button as={Link} to="/activities" size="huge" inverted>
           Go to Activities
         </Button>
+        <Button as={Link} to="/blogs" size="huge" inverted>
+          Go to Blogs
+        </Button>
+        <Button as={Link} to="/jobs" size="huge" inverted>
+          Go to Jobs
+        </Button>
           </Fragment>
         ) : (
 

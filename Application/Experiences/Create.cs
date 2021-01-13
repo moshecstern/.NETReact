@@ -86,7 +86,7 @@ namespace Application.Experiences
                     AppUser = user,
                     Experience = experience,
                     IsHost = true,
-                    DatePosted = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserExperiences.Add(publisher);

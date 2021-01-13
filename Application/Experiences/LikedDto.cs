@@ -6,6 +6,6 @@ namespace Application.Experiences
         public string DisplayName { get; set; }
         public string Image { get; set; }
         public bool IsHost { get; set; }
-        public string Liked { get; set; }
+        public string Following { get; set; }
     }
 }

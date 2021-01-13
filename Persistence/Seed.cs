@@ -46,6 +46,40 @@ namespace Persistence
                 }
             }
 
+            if (!context.Experiences.Any())
+            {
+                var experiences = new List<Experience>
+                {
+                    new Experience
+                    {
+        Title= "Churchland Psychological Center",
+        Category= "Experience",
+        // DateStarted= "2020-04-01",
+        // DateEnded= "2020-07-01",
+        City= "Cali",
+        Main= "Designed, and maintain website",
+        Main2= "Longer Info if i have it",
+        Skills="GitHub, JavaScript, React, Node",
+        Link2= "https://",
+        Link1= "htttps://",
+        Image= "https://",
+        UserExperiences = new List<UserExperience>
+                        {
+                            new UserExperience
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            }
+                        }
+                    }
+        };
+                await context.Experiences.AddRangeAsync(experiences);
+                await context.SaveChangesAsync();
+            }
+
+
+
             if (!context.Jobs.Any())
             {
                 var jobs = new List<Job>
@@ -53,36 +87,42 @@ namespace Persistence
                     new Job
                     {
                         Title = "Job number 1",
-                        Date = DateTime.Now.AddMonths(-2),
+                        Date = DateTime.Now.AddMonths(6),
                         Description = "Sign here for exclusive job offers",
                         Category = "drinks",
                         City = "London",
                         // Venue = "Pub",
-                        UserJob = new List<UserJob>
+                        UserJobs = new List<UserJob>
                         {
                             new UserJob
                             {
                                 AppUserId = "a",
                                 IsHost = true,
-                                DatePosted = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
+                            new UserJob
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             }
                         }
                     },
                     new Job
                     {
                         Title = "Job number 2",
-                        Date = DateTime.Now.AddMonths(-2),
+                        Date = DateTime.Now.AddMonths(32),
                         Description = "Sign here for exclusive job offers and more",
                         Category = "drinks",
                         City = "England",
                         // Venue = "Pub",
-                        UserJob = new List<UserJob>
+                        UserJobs = new List<UserJob>
                         {
                             new UserJob
                             {
                                 AppUserId = "a",
                                 IsHost = true,
-                                DatePosted = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
                             }
                         }
                     },
@@ -94,13 +134,19 @@ namespace Persistence
                         Category = "drinks",
                         City = "Venice",
                         // Venue = "Pub",
-                        UserJob = new List<UserJob>
+                        UserJobs = new List<UserJob>
                         {
                             new UserJob
                             {
                                 AppUserId = "b",
                                 IsHost = true,
-                                DatePosted = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
+                            new UserJob
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             }
                         }
                     }
@@ -109,25 +155,31 @@ namespace Persistence
                 await context.SaveChangesAsync();
             }
 
-                        if (!context.Blogs.Any())
+            if (!context.Blogs.Any())
             {
                 var blogs = new List<Blog>
                 {
                     new Blog
                     {
                         Title = "Blog number 1",
-                        Date = DateTime.Now.AddMonths(-2),
+                        Date = DateTime.Now.AddMonths(2),
                         Description = "Sign here for exclusive job offers",
                         Category = "drinks",
-                        // City = "London",
-                        // Venue = "Pub",
-                        UserBlog = new List<UserBlog>
+                        Main= "practicing and trying to get it up and running",
+                        Main2="Extra text to put in if needed",
+                        UserBlogs = new List<UserBlog>
                         {
                             new UserBlog
                             {
                                 AppUserId = "a",
                                 IsHost = true,
-                                DatePublished = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
+                            new UserBlog
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             }
                         }
                     },
@@ -137,33 +189,49 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-2),
                         Description = "Sign here for exclusive job offers and more",
                         Category = "drinks",
+                        Main= "practicing and trying to get it up and running",
+                        Main2="Extra text to put in if needed",
                         // City = "England",
                         // Venue = "Pub",
-                        UserBlog = new List<UserBlog>
+                        UserBlogs = new List<UserBlog>
                         {
                             new UserBlog
                             {
                                 AppUserId = "a",
                                 IsHost = true,
-                                DatePublished = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
+                            new UserBlog
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             }
                         }
                     },
                         new Blog
                     {
                         Title = "Blog number 3",
-                        Date = DateTime.Now.AddMonths(-2),
+                        Date = DateTime.Now.AddMonths(2),
                         Description = "gggggggg job offers and more",
                         Category = "drinks",
+                        Main= "practicing and trying to get it up and running",
+                        Main2="Extra text to put in if needed",
                         // City = "Venice",
                         // Venue = "Pub",
-                        UserBlog = new List<UserBlog>
+                        UserBlogs = new List<UserBlog>
                         {
                             new UserBlog
                             {
                                 AppUserId = "b",
                                 IsHost = true,
-                                DatePublished = DateTime.Now.AddMonths(-2)
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
+                            new UserBlog
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             }
                         }
                     }

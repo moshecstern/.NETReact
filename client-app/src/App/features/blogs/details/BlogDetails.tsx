@@ -39,7 +39,7 @@ const BlogDetails: React.FC<RouteComponentProps<DetailParams>> = ({
    </Grid.Column>
    <Grid.Column width={6}>
       <BlogDetailedSidebar
-        attendees={blog.Liked}
+        attendees={blog.liked}
       />
    </Grid.Column>
  </Grid>

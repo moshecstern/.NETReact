@@ -104,6 +104,18 @@ namespace API
                 {
                     policy.Requirements.Add(new IsHostRequirement());
                 });
+                 opt.AddPolicy("IsJobHost", policy =>
+                {
+                    policy.Requirements.Add(new JobIsHostRequirement());
+                });
+                 opt.AddPolicy("IsBlogHost", policy =>
+                {
+                    policy.Requirements.Add(new BlogIsHostRequirement());
+                });
+                 opt.AddPolicy("IsExperienceHost", policy =>
+                {
+                    policy.Requirements.Add(new ExperienceIsHostRequirement());
+                });
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 

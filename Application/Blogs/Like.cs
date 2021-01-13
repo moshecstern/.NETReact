@@ -49,7 +49,7 @@ namespace Application.Blogs
                     Blog = blog,
                     AppUser = user,
                     IsHost = false,
-                    DatePublished = DateTime.Now
+                    DateJoined = DateTime.Now
                 };
 
                 _context.UserBlogs.Add(liked);

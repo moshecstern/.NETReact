@@ -2,11 +2,9 @@ import React, { useEffect, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Tab, Grid, Header, Card, Image, TabProps } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { IUserActivity } from '../../models/profile';
+import { IUserBlog } from '../../models/profile';
 import { format } from 'date-fns';
 import { RootStoreContext } from '../../stores/rootStore';
-
-
 
 
 const panes = [
@@ -18,15 +16,15 @@ const panes = [
 const ProfileBlogs = () => {
   const rootStore = useContext(RootStoreContext);
   const {
-    loadUserActivities,
+    loadUserBlogs,
     profile,
-    loadingActivities,
-    userActivities
+    loadingBlogs,
+    userBlogs
   } = rootStore.profileStore!;
 
   useEffect(() => {
-    loadUserActivities(profile!.username);
-  }, [loadUserActivities, profile]);
+    loadUserBlogs(profile!.username);
+  }, [loadUserBlogs, profile]);
 
   const handleTabChange = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -44,14 +42,14 @@ const ProfileBlogs = () => {
         predicate = 'future';
         break;
     }
-    loadUserActivities(profile!.username, predicate);
+    loadUserBlogs(profile!.username, predicate);
   };
 
   return (
-    <Tab.Pane loading={loadingActivities}>
+    <Tab.Pane loading={loadingBlogs}>
       <Grid>
         <Grid.Column width={16}>
-          <Header floated='left' icon='calendar' content={'Activities'} />
+          <Header floated='left' icon='calendar' content={'Blogs'} />
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab
@@ -61,21 +59,21 @@ const ProfileBlogs = () => {
           />
           <br />
           <Card.Group itemsPerRow={4}>
-            {userActivities.map((activity: IUserActivity) => (
+            {userBlogs.map((blog: IUserBlog) => (
               <Card
                 as={Link}
-                to={`/activities/${activity.id}`}
-                key={activity.id}
+                to={`/blogs/${blog.id}`}
+                key={blog.id}
               >
                 <Image
-                  src={`/assets/categoryImages/${activity.category}.jpg`}
+                  src={`/assets/categoryImages/${blog.category}.jpg`}
                   style={{ minHeight: 100, objectFit: 'cover' }}
                 />
                 <Card.Content>
-                  <Card.Header textAlign='center'>{activity.title}</Card.Header>
+                  <Card.Header textAlign='center'>{blog.title}</Card.Header>
                   <Card.Meta textAlign='center'>
-                    <div>{format(new Date(activity.date), 'do LLL')}</div>
-                    <div>{format(new Date(activity.date), 'h:mm a')}</div>
+                    <div>{format(new Date(blog.date), 'do LLL')}</div>
+                    <div>{format(new Date(blog.date), 'h:mm a')}</div>
                   </Card.Meta>
                 </Card.Content>
               </Card>

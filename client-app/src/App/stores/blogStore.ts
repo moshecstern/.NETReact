@@ -5,7 +5,7 @@ import agent from '../api/agent';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 import { RootStore } from './rootStore';
-import { createAttendee, setBlogProps } from '../common/util/util';
+import { createLikedBlog, setBlogProps } from '../common/util/util';
 import {HubConnection, HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
 
 const LIMIT = 2;
@@ -142,7 +142,7 @@ export default class blogStore {
     try {
       const BlogsEnvelope = await agent.Blogs.list(this.axiosParams);
       const {blogs, blogCount} = BlogsEnvelope;
-      runInAction('loading Blogs', () => {
+      runInAction(() => {
         blogs.forEach(blog => {
           setBlogProps(blog, this.rootStore.userStore.user!);
           this.blogRegistry.set(blog.id, blog);
@@ -151,7 +151,7 @@ export default class blogStore {
         this.loadingInitial = false;
       });
     } catch (error) {
-      runInAction('load Blogs error', () => {
+      runInAction(() => {
         this.loadingInitial = false;
       });
     }
@@ -166,7 +166,7 @@ export default class blogStore {
       this.loadingInitial = true;
       try {
         blog = await agent.Blogs.details(id);
-        runInAction('getting blog', () => {
+        runInAction(() => {
           setBlogProps(blog, this.rootStore.userStore.user!);
           this.blog = blog;
           this.blogRegistry.set(blog.id, blog);
@@ -174,7 +174,7 @@ export default class blogStore {
         });
         return blog;
       } catch (error) {
-        runInAction('get blog error', () => {
+        runInAction(() => {
           this.loadingInitial = false;
         });
         console.log(error);
@@ -194,19 +194,19 @@ export default class blogStore {
     this.submitting = true;
     try {
       await agent.Blogs.create(blog);
-      const attendee = createAttendee(this.rootStore.userStore.user!);
+      const attendee = createLikedBlog(this.rootStore.userStore.user!);
       attendee.isHost = true;
       let attendees = [];
       attendees.push(attendee);
-      blog.Liked = attendees;
+      blog.liked = attendees;
       blog.isHost = true;
-      runInAction('create blog', () => {
+      runInAction(() => {
         this.blogRegistry.set(blog.id, blog);
         this.submitting = false;
       });
-      history.push(`/Blogs/${blog.id}`);
+      history.push(`/blogs/${blog.id}`);
     } catch (error) {
-      runInAction('create blog error', () => {
+      runInAction(() => {
         this.submitting = false;
       });
       toast.error('Problem submitting data');
@@ -218,14 +218,14 @@ export default class blogStore {
     this.submitting = true;
     try {
       await agent.Blogs.update(blog);
-      runInAction('editing blog', () => {
+      runInAction(() => {
         this.blogRegistry.set(blog.id, blog);
         this.blog = blog;
         this.submitting = false;
       });
-      history.push(`/Blogs/${blog.id}`);
+      history.push(`/blogs/${blog.id}`);
     } catch (error) {
-      runInAction('edit blog error', () => {
+      runInAction(() => {
         this.submitting = false;
       });
       toast.error('Problem submitting data');
@@ -241,13 +241,13 @@ export default class blogStore {
     this.target = event.currentTarget.name;
     try {
       await agent.Blogs.delete(id);
-      runInAction('deleting blog', () => {
+      runInAction(() => {
         this.blogRegistry.delete(id);
         this.submitting = false;
         this.target = '';
       });
     } catch (error) {
-      runInAction('delete blog error', () => {
+      runInAction(() => {
         this.submitting = false;
         this.target = '';
       });
@@ -256,14 +256,14 @@ export default class blogStore {
   };
 
   @action likeBlog = async () => {
-    const attendee = createAttendee(this.rootStore.userStore.user!);
+    const attendee = createLikedBlog(this.rootStore.userStore.user!);
     this.loading = true;
     try {
       await agent.Blogs.like(this.blog!.id);
       runInAction(() => {
         if (this.blog) {
-          this.blog.Liked.push(attendee);
-          this.blog.liked = true;
+          this.blog.liked.push(attendee);
+          this.blog.isLiked = true;
           this.blogRegistry.set(this.blog.id, this.blog);
           this.loading = false;
         }
@@ -282,10 +282,10 @@ export default class blogStore {
       await agent.Blogs.unlike(this.blog!.id);
       runInAction(() => {
         if (this.blog) {
-          this.blog.Liked = this.blog.Liked.filter(
+          this.blog.liked = this.blog.liked.filter(
             a => a.username !== this.rootStore.userStore.user!.username
           );
-          this.blog.liked = false;
+          this.blog.isLiked = false;
           this.blogRegistry.set(this.blog.id, this.blog);
           this.loading = false;
         }

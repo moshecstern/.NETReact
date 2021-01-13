@@ -2,13 +2,13 @@ import React from "react";
 import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 // import JobStore from "../../../../App/stores/jobStore";
-import { IJobs } from "../../../models/jobs";
+import { IJob } from "../../../models/jobs";
 import {format} from 'date-fns'
 import JobListItemAttendees from './JobListItemAttendees';
 // import { RootStore } from "../../../stores/rootStore";
 
-const JobListItem: React.FC<{ job: IJobs }> = ({ job }) => {
-  const host = job.Applied.filter(x => x.isHost)[0];
+const JobListItem: React.FC<{ job: IJob }> = ({ job }) => {
+  const host = job.applied.filter(x => x.isHost)[0];
   return (
     <Segment.Group>
       <Segment>
@@ -53,7 +53,7 @@ const JobListItem: React.FC<{ job: IJobs }> = ({ job }) => {
       </Segment>
       <Segment secondary>
             <JobListItemAttendees
-              applicants={job.Applied}
+              applicants={job.applied}
             />
       </Segment>
       <Segment clearing>

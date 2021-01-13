@@ -19,8 +19,8 @@ const BlogFilters = () => {
           content={'All Blogs'}
         />
         <Menu.Item
-          active={predicate.has('liked')}
-          onClick={() => setPredicate('liked', 'true')}
+          active={predicate.has('isLiked')}
+          onClick={() => setPredicate('isLiked', 'true')}
           color={'blue'}
           name={'username'}
           content={"I Liked this blog"}

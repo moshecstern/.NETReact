@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210113173512_tweaked for api and 2")]
+    partial class tweakedforapiand2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -703,7 +705,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Blog", "Blog")
-                        .WithMany("UserBlogs")
+                        .WithMany("UserBlog")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -760,7 +762,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Job", "Job")
-                        .WithMany("UserJobs")
+                        .WithMany("UserJob")
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -851,7 +853,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("BlogComments");
 
-                    b.Navigation("UserBlogs");
+                    b.Navigation("UserBlog");
                 });
 
             modelBuilder.Entity("Domain.Experience", b =>
@@ -863,7 +865,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("JobComments");
 
-                    b.Navigation("UserJobs");
+                    b.Navigation("UserJob");
                 });
 #pragma warning restore 612, 618
         }

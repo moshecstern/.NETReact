@@ -4,7 +4,7 @@ import { history } from '../..';
 import { toast } from 'react-toastify';
 import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
-import { IJobs, IJobsEnvelope } from '../models/jobs';
+import { IJob, IJobsEnvelope } from '../models/jobs';
 import { IBlog, IBlogsEnvelope } from '../models/blog';
 import { IExperience, IExperiencesEnvelope } from '../models/experience';
 
@@ -78,6 +78,49 @@ const requests = {
 };
 
 
+
+const User = {
+  current: (): Promise<IUser> => requests.get('/user'),
+  login: (user: IUserFormValues): Promise<IUser> =>
+  requests.post(`/user/login`, user),
+  register: (user: IUserFormValues): Promise<IUser> =>
+  requests.post(`/user/register`, user),
+  fbLogin: (accessToken: string) =>
+  requests.post(`/user/facebook`, { accessToken }),
+  refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),
+  verifyEmail: (token: string, email: string): Promise<void> =>
+  requests.post(`/user/verifyEmail`, { token, email }),
+  resendVerifyEmailConfirm: (email: string): Promise<void> =>
+  requests.get(`/user/resendEmailVerification?email=${email}`)
+};
+
+const Profiles = {
+  get: (username: string): Promise<IProfile> =>
+  requests.get(`/profiles/${username}`),
+  uploadPhoto: (photo: Blob): Promise<IPhoto> =>
+  requests.postForm(`/photos`, photo),
+  setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
+  deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+  updateProfile: (profile: Partial<IProfile>) =>
+  requests.put(`/profiles`, profile),
+  follow: (username: string) =>
+  requests.post(`/profiles/${username}/follow`, {}),
+  unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
+  listFollowings: (username: string, predicate: string) =>
+  requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
+  listActivities: (username: string, predicate: string) =>
+  requests.get(`/profiles/${username}/activities?predicate=${predicate}`),
+  listJobs: (username: string, predicate: string) =>
+  requests.get(`/profiles/${username}/jobs?predicate=${predicate}`),
+  listExperiences: (username: string, predicate: string) =>
+  requests.get(`/profiles/${username}/experiences?predicate=${predicate}`),
+  listBlogs: (username: string, predicate: string) =>
+  requests.get(`/profiles/${username}/blogs?predicate=${predicate}`)
+  
+  // post message/id 
+  
+};
+
 const Activities = {
   list: (params: URLSearchParams): Promise<IActivitiesEnvelope> =>
     axios.get('/activities', { params: params }).then(responseBody),
@@ -89,86 +132,43 @@ const Activities = {
   attend: (id: string) => requests.post(`/activities/${id}/attend`, {}),
   unattend: (id: string) => requests.del(`/activities/${id}/attend`)
 };
-
-const User = {
-  current: (): Promise<IUser> => requests.get('/user'),
-  login: (user: IUserFormValues): Promise<IUser> =>
-    requests.post(`/user/login`, user),
-  register: (user: IUserFormValues): Promise<IUser> =>
-    requests.post(`/user/register`, user),
-  fbLogin: (accessToken: string) =>
-    requests.post(`/user/facebook`, { accessToken }),
-  refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),
-  verifyEmail: (token: string, email: string): Promise<void> =>
-    requests.post(`/user/verifyEmail`, { token, email }),
-  resendVerifyEmailConfirm: (email: string): Promise<void> =>
-    requests.get(`/user/resendEmailVerification?email=${email}`)
+const Jobs = {
+  list: (params: URLSearchParams): Promise<IJobsEnvelope> =>
+    axios.get('/jobs', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/jobs/${id}`),
+  create: (job: IJob) => requests.post('/jobs', job),
+  update: (job: IJob) =>
+    requests.put(`/jobs/${job.id}`, job),
+  delete: (id: string) => requests.del(`/jobs/${id}`),
+  apply: (id: string) => requests.post(`/jobs/${id}/apply`, {}),
+  unapply: (id: string) => requests.del(`/jobs/${id}/unapply`)
 };
 
-const Profiles = {
-  get: (username: string): Promise<IProfile> =>
-    requests.get(`/profiles/${username}`),
-  uploadPhoto: (photo: Blob): Promise<IPhoto> =>
-    requests.postForm(`/photos`, photo),
-  setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-  deletePhoto: (id: string) => requests.del(`/photos/${id}`),
-  updateProfile: (profile: Partial<IProfile>) =>
-    requests.put(`/profiles`, profile),
-  follow: (username: string) =>
-    requests.post(`/profiles/${username}/follow`, {}),
-  unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
-  listFollowings: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
-  listActivities: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/activities?predicate=${predicate}`),
-    listJobs: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/jobs?predicate=${predicate}`),
-    listExperiences: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/experiences?predicate=${predicate}`),
-    listBlogs: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/blogs?predicate=${predicate}`)
-  
-  // post message/id 
-  
-  };
+const Blogs = {
+  list: (params: URLSearchParams): Promise<IBlogsEnvelope> =>
+    axios.get('/blogs', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/blogs/${id}`),
+  create: (activity: IBlog) => requests.post('/blogs', activity),
+  update: (activity: IBlog) =>
+    requests.put(`/blogs/${activity.id}`, activity),
+  delete: (id: string) => requests.del(`/blogs/${id}`),
+  like: (id: string) => requests.post(`/blogs/${id}/like`, {}),
+  unlike: (id: string) => requests.del(`/blogs/${id}/unlike`)
+};
 
-  const Jobs = {
-    list: (params: URLSearchParams): Promise<IJobsEnvelope> =>
-      axios.get('/jobs', { params: params }).then(responseBody),
-    details: (id: string) => requests.get(`/jobs/${id}`),
-    create: (job: IJobs) => requests.post('/jobs', job),
-    update: (job: IJobs) =>
-      requests.put(`/jobs/${job.id}`, job),
-    delete: (id: string) => requests.del(`/jobs/${id}`),
-    apply: (id: string) => requests.post(`/jobs/${id}/apply`, {}),
-    unapply: (id: string) => requests.del(`/jobs/${id}/unapply`)
-  };
+const Experiences = {
+  list: (params: URLSearchParams): Promise<IExperiencesEnvelope> =>
+    axios.get('/experiences', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/experiences/${id}`),
+  create: (experience: IExperience) => requests.post('/experiences', experience),
+  update: (experience: IExperience) =>
+    requests.put(`/experiences/${experience.id}`, experience),
+  delete: (id: string) => requests.del(`/experiences/${id}`),
+  like: (id: string) => requests.post(`/experiences/${id}/like`, {}),
+  unlike: (id: string) => requests.del(`/experiences/${id}/unlike`)
+};
 
-  const Blogs = {
-    list: (params: URLSearchParams): Promise<IBlogsEnvelope> =>
-      axios.get('/blogs', { params: params }).then(responseBody),
-    details: (id: string) => requests.get(`/blogs/${id}`),
-    create: (activity: IBlog) => requests.post('/blogs', activity),
-    update: (activity: IBlog) =>
-      requests.put(`/blogs/${activity.id}`, activity),
-    delete: (id: string) => requests.del(`/blogs/${id}`),
-    like: (id: string) => requests.post(`/blogs/${id}/like`, {}),
-    unlike: (id: string) => requests.del(`/blogs/${id}/unlike`)
-  };
-
-  const Experiences = {
-    list: (params: URLSearchParams): Promise<IExperiencesEnvelope> =>
-      axios.get('/experiences', { params: params }).then(responseBody),
-    details: (id: string) => requests.get(`/experiences/${id}`),
-    create: (experience: IExperience) => requests.post('/experiences', experience),
-    update: (experience: IExperience) =>
-      requests.put(`/experiences/${experience.id}`, experience),
-    delete: (id: string) => requests.del(`/experiences/${id}`),
-    like: (id: string) => requests.post(`/experiences/${id}/like`, {}),
-    unlike: (id: string) => requests.del(`/experiences/${id}/unlike`)
-  };
-
-export default  {
+export default {
   Activities,
   User,
   Profiles,

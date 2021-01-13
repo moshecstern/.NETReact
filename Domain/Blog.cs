@@ -12,7 +12,7 @@ namespace Domain
         public string Description { get; set; }
          public string Category { get; set; }
         public DateTime Date { get; set; }
-        public virtual ICollection<UserBlog> UserBlog {get; set;}
+        public virtual ICollection<UserBlog> UserBlogs {get; set;}
         public virtual ICollection<BlogComment> BlogComments {get; set;}
     }
 }

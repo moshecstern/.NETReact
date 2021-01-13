@@ -11,10 +11,10 @@ namespace API.Controllers
     {
         [HttpGet]
         public async Task<ActionResult<List.BlogsEnvelope>> List(int? limit,
-                  int? offset, bool liked, bool isHost, DateTime? startDate)
+                  int? offset, bool isLiked, bool isHost, DateTime? startDate)
         {
             return await Mediator.Send(new List.Query(limit,
-                offset, liked, isHost, startDate));
+                offset, isLiked, isHost, startDate));
         }
 
         [HttpGet("{id}")]
@@ -31,7 +31,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Policy = "IsActivityHost")]
+        [Authorize(Policy = "IsBlogHost")]
         public async Task<ActionResult<Unit>> Edit(Guid id, Edit.Command command)
         {
             command.Id = id;
@@ -39,7 +39,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Policy = "IsActivityHost")]
+        [Authorize(Policy = "IsBlogHost")]
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {
             return await Mediator.Send(new Delete.Command { Id = id });

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Segment, Grid, Icon } from 'semantic-ui-react';
-import { IJobs } from '../../../models/jobs';
+import { IJob } from '../../../models/jobs';
 import {format} from 'date-fns';
 
-
-const JobDetailedInfo: React.FC<{job: IJobs}> = ({job}) => {
+const JobDetailedInfo: React.FC<{job: IJob}> = ({job}) => {
     return (
         <div>
             <Segment.Group>

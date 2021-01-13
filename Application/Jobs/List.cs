@@ -21,17 +21,17 @@ namespace Application.Jobs
         }
         public class Query : IRequest<JobsEnvelope>
         {
-            public Query(int? limit, int? offset, bool applied, bool isHost, DateTime? startDate)
+            public Query(int? limit, int? offset, bool isApplied, bool isHost, DateTime? startDate)
             {
                 Limit = limit;
                 Offset = offset;
-                Applied = applied;
+                IsApplied = isApplied;
                 IsHost = isHost;
                 StartDate = startDate ?? DateTime.Now;
             }
             public int? Limit { get; set; }
             public int? Offset { get; set; }
-            public bool Applied { get; set; }
+            public bool IsApplied { get; set; }
             public bool IsHost { get; set; }
             public DateTime? StartDate { get; set; }
         }
@@ -55,23 +55,23 @@ namespace Application.Jobs
                     .OrderBy(x => x.Date)
                     .AsQueryable();
 
-                if (request.Applied && !request.IsHost)
+                if (request.IsApplied && !request.IsHost)
                 {
-                    queryable = queryable.Where(x => x.UserJob.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
+                    queryable = queryable.Where(x => x.UserJobs.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
                 }
 
-                if (request.IsHost && !request.Applied)
+                if (request.IsHost && !request.IsApplied)
                 {
-                    queryable = queryable.Where(x => x.UserJob.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
+                    queryable = queryable.Where(x => x.UserJobs.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
                 }
 
-                var Jobs = await queryable
+                var jobs = await queryable
                     .Skip(request.Offset ?? 0)
                     .Take(request.Limit ?? 3).ToListAsync();
 
                 return new JobsEnvelope
                 {
-                    Jobs = _mapper.Map<List<Job>, List<JobDto>>(Jobs),
+                    Jobs = _mapper.Map<List<Job>, List<JobDto>>(jobs),
                     JobCount = queryable.Count()
                 };
             }

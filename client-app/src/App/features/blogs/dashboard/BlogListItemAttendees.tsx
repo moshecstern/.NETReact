@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, List, Popup } from "semantic-ui-react";
-import { IAttendee } from "../../../models/blog";
+import { ILikedBlog } from "../../../models/blog";
 
 interface IProps {
-  peopleWhoLiked: IAttendee[];
+  peopleWhoLiked: ILikedBlog[];
 }
 
 const BlogListItemAttendees: React.FC<IProps> = ({ peopleWhoLiked }) => {
