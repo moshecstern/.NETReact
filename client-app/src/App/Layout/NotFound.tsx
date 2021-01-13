@@ -13,6 +13,12 @@ const NotFound = () => {
                 <Button as={Link} to='/activities' primary>
                     Return to Activities page
                 </Button>
+                <Button as={Link} to='/blogs' primary>
+                    Return to Blogs page
+                </Button>
+                <Button as={Link} to='/jobs' primary>
+                    Return to Jobs page
+                </Button>
             </Segment.Inline>
         </Segment>
     );

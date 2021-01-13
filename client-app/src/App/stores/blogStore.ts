@@ -17,9 +17,9 @@ export default class blogStore {
     this.rootStore = rootStore;
 
     reaction(
-      () => this.predicate.keys(),
+      () => this.predicateBlog.keys(),
       () => {
-        this.page = 0;
+        this.pageBlog = 0;
         this.blogRegistry.clear();
         this.loadBlogs();
       }
@@ -28,27 +28,27 @@ export default class blogStore {
 
   @observable blogRegistry = new Map();
   @observable blog: IBlog | null = null;
-  @observable loadingInitial = false;
-  @observable submitting = false;
-  @observable target = '';
-  @observable loading = false;
-  @observable.ref hubConnection: HubConnection | null = null;
+  @observable loadingInitialBlog = false;
+  @observable submittingBlog = false;
+  @observable targetBlog = '';
+  @observable loadingBlog = false;
+  @observable.ref hubConnectionBlog: HubConnection | null = null;
   @observable blogCount = 0;
-  @observable page = 0;
-  @observable predicate = new Map();
+  @observable pageBlog = 0;
+  @observable predicateBlog = new Map();
 
-  @action setPredicate = (predicate: string, value: string | Date) => {
-    this.predicate.clear();
+  @action setPredicateBlog = (predicate: string, value: string | Date) => {
+    this.predicateBlog.clear();
     if (predicate !== 'all') {
-      this.predicate.set(predicate, value);
+      this.predicateBlog.set(predicate, value);
     }
   }
 
-  @computed get axiosParams() {
+  @computed get axiosParamsBlog() {
     const params = new URLSearchParams();
     params.append('limit', String(LIMIT));
-    params.append('offset', `${this.page ? this.page * LIMIT : 0}`);
-    this.predicate.forEach((value, key) => {
+    params.append('offset', `${this.pageBlog ? this.pageBlog * LIMIT : 0}`);
+    this.predicateBlog.forEach((value, key) => {
       if (key === 'startDate') {
         params.append(key, value.toISOString())
       } else {
@@ -58,55 +58,55 @@ export default class blogStore {
     return params;
   }
 
-  @computed get totalPages() {
+  @computed get totalPagesBlog() {
     return Math.ceil(this.blogCount / LIMIT);
   }
 
-  @action setPage = (page: number) => {
-    this.page = page;
+  @action setPageBlog = (page: number) => {
+    this.pageBlog = page;
   }
 
-  @action createHubConnection = (blogId: string) => {
-    this.hubConnection = new HubConnectionBuilder()
+  @action createHubConnectionBlog = (blogId: string) => {
+    this.hubConnectionBlog = new HubConnectionBuilder()
       .withUrl(process.env.REACT_APP_API_CHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)
       .build();
 
-    this.hubConnection
+    this.hubConnectionBlog
       .start()
-      .then(() => console.log(this.hubConnection!.state))
+      .then(() => console.log(this.hubConnectionBlog!.state))
       .then(() => {
         console.log('Attempting to join group');
-        this.hubConnection!.invoke('AddToGroup', blogId)
+        this.hubConnectionBlog!.invoke('AddToGroup', blogId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
 
-    this.hubConnection.on('ReceiveComment', comment => {
+    this.hubConnectionBlog.on('ReceiveComment', comment => {
       runInAction(() => {
         this.blog!.comments.push(comment)
       })
     })
 
-    this.hubConnection.on('Send', message => {
+    this.hubConnectionBlog.on('Send', message => {
       toast.info(message);
     })
   };
 
-  @action stopHubConnection = () => {
-    this.hubConnection!.invoke('RemoveFromGroup', this.blog!.id)
+  @action stopHubConnectionBlog = () => {
+    this.hubConnectionBlog!.invoke('RemoveFromGroup', this.blog!.id)
       .then(() => {
-        this.hubConnection!.stop()
+        this.hubConnectionBlog!.stop()
       })
       .then(() => console.log('Connection stopped'))
       .catch(err => console.log(err))
   }
 
-  @action addComment = async (values: any) => {
+  @action addCommentBlog = async (values: any) => {
     values.blogId = this.blog!.id;
     try {
-      await this.hubConnection!.invoke('SendComment', values)
+      await this.hubConnectionBlog!.invoke('SendComment', values)
     } catch (error) {
       console.log(error);
     }
@@ -138,9 +138,9 @@ export default class blogStore {
   }
 
   @action loadBlogs = async () => {
-    this.loadingInitial = true;
+    this.loadingInitialBlog = true;
     try {
-      const BlogsEnvelope = await agent.Blogs.list(this.axiosParams);
+      const BlogsEnvelope = await agent.Blogs.list(this.axiosParamsBlog);
       const {blogs, blogCount} = BlogsEnvelope;
       runInAction(() => {
         blogs.forEach(blog => {
@@ -148,11 +148,11 @@ export default class blogStore {
           this.blogRegistry.set(blog.id, blog);
         });
         this.blogCount = blogCount;
-        this.loadingInitial = false;
+        this.loadingInitialBlog = false;
       });
     } catch (error) {
       runInAction(() => {
-        this.loadingInitial = false;
+        this.loadingInitialBlog = false;
       });
     }
   };
@@ -163,19 +163,19 @@ export default class blogStore {
       this.blog = blog;
       return toJS(blog);
     } else {
-      this.loadingInitial = true;
+      this.loadingInitialBlog = true;
       try {
         blog = await agent.Blogs.details(id);
         runInAction(() => {
           setBlogProps(blog, this.rootStore.userStore.user!);
           this.blog = blog;
           this.blogRegistry.set(blog.id, blog);
-          this.loadingInitial = false;
+          this.loadingInitialBlog = false;
         });
         return blog;
       } catch (error) {
         runInAction(() => {
-          this.loadingInitial = false;
+          this.loadingInitialBlog = false;
         });
         console.log(error);
       }
@@ -191,7 +191,7 @@ export default class blogStore {
   };
 
   @action createblog = async (blog: IBlog) => {
-    this.submitting = true;
+    this.submittingBlog = true;
     try {
       await agent.Blogs.create(blog);
       const attendee = createLikedBlog(this.rootStore.userStore.user!);
@@ -202,12 +202,12 @@ export default class blogStore {
       blog.isHost = true;
       runInAction(() => {
         this.blogRegistry.set(blog.id, blog);
-        this.submitting = false;
+        this.submittingBlog = false;
       });
       history.push(`/blogs/${blog.id}`);
     } catch (error) {
       runInAction(() => {
-        this.submitting = false;
+        this.submittingBlog = false;
       });
       toast.error('Problem submitting data');
       console.log(error.response);
@@ -215,18 +215,18 @@ export default class blogStore {
   };
 
   @action editblog = async (blog: IBlog) => {
-    this.submitting = true;
+    this.submittingBlog = true;
     try {
       await agent.Blogs.update(blog);
       runInAction(() => {
         this.blogRegistry.set(blog.id, blog);
         this.blog = blog;
-        this.submitting = false;
+        this.submittingBlog = false;
       });
       history.push(`/blogs/${blog.id}`);
     } catch (error) {
       runInAction(() => {
-        this.submitting = false;
+        this.submittingBlog = false;
       });
       toast.error('Problem submitting data');
       console.log(error);
@@ -237,19 +237,19 @@ export default class blogStore {
     event: SyntheticEvent<HTMLButtonElement>,
     id: string
   ) => {
-    this.submitting = true;
-    this.target = event.currentTarget.name;
+    this.submittingBlog = true;
+    this.targetBlog = event.currentTarget.name;
     try {
       await agent.Blogs.delete(id);
       runInAction(() => {
         this.blogRegistry.delete(id);
-        this.submitting = false;
-        this.target = '';
+        this.submittingBlog = false;
+        this.targetBlog = '';
       });
     } catch (error) {
       runInAction(() => {
-        this.submitting = false;
-        this.target = '';
+        this.submittingBlog = false;
+        this.targetBlog = '';
       });
       console.log(error);
     }
@@ -257,7 +257,7 @@ export default class blogStore {
 
   @action likeBlog = async () => {
     const attendee = createLikedBlog(this.rootStore.userStore.user!);
-    this.loading = true;
+    this.loadingBlog = true;
     try {
       await agent.Blogs.like(this.blog!.id);
       runInAction(() => {
@@ -265,19 +265,19 @@ export default class blogStore {
           this.blog.liked.push(attendee);
           this.blog.isLiked = true;
           this.blogRegistry.set(this.blog.id, this.blog);
-          this.loading = false;
+          this.loadingBlog = false;
         }
       })
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
+        this.loadingBlog = false;
       })
       toast.error('Problem signing up to blog');
     }
   };
 
   @action unlikeBlog = async () => {
-    this.loading = true;
+    this.loadingBlog = true;
     try {
       await agent.Blogs.unlike(this.blog!.id);
       runInAction(() => {
@@ -287,12 +287,12 @@ export default class blogStore {
           );
           this.blog.isLiked = false;
           this.blogRegistry.set(this.blog.id, this.blog);
-          this.loading = false;
+          this.loadingBlog = false;
         }
       })
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
+        this.loadingBlog = false;
       })
       toast.error('Problem cancelling like');
     }

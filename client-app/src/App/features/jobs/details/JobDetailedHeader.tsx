@@ -22,7 +22,7 @@ const jobImageTextStyle = {
 const JobDetailedHeader: React.FC<{job: IJob}> = ({job}) => {
   const host = job.applied.filter(x => x.isHost)[0];
   const rootStore = useContext(RootStoreContext);
-  const { applyjob, unlikeJob, loading } = rootStore.jobStore;
+  const { applyjob, unlikeJob, loadingJob } = rootStore.jobStore;
     return (
         <Segment.Group>
           <Segment basic attached='top' style={{ padding: '0' }}>
@@ -50,13 +50,13 @@ const JobDetailedHeader: React.FC<{job: IJob}> = ({job}) => {
           </Segment>
           <Segment clearing attached='bottom'>
             {job.isHost ? (
-              <Button as={Link} to={`/manage/${job.id}`} color='orange' floated='right'>
+              <Button as={Link} to={`/job/manage/${job.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
               ) : job.isApplied ? (
-                <Button loading={loading} onClick={unlikeJob}>Cancel application</Button>
+                <Button loading={loadingJob} onClick={unlikeJob}>Cancel application</Button>
                 ) : (
-                <Button loading={loading} onClick={applyjob} color='teal'>Apply</Button>
+                <Button loading={loadingJob} onClick={applyjob} color='teal'>Apply</Button>
               )}
           </Segment>
         </Segment.Group>

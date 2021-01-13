@@ -18,6 +18,7 @@ import BlogDetails from "../features/blogs/details/BlogDetails";
 import BlogDashboard from "../features/blogs/dashboard/BlogDashboard";
 import JobForm from "../features/jobs/form/JobForm";
 import JobDetails from "../features/jobs/details/JobDetails";
+
 import JobDashboard from "../features/jobs/dashboard/JobDashboard";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
@@ -67,7 +68,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 />
                 <PrivateRoute
                   key={location.key}
-                  path={["/createActivity", "/manage/:id"]}
+                  path={["/createActivity", "/activity/manage/:id"]}
                   component={ActivityForm}
                 />
                 <PrivateRoute
@@ -81,7 +82,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 />
                 <PrivateRoute
                   key={location.key}
-                  path={["/createJob", "/manage/:id"]}
+                  path={["/createJob", "/job/manage/:id"]}
                   component={JobForm}
                 />
                 <PrivateRoute
@@ -95,7 +96,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 />
                 <PrivateRoute
                   key={location.key}
-                  path={["/createBlog", "/manage/:id"]}
+                  path={["/createBlog", "/blog/manage/:id"]}
                   component={BlogForm}
                 />
                 <PrivateRoute

@@ -42,7 +42,7 @@ namespace Application.Blogs
                     x.AppUserId == user.Id);
 
                 if (liked != null)
-                    throw new RestException(HttpStatusCode.BadRequest, new { Liked = "Already attending this activity" });
+                    throw new RestException(HttpStatusCode.BadRequest, new { Liked = "Already attending this blog" });
 
                 liked = new UserBlog
                 {

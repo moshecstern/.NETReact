@@ -10,18 +10,18 @@ import {formatDistance} from 'date-fns';
 const BlogDetailedChat = () => {
   const rootStore = useContext(RootStoreContext);
   const {
-    createHubConnection,
-    stopHubConnection,
-    addComment,
+    createHubConnectionBlog,
+    stopHubConnectionBlog,
+    addCommentBlog,
     blog
   } = rootStore.blogStore;
 
   useEffect(() => {
-    createHubConnection(blog!.id);
+    createHubConnectionBlog(blog!.id);
     return () => {
-      stopHubConnection();
+      stopHubConnectionBlog();
     }
-  }, [createHubConnection, stopHubConnection, blog])
+  }, [createHubConnectionBlog, stopHubConnectionBlog, blog])
 
   return (
     <Fragment>
@@ -50,7 +50,7 @@ const BlogDetailedChat = () => {
           ))}
 
           <FinalForm 
-            onSubmit={addComment}
+            onSubmit={addCommentBlog}
             render={({handleSubmit, submitting, form}) => (
               <Form onSubmit={() => handleSubmit()!.then(() => form.reset())}>
               <Field 

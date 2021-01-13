@@ -16,17 +16,17 @@ const BlogDashboard: React.FC = () => {
     const rootStore = useContext(RootStoreContext);
     const {
       loadBlogs,
-      loadingInitial,
-      setPage,
-      page,
-      totalPages
+      loadingInitialBlog,
+      setPageBlog,
+      pageBlog,
+      totalPagesBlog
     } = rootStore.blogStore;
-    const [loadingNext, setLoadingNext] =useState(false);
+    const [loadingNextBlog, setLoadingNextBlog] =useState(false);
 
     const handleGetNext = () => {
-      setLoadingNext(true);
-      setPage(page + 1);
-      loadBlogs().then(() => setLoadingNext(false));
+      setLoadingNextBlog(true);
+      setPageBlog(pageBlog + 1);
+      loadBlogs().then(() => setLoadingNextBlog(false));
     };
 
     // LIFECYCLE
@@ -39,13 +39,13 @@ const BlogDashboard: React.FC = () => {
   return (
       <Grid>
         <Grid.Column width={10}>
-          {loadingInitial && page === 0 ? (
+          {loadingInitialBlog && pageBlog === 0 ? (
             <BlogListItemPlaceholder />
           ) : (
             <InfiniteScroll
             pageStart={0}
             loadMore={handleGetNext}
-            hasMore={!loadingNext && page + 1 < totalPages}
+            hasMore={!loadingNextBlog && pageBlog + 1 < totalPagesBlog}
             initialLoad={false}
               >
                 <BlogList />
@@ -56,7 +56,7 @@ const BlogDashboard: React.FC = () => {
           <BlogFilters />
         </Grid.Column>
         <Grid.Column width={10}>
-          <Loader active={loadingNext} />
+          <Loader active={loadingNextBlog} />
         </Grid.Column>
       </Grid>
   );

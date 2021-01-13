@@ -50,7 +50,7 @@ const ActivityDetailedHeader: React.FC<{activity: IActivity}> = ({activity}) => 
           </Segment>
           <Segment clearing attached='bottom'>
             {activity.isHost ? (
-              <Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
+              <Button as={Link} to={`/activity/manage/${activity.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
               ) : activity.isGoing ? (

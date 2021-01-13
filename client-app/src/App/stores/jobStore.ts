@@ -17,9 +17,9 @@ export default class jobStore {
     this.rootStore = rootStore;
 
     reaction(
-      () => this.predicate.keys(),
+      () => this.predicateJob.keys(),
       () => {
-        this.page = 0;
+        this.pageJob = 0;
         this.jobRegistry.clear();
         this.loadJobs();
       }
@@ -30,25 +30,25 @@ export default class jobStore {
   @observable job: IJob | null = null;
   @observable loadingInitialJob = false;
   @observable submittingJob = false;
-  @observable target = '';
-  @observable loading = false;
-  @observable.ref hubConnection: HubConnection | null = null;
+  @observable targetJob = '';
+  @observable loadingJob = false;
+  @observable.ref hubConnectionJob: HubConnection | null = null;
   @observable jobCount = 0;
-  @observable page = 0;
-  @observable predicate = new Map();
+  @observable pageJob = 0;
+  @observable predicateJob = new Map();
 
-  @action setPredicate = (predicate: string, value: string | Date) => {
-    this.predicate.clear();
-    if (predicate !== 'all') {
-      this.predicate.set(predicate, value);
+  @action setpredicateJob = (predicateJob: string, value: string | Date) => {
+    this.predicateJob.clear();
+    if (predicateJob !== 'all') {
+      this.predicateJob.set(predicateJob, value);
     }
   }
 
   @computed get axiosParams() {
     const params = new URLSearchParams();
     params.append('limit', String(LIMIT));
-    params.append('offset', `${this.page ? this.page * LIMIT : 0}`);
-    this.predicate.forEach((value, key) => {
+    params.append('offset', `${this.pageJob ? this.pageJob * LIMIT : 0}`);
+    this.predicateJob.forEach((value, key) => {
       if (key === 'startDate') {
         params.append(key, value.toISOString())
       } else {
@@ -58,46 +58,46 @@ export default class jobStore {
     return params;
   }
 
-  @computed get totalPages() {
+  @computed get totalpageJobs() {
     return Math.ceil(this.jobCount / LIMIT);
   }
 
-  @action setPage = (page: number) => {
-    this.page = page;
+  @action setpageJob = (pageJob: number) => {
+    this.pageJob = pageJob;
   }
 
   @action createHubConnection = (jobId: string) => {
-    this.hubConnection = new HubConnectionBuilder()
+    this.hubConnectionJob = new HubConnectionBuilder()
       .withUrl(process.env.REACT_APP_API_CHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)
       .build();
 
-    this.hubConnection
+    this.hubConnectionJob
       .start()
-      .then(() => console.log(this.hubConnection!.state))
+      .then(() => console.log(this.hubConnectionJob!.state))
       .then(() => {
         console.log('Attempting to join group');
-        this.hubConnection!.invoke('AddToGroup', jobId)
+        this.hubConnectionJob!.invoke('AddToGroup', jobId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
 
-    this.hubConnection.on('ReceiveComment', comment => {
+    this.hubConnectionJob.on('ReceiveComment', comment => {
       runInAction(() => {
         this.job!.comments.push(comment)
       })
     })
 
-    this.hubConnection.on('Send', message => {
+    this.hubConnectionJob.on('Send', message => {
       toast.info(message);
     })
   };
 
   @action stopHubConnection = () => {
-    this.hubConnection!.invoke('RemoveFromGroup', this.job!.id)
+    this.hubConnectionJob!.invoke('RemoveFromGroup', this.job!.id)
       .then(() => {
-        this.hubConnection!.stop()
+        this.hubConnectionJob!.stop()
       })
       .then(() => console.log('Connection stopped'))
       .catch(err => console.log(err))
@@ -106,7 +106,7 @@ export default class jobStore {
   @action addComment = async (values: any) => {
     values.jobId = this.job!.id;
     try {
-      await this.hubConnection!.invoke('SendComment', values)
+      await this.hubConnectionJob!.invoke('SendComment', values)
     } catch (error) {
       console.log(error);
     }
@@ -246,18 +246,18 @@ export default class jobStore {
     id: string
   ) => {
     this.submittingJob = true;
-    this.target = event.currentTarget.name;
+    this.targetJob = event.currentTarget.name;
     try {
       await agent.Jobs.delete(id);
       runInAction(() => {
         this.jobRegistry.delete(id);
         this.submittingJob = false;
-        this.target = '';
+        this.targetJob = '';
       });
     } catch (error) {
       runInAction(() => {
         this.submittingJob = false;
-        this.target = '';
+        this.targetJob = '';
       });
       console.log(error);
     }
@@ -265,7 +265,7 @@ export default class jobStore {
 
   @action applyjob = async () => {
     const attendee = createApplicant(this.rootStore.userStore.user!);
-    this.loading = true;
+    this.loadingJob = true;
     try {
       await agent.Jobs.apply(this.job!.id);
       runInAction(() => {
@@ -273,19 +273,19 @@ export default class jobStore {
           this.job.applied.push(attendee);
           this.job.isApplied = true;
           this.jobRegistry.set(this.job.id, this.job);
-          this.loading = false;
+          this.loadingJob = false;
         }
       })
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
+        this.loadingJob = false;
       })
       toast.error('Problem signing up to job');
     }
   };
 
   @action unlikeJob = async () => {
-    this.loading = true;
+    this.loadingJob = true;
     try {
       await agent.Jobs.unapply(this.job!.id);
       runInAction(() => {
@@ -295,12 +295,12 @@ export default class jobStore {
           );
           this.job.isApplied = false;
           this.jobRegistry.set(this.job.id, this.job);
-          this.loading = false;
+          this.loadingJob = false;
         }
       })
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
+        this.loadingJob = false;
       })
       toast.error('Problem cancelling like');
     }

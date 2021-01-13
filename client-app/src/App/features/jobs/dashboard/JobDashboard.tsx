@@ -17,16 +17,16 @@ const JobDashboard: React.FC = () => {
     const {
       loadJobs,
       loadingInitialJob,
-      setPage,
-      page,
-      totalPages
+      setpageJob,
+      pageJob,
+      totalpageJobs
     } = rootStore.jobStore;
-    const [loadingNext, setLoadingNext] =useState(false);
+    const [loadingNextJob, setLoadingNextJob] =useState(false);
 
     const handleGetNext = () => {
-      setLoadingNext(true);
-      setPage(page + 1);
-      loadJobs().then(() => setLoadingNext(false));
+      setLoadingNextJob(true);
+      setpageJob(pageJob + 1);
+      loadJobs().then(() => setLoadingNextJob(false));
     };
 
     // LIFECYCLE
@@ -39,13 +39,13 @@ const JobDashboard: React.FC = () => {
   return (
       <Grid>
         <Grid.Column width={10}>
-          {loadingInitialJob && page === 0 ? (
+          {loadingInitialJob && pageJob === 0 ? (
             <JobListItemPlaceholder />
           ) : (
             <InfiniteScroll
             pageStart={0}
             loadMore={handleGetNext}
-            hasMore={!loadingNext && page + 1 < totalPages}
+            hasMore={!loadingNextJob && pageJob + 1 < totalpageJobs}
             initialLoad={false}
               >
                 <JobList />
@@ -57,7 +57,7 @@ const JobDashboard: React.FC = () => {
           <JobFilters />
         </Grid.Column>
         <Grid.Column width={10}>
-          <Loader active={loadingNext} />
+          <Loader active={loadingNextJob} />
         </Grid.Column>
       </Grid>
   );

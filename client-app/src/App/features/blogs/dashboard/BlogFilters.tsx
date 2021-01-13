@@ -6,28 +6,28 @@ import { observer } from 'mobx-react-lite';
 
 const BlogFilters = () => {
   const rootStore = useContext(RootStoreContext);
-  const { predicate, setPredicate } = rootStore.blogStore;
+  const { predicateBlog, setPredicateBlog } = rootStore.blogStore;
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
         <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
         <Menu.Item
-          active={predicate.size === 0}
-          onClick={() => setPredicate('all', 'true')}
+          active={predicateBlog.size === 0}
+          onClick={() => setPredicateBlog('all', 'true')}
           color={'blue'}
           name={'all'}
           content={'All Blogs'}
         />
         <Menu.Item
-          active={predicate.has('isLiked')}
-          onClick={() => setPredicate('isLiked', 'true')}
+          active={predicateBlog.has('isLiked')}
+          onClick={() => setPredicateBlog('isLiked', 'true')}
           color={'blue'}
           name={'username'}
           content={"I Liked this blog"}
         />
         <Menu.Item
-          active={predicate.has('isHost')}
-          onClick={() => setPredicate('isHost', 'true')}
+          active={predicateBlog.has('isHost')}
+          onClick={() => setPredicateBlog('isHost', 'true')}
           color={'blue'}
           name={'host'}
           content={"I'm hosting"}
@@ -40,8 +40,8 @@ const BlogFilters = () => {
         content={'Select Date'}
       />
       <Calendar
-        onChange={date => setPredicate('startDate', date!)}
-        value={predicate.get('startDate') || new Date()}
+        onChange={date => setPredicateBlog('startDate', date!)}
+        value={predicateBlog.get('startDate') || new Date()}
       />
     </Fragment>
   );

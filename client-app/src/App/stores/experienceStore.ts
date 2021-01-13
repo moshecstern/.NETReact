@@ -29,7 +29,7 @@ export default class experienceStore {
 
   @observable experienceRegistry = new Map();
   @observable experience: IExperience | null = null;
-  @observable loadingInitial = false;
+  @observable loadingInitialExperience = false;
   @observable submitting = false;
   @observable target = '';
   @observable loading = false;
@@ -139,7 +139,7 @@ export default class experienceStore {
   }
 
   @action loadExperiences = async () => {
-    this.loadingInitial = true;
+    this.loadingInitialExperience = true;
     try {
       const experienceEnvelope = await agent.Experiences.list(this.axiosParams);
       const {experiences, experienceCount} = experienceEnvelope;
@@ -149,11 +149,11 @@ export default class experienceStore {
           this.experienceRegistry.set(experience.id, experience);
         });
         this.experienceCount = experienceCount;
-        this.loadingInitial = false;
+        this.loadingInitialExperience = false;
       });
     } catch (error) {
       runInAction('load experience error', () => {
-        this.loadingInitial = false;
+        this.loadingInitialExperience = false;
       });
     }
   };
@@ -164,19 +164,19 @@ export default class experienceStore {
       this.experience = experience;
       return toJS(experience);
     } else {
-      this.loadingInitial = true;
+      this.loadingInitialExperience = true;
       try {
         experience = await agent.Experiences.details(id);
         runInAction('getting experience', () => {
         //   setexperienceProps(experience, this.rootStore.userStore.user!);
           this.experience = experience;
           this.experienceRegistry.set(experience.id, experience);
-          this.loadingInitial = false;
+          this.loadingInitialExperience = false;
         });
         return experience;
       } catch (error) {
         runInAction('get experience error', () => {
-          this.loadingInitial = false;
+          this.loadingInitialExperience = false;
         });
         console.log(error);
       }

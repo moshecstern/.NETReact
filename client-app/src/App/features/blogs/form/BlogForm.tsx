@@ -42,7 +42,7 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
   const {
     createblog,
     editblog,
-    submitting,
+    submittingBlog,
     loadblog,
   } = rootStore.blogStore;
 
@@ -134,7 +134,7 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   component={TextInput}
                 /> */}
                 <Button
-                  loading={submitting}
+                  loading={submittingBlog}
                   disabled={loading || invalid || pristine}
                   floated="right"
                   positive

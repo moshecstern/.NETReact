@@ -15,10 +15,10 @@ export interface IJob {
     isApplied: boolean;
     isHost: boolean;
     applied: IApplied[];
-    comments: IComment[];
+    comments: IJobComment[];
 }
 
-export interface IComment {
+export interface IJobComment {
     id: string;
     createdAt: Date;
     body: string;
@@ -27,10 +27,10 @@ export interface IComment {
     image: string;
   }
 
-export interface IJobsFormValues extends Partial<IJob> {
+export interface IJobFormValues extends Partial<IJob> {
     time?: Date;
 }
-export class JobFormValues implements IJobsFormValues {
+export class JobFormValues implements IJobFormValues {
     id?: string = undefined;
     title: string = '';
     category: string = "";
@@ -40,7 +40,7 @@ export class JobFormValues implements IJobsFormValues {
     city: string = "";
     // venue:string = "";
 
-    constructor(init?: IJobsFormValues) {
+    constructor(init?: IJobFormValues) {
         if (init && init.date){
             init.time = init.date
         }

@@ -22,7 +22,7 @@ const blogImageTextStyle = {
 const BlogDetailedHeader: React.FC<{blog: IBlog}> = ({blog}) => {
   const host = blog.liked.filter(x => x.isHost)[0];
   const rootStore = useContext(RootStoreContext);
-  const { likeBlog, unlikeBlog, loading } = rootStore.blogStore;
+  const { likeBlog, unlikeBlog, loadingBlog } = rootStore.blogStore;
     return (
         <Segment.Group>
           <Segment basic attached='top' style={{ padding: '0' }}>
@@ -50,13 +50,13 @@ const BlogDetailedHeader: React.FC<{blog: IBlog}> = ({blog}) => {
           </Segment>
           <Segment clearing attached='bottom'>
             {blog.isHost ? (
-              <Button as={Link} to={`/manage/${blog.id}`} color='orange' floated='right'>
+              <Button as={Link} to={`/blog/manage/${blog.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
               ) : blog.isLiked ? (
-                <Button loading={loading} onClick={unlikeBlog}>Cancel attendance</Button>
+                <Button loading={loadingBlog} onClick={unlikeBlog}>Cancel attendance</Button>
                 ) : (
-                <Button loading={loading} onClick={likeBlog} color='teal'>Join Blog</Button>
+                <Button loading={loadingBlog} onClick={likeBlog} color='teal'>Join Blog</Button>
               )}
           </Segment>
         </Segment.Group>

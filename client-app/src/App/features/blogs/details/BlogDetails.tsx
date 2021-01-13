@@ -18,13 +18,13 @@ const BlogDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   history,
 }) => {
   const rootStore = useContext(RootStoreContext);
-  const {loadblog, loadingInitial, blog} = rootStore.blogStore;
+  const {loadblog, loadingInitialBlog, blog} = rootStore.blogStore;
 
   useEffect(() => {
     loadblog(match.params.id);
   }, [loadblog, match.params.id, history]);
 
-  if (loadingInitial || !blog)
+  if (loadingInitialBlog || !blog)
     return <LoadingComponent content="Loading blog..." />;
 
   if (!blog)
