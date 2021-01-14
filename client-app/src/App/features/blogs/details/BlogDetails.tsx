@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid} from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
@@ -19,12 +19,12 @@ const BlogDetails: React.FC<RouteComponentProps<DetailParams>> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const {loadblog, loadingInitialBlog, blog} = rootStore.blogStore;
-
+  const [ initialLoad, setInitialLoad] = useState(true);
   useEffect(() => {
-    loadblog(match.params.id);
+    loadblog(match.params.id).then(()=>setInitialLoad(false));
   }, [loadblog, match.params.id, history]);
 
-  if (loadingInitialBlog || !blog)
+  if (loadingInitialBlog || !blog || initialLoad)
     return <LoadingComponent content="Loading blog..." />;
 
   if (!blog)
@@ -35,7 +35,7 @@ const BlogDetails: React.FC<RouteComponentProps<DetailParams>> = ({
    <Grid.Column width={10}>
       <BlogDetailedHeader blog={blog} />
       <BlogDetailedInfo blog={blog} />
-      <BlogDetailedChat />
+      {!initialLoad && <BlogDetailedChat />}
    </Grid.Column>
    <Grid.Column width={6}>
       <BlogDetailedSidebar

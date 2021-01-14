@@ -42,7 +42,12 @@ const ActivityDetailedChat = () => {
           <Comment.Content>
             <Comment.Author as={Link} to={`/profile/${comment.username}`}>{comment.displayName}</Comment.Author>
             <Comment.Metadata>
-              <div>{formatDistance(comment.createdAt, new Date())}</div>
+              <div>
+                {formatDistance(
+                 new Date(comment.createdAt), 
+                  new Date()
+                  )}
+                  </div>
             </Comment.Metadata>
             <Comment.Text>{comment.body}</Comment.Text>
           </Comment.Content>

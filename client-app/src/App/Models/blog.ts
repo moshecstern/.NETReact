@@ -15,7 +15,7 @@ export interface IBlog {
     isHost: boolean;
     isLiked: boolean;
     liked: ILikedBlog[];
-    comments: IComment[];
+    blogComments: IComment[];
 }
 
 export interface IComment {

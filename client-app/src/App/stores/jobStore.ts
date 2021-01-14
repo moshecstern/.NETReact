@@ -6,7 +6,7 @@ import { history } from '../..';
 import { toast } from 'react-toastify';
 import { RootStore } from './rootStore';
 import { createApplicant, setJobProps } from '../common/util/util';
-import {HubConnection, HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 const LIMIT = 2;
 
@@ -65,10 +65,9 @@ export default class jobStore {
   @action setpageJob = (pageJob: number) => {
     this.pageJob = pageJob;
   }
-
-  @action createHubConnection = (jobId: string) => {
+  @action createHubConnectionJob = (jobId: string) => {
     this.hubConnectionJob = new HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_CHAT_URL!, {
+      .withUrl(process.env.REACT_APP_API_JOBCHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)
@@ -79,23 +78,24 @@ export default class jobStore {
       .then(() => console.log(this.hubConnectionJob!.state))
       .then(() => {
         console.log('Attempting to join group');
-        this.hubConnectionJob!.invoke('AddToGroup', jobId)
+        this.hubConnectionJob!.invoke('AddToGroupJob', jobId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
-
-    this.hubConnectionJob.on('ReceiveComment', comment => {
+// below 'RecieveComment' is related to API.SignalR.HubCOnnection line40
+    this.hubConnectionJob.on('ReceiveJobComment', comment => {
+      console.log(comment)
       runInAction(() => {
-        this.job!.comments.push(comment)
+        this.job!.jobComments.push(comment)
       })
     })
 
-    this.hubConnectionJob.on('Send', message => {
+    this.hubConnectionJob.on('SendJob', message => {
       toast.info(message);
     })
   };
 
-  @action stopHubConnection = () => {
-    this.hubConnectionJob!.invoke('RemoveFromGroup', this.job!.id)
+  @action stopHubConnectionJob = () => {
+    this.hubConnectionJob!.invoke('RemoveFromGroupJob', this.job!.id)
       .then(() => {
         this.hubConnectionJob!.stop()
       })
@@ -103,10 +103,11 @@ export default class jobStore {
       .catch(err => console.log(err))
   }
 
-  @action addComment = async (values: any) => {
+  @action addCommentJob = async (values: any) => {
+    // below values.activityId needs to match whats in Application.create.cs
     values.jobId = this.job!.id;
     try {
-      await this.hubConnectionJob!.invoke('SendComment', values)
+      await this.hubConnectionJob!.invoke('SendCommentJob', values)
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +122,7 @@ export default class jobStore {
 
   groupjobsByDate(jobs: IJob[]) {
     console.log("grouping by date " + jobs);
-    
+
     const sortedjobs = jobs.sort(
       (a, b) => a.date.getTime() - b.date.getTime()
     );
@@ -143,17 +144,17 @@ export default class jobStore {
     this.loadingInitialJob = true;
     try {
       const jobsEnvelope = await agent.Jobs.list(this.axiosParams);
-      const {jobs, jobCount} = jobsEnvelope;
-      console.log("This is how many are comming back * " +jobCount+" * these are the jobs coming back"+ jobs)
+      const { jobs, jobCount } = jobsEnvelope;
+      console.log("This is how many are comming back * " + jobCount + " * these are the jobs coming back" + jobs)
       console.log(jobs)
       runInAction(() => {
         jobs.forEach(job => {
           setJobProps(job, this.rootStore.userStore.user!);
           this.jobRegistry.set(job.id, job);
-           console.log(jobs)
-        console.log("jobs after");
+          console.log(jobs)
+          console.log("jobs after");
         });
-       
+
         this.jobCount = jobCount;
         this.loadingInitialJob = false;
       });

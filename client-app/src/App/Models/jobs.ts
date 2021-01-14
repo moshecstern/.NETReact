@@ -15,7 +15,7 @@ export interface IJob {
     isApplied: boolean;
     isHost: boolean;
     applied: IApplied[];
-    comments: IJobComment[];
+    jobComments: IJobComment[];
 }
 
 export interface IJobComment {

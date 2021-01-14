@@ -39,7 +39,7 @@ public class Command : IRequest<BlogCommentsDto>
 
                 var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == request.Username);
 
-                var blogcomment = new BlogComment
+                var comment = new BlogComment
                 {
                     Author = user,
                     Blog = blog,
@@ -47,11 +47,11 @@ public class Command : IRequest<BlogCommentsDto>
                     CreatedAt = DateTime.Now
                 };
                 // job.Comments.Add(jobcomment);
-                blog.BlogComments.Add(blogcomment);
+                blog.BlogComments.Add(comment);
 
                 var success = await _context.SaveChangesAsync() > 0;
 
-                if (success) return _mapper.Map<BlogCommentsDto>(blogcomment);
+                if (success) return _mapper.Map<BlogCommentsDto>(comment);
 
                 throw new Exception("Problem saving changes");
             }

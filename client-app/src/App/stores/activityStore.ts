@@ -82,7 +82,7 @@ export default class ActivityStore {
         this.hubConnection!.invoke('AddToGroup', activityId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
-
+// below 'RecieveComment' is related to API.SignalR.HubCOnnection line40
     this.hubConnection.on('ReceiveComment', comment => {
       runInAction(() => {
         this.activity!.comments.push(comment)
@@ -104,6 +104,7 @@ export default class ActivityStore {
   }
 
   @action addComment = async (values: any) => {
+    // below values.activityId needs to match whats in Application.create.cs
     values.activityId = this.activity!.id;
     try {
       await this.hubConnection!.invoke('SendComment', values)

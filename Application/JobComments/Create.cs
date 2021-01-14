@@ -39,7 +39,7 @@ namespace Application.JobComments
 
                 var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == request.Username);
 
-                var jobcomment = new JobComment
+                var comment = new JobComment
                 {
                     Author = user,
                     Job = job,
@@ -47,11 +47,11 @@ namespace Application.JobComments
                     CreatedAt = DateTime.Now
                 };
                 // job.Comments.Add(jobcomment);
-                job.JobComments.Add(jobcomment);
+                job.JobComments.Add(comment);
 
                 var success = await _context.SaveChangesAsync() > 0;
 
-                if (success) return _mapper.Map<JobCommentDto>(jobcomment);
+                if (success) return _mapper.Map<JobCommentDto>(comment);
 
                 throw new Exception("Problem saving changes");
             }

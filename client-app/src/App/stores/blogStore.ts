@@ -66,9 +66,64 @@ export default class blogStore {
     this.pageBlog = page;
   }
 
+  // @action createHubConnectionBlog = (blogId: string) => {
+  //   if (!this.hubConnectionBlog) {
+  //   this.hubConnectionBlog = new HubConnectionBuilder()
+  //     .withUrl(process.env.REACT_APP_API_BLOGCHAT_URL!, {
+  //       accessTokenFactory: () => this.rootStore.commonStore.token!
+  //     })
+  //     .configureLogging(LogLevel.Information)
+  //     .build();
+
+  //     this.hubConnectionBlog.on('ReceiveBlogComment', (comment) => runInAction(() => this.blog!.comments.push(comment)));
+  //     this.hubConnectionBlog.on('SendBlog', (message) => {/*toast.info(message)*/});
+
+  //   }
+  //     if (this.hubConnectionBlog!.state === "Disconnected") {
+  //   this.hubConnectionBlog
+  //     .start()
+  //     .then(() => console.log(this.hubConnectionBlog!.state))
+  //     .then(() => {
+  //       console.log('Attempting to join group');
+  //       this.hubConnectionBlog!.invoke('AddToGroupBlog', blogId)
+  //     })
+  //     .catch(error => console.log('Error establishing connection: ', error));
+  //   } else if(this.hubConnectionBlog!.state === 'Connected'){
+  //     this.hubConnectionBlog!.invoke('AddToGroup', blogId);
+  //   }
+  
+  //   this.hubConnectionBlog.on('ReceiveBlogComment', comment => {
+  //     runInAction(() => {
+  //       this.blog!.comments.push(comment)
+  //     })
+  //   })
+
+  //   this.hubConnectionBlog.on('SendBlog', message => {
+  //     toast.info(message);
+  //   })
+  // };
+
+  // @action stopHubConnectionBlog = () => {
+  //   if (this.hubConnectionBlog?.state === "Connected") {
+  //   this.hubConnectionBlog!.invoke('RemoveFromGroupBlog', this.blog!.id)
+  //     .then(() => {
+  //       this.hubConnectionBlog!.stop()
+  //     })
+  //     .then(() => console.log('Connection stopped'))
+  //     .catch(err => console.log(err))
+  // }}
+
+  // @action addCommentBlog = async (values: any) => {
+  //   values.blogId = this.blog!.id;
+  //   try {
+  //     await this.hubConnectionBlog!.invoke('SendCommentBlog', values)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // } 
   @action createHubConnectionBlog = (blogId: string) => {
     this.hubConnectionBlog = new HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_CHAT_URL!, {
+      .withUrl(process.env.REACT_APP_API_BLOGCHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)
@@ -79,23 +134,24 @@ export default class blogStore {
       .then(() => console.log(this.hubConnectionBlog!.state))
       .then(() => {
         console.log('Attempting to join group');
-        this.hubConnectionBlog!.invoke('AddToGroup', blogId)
+        this.hubConnectionBlog!.invoke('AddToGroupBlog', blogId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
-
-    this.hubConnectionBlog.on('ReceiveComment', comment => {
+// below 'RecieveComment' is related to API.SignalR.HubCOnnection line40
+    this.hubConnectionBlog.on('ReceiveBlogComment', comment => {
+      console.log(comment)
       runInAction(() => {
-        this.blog!.comments.push(comment)
+        this.blog!.blogComments.push(comment)
       })
     })
 
-    this.hubConnectionBlog.on('Send', message => {
+    this.hubConnectionBlog.on('SendBlog', message => {
       toast.info(message);
     })
   };
 
   @action stopHubConnectionBlog = () => {
-    this.hubConnectionBlog!.invoke('RemoveFromGroup', this.blog!.id)
+    this.hubConnectionBlog!.invoke('RemoveFromGroupBlog', this.blog!.id)
       .then(() => {
         this.hubConnectionBlog!.stop()
       })
@@ -104,9 +160,10 @@ export default class blogStore {
   }
 
   @action addCommentBlog = async (values: any) => {
+    // below values.activityId needs to match whats in Application.create.cs
     values.blogId = this.blog!.id;
     try {
-      await this.hubConnectionBlog!.invoke('SendComment', values)
+      await this.hubConnectionBlog!.invoke('SendCommentBlog', values)
     } catch (error) {
       console.log(error);
     }
