@@ -18,15 +18,46 @@ namespace Persistence
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UserFollowing> Followings { get; set; }
 
-        public DbSet<Blog> Blogs {get; set; }
-        public DbSet<UserBlog> UserBlogs {get; set; }
-        public DbSet<BlogComment> BlogComments {get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<UserBlog> UserBlogs { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
 
-        public DbSet<Job> Jobs {get; set;}
-        public DbSet<UserJob> UserJobs {get; set;}
-        public DbSet<JobComment> JobComments {get; set;}
-        public DbSet<Experience> Experiences {get; set;}
-        public DbSet<UserExperience> UserExperiences {get; set;}
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<UserJob> UserJobs { get; set; }
+        public DbSet<JobComment> JobComments { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
+        public DbSet<UserExperience> UserExperiences { get; set; }
+
+        // message
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
+        public DbSet<MessageComment> MessageComments { get; set; }
+
+        // Business 
+        public DbSet<Business> Businesses { get; set; }
+        public DbSet<UserBusiness> UserBusinesses { get; set; }
+        public DbSet<BusinessComment> BusinessComments { get; set; }
+
+        //  Post
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<UserPost> UserPosts { get; set; }
+        public DbSet<PostComment> PostComments { get; set; }
+
+        // Product
+        public DbSet<Product> Products { get; set; }
+        public DbSet<UserProduct> UserProducts { get; set; }
+        public DbSet<ProductComment> ProductComments { get; set; }
+
+        // Cart
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<UserCart> UserCarts { get; set; }
+        // wishlist
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<UserWishlist> UserWishlists { get; set; }
+        // purchasehistory
+        public DbSet<PurchaseHistory> PurchaseHistories { get; set; }
+        public DbSet<UserPurchaseHistory> UserPurchaseHistories { get; set; }
+
 
 
 
@@ -70,8 +101,8 @@ namespace Persistence
             });
 
             // repeat for Jobs, expeirences, blogs
-                        builder.Entity<UserJob>(x => x.HasKey(ua =>
-                new { ua.AppUserId, ua.JobId }));
+            builder.Entity<UserJob>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.JobId }));
 
             builder.Entity<UserJob>()
                 .HasOne(u => u.AppUser)
@@ -82,11 +113,11 @@ namespace Persistence
                 .HasOne(a => a.Job)
                 .WithMany(u => u.UserJobs)
                 .HasForeignKey(a => a.JobId);
-      
+
 
             // Blogs
-                        builder.Entity<UserBlog>(x => x.HasKey(ua =>
-                new { ua.AppUserId, ua.BlogId }));
+            builder.Entity<UserBlog>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.BlogId }));
 
             builder.Entity<UserBlog>()
                 .HasOne(u => u.AppUser)
@@ -98,8 +129,8 @@ namespace Persistence
                 .WithMany(u => u.UserBlogs)
                 .HasForeignKey(a => a.BlogId);
             // Experiences
-                        builder.Entity<UserExperience>(x => x.HasKey(ua =>
-                new { ua.AppUserId, ua.ExperienceId }));
+            builder.Entity<UserExperience>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.ExperienceId }));
 
             builder.Entity<UserExperience>()
                 .HasOne(u => u.AppUser)
@@ -111,7 +142,107 @@ namespace Persistence
                 .WithMany(u => u.UserExperiences)
                 .HasForeignKey(a => a.ExperienceId);
 
+            // message
+             builder.Entity<UserMessage>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.MessageId }));
 
+            builder.Entity<UserMessage>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserMessages)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserMessage>()
+                .HasOne(a => a.Message)
+                .WithMany(u => u.UserMessages)
+                .HasForeignKey(a => a.MessageId);
+
+                // Business
+                 builder.Entity<UserBusiness>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.BusinessId }));
+
+            builder.Entity<UserBusiness>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserBusinesses)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserBusiness>()
+                .HasOne(a => a.Business)
+                .WithMany(u => u.UserBusinesses)
+                .HasForeignKey(a => a.BusinessId);
+
+
+                // Post
+                 builder.Entity<UserPost>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.PostId }));
+
+            builder.Entity<UserPost>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserPosts)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserPost>()
+                .HasOne(a => a.Post)
+                .WithMany(u => u.UserPosts)
+                .HasForeignKey(a => a.PostId);
+
+                // Product
+                 builder.Entity<UserProduct>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.ProductId }));
+
+            builder.Entity<UserProduct>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserProducts)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserProduct>()
+                .HasOne(a => a.Product)
+                .WithMany(u => u.UserProducts)
+                .HasForeignKey(a => a.ProductId);
+
+
+                // Cart
+                 builder.Entity<UserCart>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.CartId }));
+
+            builder.Entity<UserCart>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserCarts)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserCart>()
+                .HasOne(a => a.Cart)
+                .WithMany(u => u.UserCarts)
+                .HasForeignKey(a => a.CartId);
+
+
+                // Wishlist
+                 builder.Entity<UserWishlist>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.WishlistId }));
+
+            builder.Entity<UserWishlist>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserWishlists)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserWishlist>()
+                .HasOne(a => a.Wishlist)
+                .WithMany(u => u.UserWishlists)
+                .HasForeignKey(a => a.WishlistId);
+
+
+                // purchasehistory
+                 builder.Entity<UserPurchaseHistory>(x => x.HasKey(ua =>
+    new { ua.AppUserId, ua.PurchaseHistoryId }));
+
+            builder.Entity<UserPurchaseHistory>()
+                .HasOne(u => u.AppUser)
+                .WithMany(a => a.UserPurchaseHistories)
+                .HasForeignKey(u => u.AppUserId);
+
+            builder.Entity<UserPurchaseHistory>()
+                .HasOne(a => a.PurchaseHistory)
+                .WithMany(u => u.UserPurchaseHistories)
+                .HasForeignKey(a => a.PurchaseHistoryId);
         }
     }
 }

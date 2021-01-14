@@ -24,10 +24,14 @@ namespace Domain
         public virtual ICollection<UserExperience> UserExperiences { get; set; }
 
         public virtual ICollection<UserJob> UserJobs { get; set; }
-        // public virtual ICollection<JobFollowing> JobFollowings { get; set; }
-        // public virtual ICollection<JobFollowing> JobFollowers { get; set; }
         public virtual ICollection<UserBlog> UserBlogs { get; set; }
-        // public virtual ICollection<BlogFollowing> BlogFollowings { get; set; }
-        // public virtual ICollection<BlogFollowing> BlogFollowers { get; set; }
+        public virtual ICollection<UserMessage> UserMessages { get; set; }
+           public virtual ICollection<UserBusiness> UserBusinesses { get; set; }
+        public virtual ICollection<UserPost> UserPosts { get; set; }
+        public virtual ICollection<UserProduct> UserProducts { get; set; }
+         public virtual ICollection<UserPurchaseHistory> UserPurchaseHistories { get; set; }
+        public virtual ICollection<UserWishlist> UserWishlists { get; set; }
+        public virtual ICollection<UserCart> UserCarts { get; set; }
+
     }
 }
