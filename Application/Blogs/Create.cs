@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
@@ -56,9 +55,10 @@ public class Command : IRequest
                     Description = request.Description,
                     Category = request.Category,
                     Date = request.Date,
-                    Main = request.Main,
-                    Main2 = request.Main2,
-                    // edit not sure how to make optional here
+                    Main = request.Main ?? "",
+                    Main2 = request.Main2 ?? ""
+
+                    // edit only add ones needed to create!
                 };
                 _context.Blogs.Add(blog);
 

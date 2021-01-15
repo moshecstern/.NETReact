@@ -12,6 +12,7 @@ namespace Application.Comments
                 .ForMember(d => d.Username, o => o.MapFrom(s => s.Author.UserName))
                 .ForMember(d => d.DisplayName, o => o.MapFrom(s => s.Author.DisplayName))
                 .ForMember(d => d.Image, o => o.MapFrom(s => s.Author.Photos.FirstOrDefault(x => x.IsMain).Url));
+                // .ForMember(d => d.Following, o => 0.MapFrom<FollowingResolver>());
         }
     }
 }

@@ -25,13 +25,13 @@ namespace Application.Experiences
             {
                 Limit = limit;
                 Offset = offset;
-                IsLiked = isLiked;
+                // IsLiked = isLiked;
                 IsHost = isHost;
                 StartDate = startDate ?? DateTime.Now;
             }
             public int? Limit { get; set; }
             public int? Offset { get; set; }
-            public bool IsLiked { get; set; }
+            // public bool IsLiked { get; set; }
             public bool IsHost { get; set; }
             public DateTime? StartDate { get; set; }
         }
@@ -55,12 +55,12 @@ namespace Application.Experiences
                     .OrderBy(x => x.Date)
                     .AsQueryable();
 
-                if (request.IsLiked && !request.IsHost)
+                if (!request.IsHost)
                 {
                     queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername()));
                 }
 
-                if (request.IsHost && !request.IsLiked)
+                if (request.IsHost)
                 {
                     queryable = queryable.Where(x => x.UserExperiences.Any(a => a.AppUser.UserName == _userAccessor.GetCurrentUsername() && a.IsHost));
                 }

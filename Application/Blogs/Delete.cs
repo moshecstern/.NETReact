@@ -27,7 +27,7 @@ public class Command : IRequest
                 // handler logic
                 var blog = await _context.Blogs.FindAsync(request.Id);
                 if (blog == null)
-                    throw new RestException(HttpStatusCode.NotFound, new {blog = "Not Found"});
+                    throw new RestException(HttpStatusCode.NotFound, new {Blogs = "Not Found"});
                 _context.Remove(blog);
 
                 var success = await _context.SaveChangesAsync() > 0;

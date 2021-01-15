@@ -116,6 +116,24 @@ namespace API
                 {
                     policy.Requirements.Add(new ExperienceIsHostRequirement());
                 });
+                    opt.AddPolicy("IsMessageHost", policy =>
+                {
+                    policy.Requirements.Add(new MessageIsHost());
+                });
+                    opt.AddPolicy("IsBusinessHost", policy =>
+                {
+                    policy.Requirements.Add(new BusinessIsHost());
+                });
+
+                    opt.AddPolicy("IsPostHost", policy =>
+                {
+                    policy.Requirements.Add(new PostIsHost());
+                });
+
+                    opt.AddPolicy("IsProductHost", policy =>
+                {
+                    policy.Requirements.Add(new ProductIsHost());
+                });
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
@@ -211,6 +229,11 @@ namespace API
                 endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapHub<ChatHubJob>("/jobchat");
                 endpoints.MapHub<ChatHubBlog>("/blogchat");
+
+                endpoints.MapHub<ChatHub>("/messagechat");
+                endpoints.MapHub<ChatHub>("/businesschat");
+                endpoints.MapHub<ChatHub>("/postchat");
+                endpoints.MapHub<ChatHub>("/productchat");
             });
         }
     }

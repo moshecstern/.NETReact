@@ -37,7 +37,7 @@ namespace Application.Blogs
                 if (blog == null)
                     throw new RestException(HttpStatusCode.NotFound, new
                     {
-                        blog = "Not Found"
+                        Blog = "Not Found"
                     });
                 var blogToReturn = _mapper.Map<Blog, BlogDto>(blog);
 

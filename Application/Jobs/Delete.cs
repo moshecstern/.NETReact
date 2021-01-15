@@ -27,7 +27,7 @@ namespace Application.Jobs
                 // handler logic
                 var job = await _context.Jobs.FindAsync(request.Id);
                 if (job == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { job = "Not Found" });
+                    throw new RestException(HttpStatusCode.NotFound, new { Job = "Not Found" });
                 _context.Remove(job);
 
                 var success = await _context.SaveChangesAsync() > 0;

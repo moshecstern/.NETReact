@@ -49,7 +49,7 @@ namespace Application.Blogs
                 if (blog == null)
                     throw new RestException(HttpStatusCode.NotFound, new
                     {
-                        blog = "Not Found"
+                        Blog = "Not Found"
                     });
                 blog.Title = request.Title ?? blog.Title;
                 blog.Category = request.Category ?? blog.Category;

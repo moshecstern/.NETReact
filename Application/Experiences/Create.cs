@@ -40,6 +40,8 @@ namespace Application.Experiences
                 RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
+                RuleFor(x => x.DateEnded).NotEmpty();
+                RuleFor(x => x.DateStarted).NotEmpty();
                 // RuleFor(x => x.Main).NotEmpty();
                 // RuleFor(x => x.Main2).NotEmpty();
                 // edit rules for whats required
@@ -67,13 +69,13 @@ namespace Application.Experiences
                     Date = request.Date,
                     DateStarted = request.DateStarted,
                     DateEnded = request.DateEnded,
-                    Main = request.Main,
-                    Main2 = request.Main2,
-                    Link1 = request.Link1,
-                    Link2 = request.Link2,
-                    Link1Name = request.Link1Name,
-                    Link2Name = request.Link2Name,
-                    Image = request.Image,
+                    Main = request.Main ?? "",
+                    Main2 = request.Main2 ?? "",
+                    Link1 = request.Link1 ?? "",
+                    Link2 = request.Link2 ?? "",
+                    Link1Name = request.Link1Name ?? "",
+                    Link2Name = request.Link2Name ?? "",
+                    Image = request.Image ?? ""
                     // edit not sure how to make optional here
                 };
                 _context.Experiences.Add(experience);

@@ -45,7 +45,7 @@ namespace Application.Blogs
                     return Unit.Value;
 
                 if (liked.IsHost)
-                    throw new RestException(HttpStatusCode.BadRequest, new { Blogs = "You cannot remove yourself as host" });
+                    throw new RestException(HttpStatusCode.BadRequest, new { Blog = "You cannot remove yourself as host" });
 
                 _context.UserBlogs.Remove(liked);
 
