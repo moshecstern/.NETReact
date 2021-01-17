@@ -21,7 +21,7 @@ namespace Application.Experiences
         }
         public class Query : IRequest<ExperiencesEnvelope>
         {
-            public Query(int? limit, int? offset, bool isLiked, bool isHost, DateTime? startDate)
+            public Query(int? limit, int? offset, bool isHost, DateTime? startDate)
             {
                 Limit = limit;
                 Offset = offset;

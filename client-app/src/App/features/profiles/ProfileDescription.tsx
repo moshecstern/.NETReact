@@ -31,12 +31,13 @@ const ProfileDescription = () => {
             <ProfileEditForm updateProfile={updateProfile} profile={profile!} />
           ) : (
             <div>
-              {profile! && profile?.isBusiness === true ? ( 
+              {/* {profile! && profile?.isBusiness === true ? ( 
             <span>Business</span>
                ):(
                 <span>Personal</span>
-               ) }
+               ) } */}
             <span>{profile!.bio}</span>
+            <div />
             <span>{profile!.LongBio}</span>
             </div>
           )}

@@ -1,7 +1,7 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Tab, Grid, Header, Card, Image, TabProps } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Tab, Grid, Header, Card, Image, TabProps, Button } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 import { IUserActivity } from '../../models/profile';
 import { format } from 'date-fns';
 import { RootStoreContext } from '../../stores/rootStore';
@@ -17,6 +17,7 @@ const ProfileEvents = () => {
   const {
     loadUserActivities,
     profile,
+    isCurrentUser,
     loadingActivities,
     userActivities
   } = rootStore.profileStore!;
@@ -49,6 +50,16 @@ const ProfileEvents = () => {
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content={'Activities'} />
+       {isCurrentUser && (
+                   <Button
+                   as={NavLink}
+                   to={"/createActivity"}
+                   basic
+                   floated='right'
+                   content="Create Activity"
+                 />
+       )}
+       
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab

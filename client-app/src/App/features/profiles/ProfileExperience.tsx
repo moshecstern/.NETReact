@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { Card, Grid, Header, Tab, Image, TabProps } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
+import { Card, Grid, Header, Tab, Image, TabProps, Button } from 'semantic-ui-react';
 import { RootStoreContext } from '../../stores/rootStore';
 import {IUserExperience} from '../../models/profile';
 import { format } from 'date-fns';
@@ -17,6 +17,7 @@ const ProfileExperience = () => {
         loadUserExperiences,
         profile,
         loadingExperiences,
+        isCurrentUser,
         userExperiences
     } = rootStore.profileStore!;
 
@@ -47,6 +48,16 @@ const ProfileExperience = () => {
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content={'Experience'} />
+          {isCurrentUser && (
+                   <Button
+                   as={NavLink}
+                   to={"/createExperience"}
+                   basic
+                   floated='right'
+                   content="Create Experience"
+                 />
+          )}
+       
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab

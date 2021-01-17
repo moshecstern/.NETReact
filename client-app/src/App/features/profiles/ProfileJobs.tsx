@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { Card, Grid, Header, Tab, Image, TabProps } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
+import { Card, Grid, Header, Tab, Image, TabProps, Button } from 'semantic-ui-react';
 import { RootStoreContext } from '../../stores/rootStore';
 import {IUserJob} from '../../models/profile';
 import { format } from 'date-fns';
@@ -17,6 +17,7 @@ const ProfileJobs = () => {
         loadUserJobs,
         profile,
         loadingJobs,
+        isCurrentUser,
         userJobs
     } = rootStore.profileStore!;
 
@@ -47,6 +48,16 @@ const ProfileJobs = () => {
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content={'Jobs'} />
+          {isCurrentUser && (
+                   <Button
+                   as={NavLink}
+                   to={"/createJob"}
+                   basic
+                   floated='right'
+                   content="Create Job"
+                 />
+       )}
+        
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab

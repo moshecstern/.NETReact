@@ -11,10 +11,10 @@ namespace API.Controllers
     {
       [HttpGet]
         public async Task<ActionResult<List.ExperiencesEnvelope>> List(int? limit,
-            int? offset, bool isLiked, bool isHost, DateTime? startDate)
+            int? offset, bool isHost, DateTime? startDate)
         {
             return await Mediator.Send(new List.Query(limit,
-                offset, isLiked, isHost, startDate));
+                offset, isHost, startDate));
         }
 
         [HttpGet("{id}")]

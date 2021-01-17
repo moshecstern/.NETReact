@@ -40,5 +40,41 @@ namespace API.Controllers
         {
             return await Mediator.Send(new ListBlogs.Query{Username = username, Predicate = predicate});
         }
+
+                  [HttpGet("{username}/messages")]
+        public async Task<ActionResult<List<UserMessageDto>>> GetUserMessages(string username, string predicate)
+        {
+            return await Mediator.Send(new ListMessages.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/businesses")]
+        public async Task<ActionResult<List<UserBusinessDto>>> GetUserBusinesses(string username, string predicate)
+        {
+            return await Mediator.Send(new ListBusinesses.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/posts")]
+        public async Task<ActionResult<List<UserPostDto>>> GetUserPosts(string username, string predicate)
+        {
+            return await Mediator.Send(new ListPosts.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/products")]
+        public async Task<ActionResult<List<UserProductDto>>> GetUserProducts(string username, string predicate)
+        {
+            return await Mediator.Send(new ListProducts.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/carts")]
+        public async Task<ActionResult<List<UserCartDto>>> GetUserCarts(string username, string predicate)
+        {
+            return await Mediator.Send(new ListCarts.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/wishlists")]
+        public async Task<ActionResult<List<UserWishlistDto>>> GetUserWishlists(string username, string predicate)
+        {
+            return await Mediator.Send(new ListWishlists.Query{Username = username, Predicate = predicate});
+        }
+                  [HttpGet("{username}/purchasehistories")]
+        public async Task<ActionResult<List<UserPurchaseHistoryDto>>> GetUserPurchaseHistories(string username, string predicate)
+        {
+            return await Mediator.Send(new ListProductHistories.Query{Username = username, Predicate = predicate});
+        }
     }
 }

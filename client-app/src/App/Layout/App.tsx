@@ -18,8 +18,9 @@ import BlogDetails from "../features/blogs/details/BlogDetails";
 import BlogDashboard from "../features/blogs/dashboard/BlogDashboard";
 import JobForm from "../features/jobs/form/JobForm";
 import JobDetails from "../features/jobs/details/JobDetails";
-
 import JobDashboard from "../features/jobs/dashboard/JobDashboard";
+import ExperienceForm from "../features/experiences/form/ExperienceForm";
+
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
@@ -99,6 +100,11 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path={["/createBlog", "/blog/manage/:id"]}
                   component={BlogForm}
                 />
+                  <PrivateRoute
+                 key={location.key}
+                 path={["/createExperience", "/experience/manage/:id"]}
+                 component={ExperienceForm}
+               />
                 <PrivateRoute
                   path="/profile/:username"
                   component={ProfilePage}

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Tab, Grid, Header, Card, Image, TabProps } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Tab, Grid, Header, Card, Image, TabProps, Button } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 import { IUserBlog } from '../../models/profile';
 import { format } from 'date-fns';
 import { RootStoreContext } from '../../stores/rootStore';
@@ -19,6 +19,7 @@ const ProfileBlogs = () => {
     loadUserBlogs,
     profile,
     loadingBlogs,
+    isCurrentUser,
     userBlogs
   } = rootStore.profileStore!;
 
@@ -50,6 +51,15 @@ const ProfileBlogs = () => {
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content={'Blogs'} />
+          {isCurrentUser && (
+                   <Button
+                   as={NavLink}
+                   to={"/createJob"}
+                   basic
+                   floated='right'
+                   content="Create Job"
+                 />
+          )}
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab
