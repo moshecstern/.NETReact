@@ -4,6 +4,7 @@ import { Card, Grid, Header, Tab, Image, TabProps, Button } from 'semantic-ui-re
 import { RootStoreContext } from '../../stores/rootStore';
 import {IUserJob} from '../../models/profile';
 import { format } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 
 const panes = [
     { menuItem: 'Future Events', pane: { key: 'futureEvents' } },
@@ -93,4 +94,4 @@ const ProfileJobs = () => {
     )
 }
 
-export default ProfileJobs
+export default observer(ProfileJobs)

@@ -2,6 +2,7 @@ import { IActivity, IAttendee } from "../../models/activity";
 import { IBlog, ILikedBlog } from "../../models/blog";
 import { IExperience } from "../../models/experience";
 import { IJob, IApplied } from "../../models/jobs";
+import {IBusiness, ILikedBusiness } from "../../models/business";
 // import { IExperience } from "../../models/profile";
 import { IUser } from "../../models/user";
 
@@ -60,6 +61,25 @@ export const setExperienceProps = (experience: IExperience, user: IUser) => {
     a => a.username === user.username && a.isHost
   )
   return experience;
+}
+
+export const setBusinessProps = (business: IBusiness, user: IUser) => {
+  business.date = new Date(business.date);
+  business.isLiked = business.liked.some(
+    a => a.username === user.username
+  )
+  business.isHost = business.liked.some(
+    a => a.username === user.username && a.isHost
+  )
+  return business;
+}
+export const createLikedBusiness = (user: IUser): ILikedBusiness => {
+  return {
+      displayName: user.displayName,
+      isHost: false,
+      username: user.username,
+      image: user.image!
+  }
 }
 
 export const createAttendee = (user: IUser): IAttendee => {

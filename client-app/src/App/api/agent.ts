@@ -7,7 +7,7 @@ import { IActivity, IActivitiesEnvelope } from '../models/activity';
 import { IJob, IJobsEnvelope } from '../models/jobs';
 import { IBlog, IBlogsEnvelope } from '../models/blog';
 import { IExperience, IExperiencesEnvelope } from '../models/experience';
-
+import {IBusiness, IBusinesssEnvelope} from '../models/business';
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(
@@ -115,7 +115,9 @@ const Profiles = {
   listExperiences: (username: string, predicate: string) =>
     requests.get(`/profiles/${username}/experiences?predicate=${predicate}`),
   listBlogs: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/blogs?predicate=${predicate}`)
+    requests.get(`/profiles/${username}/blogs?predicate=${predicate}`),
+    listBusinesses: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/businesses?predicate=${predicate}`)
 
   // post message/id 
 
@@ -163,6 +165,16 @@ const Experiences = {
   like: (id: string) => requests.post(`/experiences/${id}/like`, {}),
   unlike: (id: string) => requests.del(`/experiences/${id}/unlike`)
 };
+const Businesses = {
+  list: (params: URLSearchParams): Promise<IBusinesssEnvelope> =>
+    axios.get('/businesses', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/businesses/${id}`),
+  create: (business: IBusiness) => requests.post('/businesses', business),
+  update: (business: IBusiness) => requests.put(`/businesses/${business.id}`, business),
+  delete: (id: string) => requests.del(`/businesses/${id}`),
+  like: (id: string) => requests.post(`/businesses/${id}/like`, {}),
+  unlike: (id: string) => requests.del(`/businesses/${id}/unlike`)
+};
 
 export default {
   Activities,
@@ -170,5 +182,6 @@ export default {
   Profiles,
   Jobs,
   Blogs,
-  Experiences
+  Experiences,
+  Businesses
 };
