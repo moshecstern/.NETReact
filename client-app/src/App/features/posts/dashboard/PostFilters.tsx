@@ -1,39 +1,40 @@
 import React, { Fragment, useContext } from 'react';
 import { Menu, Header, Button } from 'semantic-ui-react';
-import { Calendar } from 'react-widgets';
+// import { Calendar } from 'react-widgets';
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 
-const JobFilters = () => {
+const PostFilters = () => {
   const rootStore = useContext(RootStoreContext);
-  const { predicateJob, setpredicateJob } = rootStore.jobStore;
+  const { predicatePost, setPredicatePost } = rootStore.postStore;
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
         <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
         <Menu.Item
-          active={predicateJob.size === 0}
-          onClick={() => setpredicateJob('all', 'true')}
+          active={predicatePost.size === 0}
+          onClick={() => setPredicatePost('all', 'true')}
           color={'blue'}
           name={'all'}
-          content={'All Jobs'}
+          content={'All posts'}
         />
         <Menu.Item
-          active={predicateJob.has('isApplied')}
-          onClick={() => setpredicateJob('isApplied', 'true')}
+          active={predicatePost.has('isLiked')}
+          onClick={() => setPredicatePost('isLiked', 'true')}
           color={'blue'}
           name={'username'}
-          content={"Applied Jobs"}
+          content={"My Liked Posts"}
         />
         <Menu.Item
-          active={predicateJob.has('isHost')}
-          onClick={() => setpredicateJob('isHost', 'true')}
+          active={predicatePost.has('isHost')}
+          onClick={() => setPredicatePost('isHost', 'true')}
           color={'blue'}
           name={'host'}
-          content={"My Posted Jobs"}
+          content={"My Posts"}
         />
       </Menu>
+
       <Header
     icon={'add'}
     attached
@@ -42,10 +43,11 @@ const JobFilters = () => {
   />
       <Button
         as={NavLink}
-        to={"/createJob"}
+        to={"/createPost"}
         positive
-        content="Create Job"
+        content="Create Post"
       />
+
       {/* <Header
         icon={'calendar'}
         attached
@@ -53,11 +55,11 @@ const JobFilters = () => {
         content={'Select Date'}
       />
       <Calendar
-        onChange={date => setpredicateJob('startDate', date!)}
-        value={predicateJob.get('startDate') || new Date()}
+        onChange={date => setPredicatePost('startDate', date!)}
+        value={predicatePost.get('startDate') || new Date()}
       /> */}
     </Fragment>
   );
 };
 
-export default observer(JobFilters);
+export default observer(PostFilters);

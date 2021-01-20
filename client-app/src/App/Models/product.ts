@@ -1,26 +1,22 @@
-export interface IBusinessesEnvelope {
-    businesses: IBusiness[];
-    businessCount: number;
+export interface IProductsEnvelope {
+    products: IProduct[];
+    productCount: number;
   }
 
-export interface IBusiness {
+export interface IProduct {
     id: string;
     title: string;
     description: string;
-    featuredPost: string;
-    street: string;
-    hours: string;
-    city: string;
+    stock: Number;
+    madeBy: string;
     image: string;
-    state: string;
-    website: string;
-    isService: boolean;
+    link: string;
     category: string;
     date: Date;
     isHost: boolean;
     isLiked: boolean;
-    liked: ILikedBusiness[];
-    businessComments: IComment[];
+    liked: ILikedProduct[];
+    productComments: IComment[];
 }
 
 export interface IComment {
@@ -32,10 +28,10 @@ export interface IComment {
     image: string;
   }
 
-export interface IBusinessFormValues extends Partial<IBusiness> {
+export interface IProductFormValues extends Partial<IProduct> {
     time?: Date;
 }
-export class BusinessFormValues implements IBusinessFormValues {
+export class ProductFormValues implements IProductFormValues {
     id?: string = undefined;
     title: string = '';
     category: string = "";
@@ -43,7 +39,7 @@ export class BusinessFormValues implements IBusinessFormValues {
     date?: Date = undefined;
     time?: Date = undefined;
 
-    constructor(init?: IBusinessFormValues) {
+    constructor(init?: IProductFormValues) {
         if (init && init.date){
             init.time = init.date
         }
@@ -51,7 +47,7 @@ export class BusinessFormValues implements IBusinessFormValues {
     } 
 }
 
-export interface ILikedBusiness {
+export interface ILikedProduct {
     username: string;
     displayName: string;
     image: string;

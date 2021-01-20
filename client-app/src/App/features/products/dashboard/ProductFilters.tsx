@@ -5,36 +5,38 @@ import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 
-const JobFilters = () => {
+const ProductFilters = () => {
   const rootStore = useContext(RootStoreContext);
-  const { predicateJob, setpredicateJob } = rootStore.jobStore;
+  const { predicateProduct, setPredicateProduct } = rootStore.productStore;
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
         <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
         <Menu.Item
-          active={predicateJob.size === 0}
-          onClick={() => setpredicateJob('all', 'true')}
+          active={predicateProduct.size === 0}
+          onClick={() => setPredicateProduct('all', 'true')}
           color={'blue'}
           name={'all'}
-          content={'All Jobs'}
+          content={'All products'}
         />
         <Menu.Item
-          active={predicateJob.has('isApplied')}
-          onClick={() => setpredicateJob('isApplied', 'true')}
+          active={predicateProduct.has('isLiked')}
+          onClick={() => setPredicateProduct('isLiked', 'true')}
           color={'blue'}
           name={'username'}
-          content={"Applied Jobs"}
+          content={"I Liked this product"}
         />
         <Menu.Item
-          active={predicateJob.has('isHost')}
-          onClick={() => setpredicateJob('isHost', 'true')}
+          active={predicateProduct.has('isHost')}
+          onClick={() => setPredicateProduct('isHost', 'true')}
           color={'blue'}
           name={'host'}
-          content={"My Posted Jobs"}
+          content={"I'm hosting"}
         />
       </Menu>
-      <Header
+
+      {/* edit make user roles and if this user roles == admin then show */}
+      {/* <Header
     icon={'add'}
     attached
     color={'teal'}
@@ -42,10 +44,14 @@ const JobFilters = () => {
   />
       <Button
         as={NavLink}
-        to={"/createJob"}
+        to={"/createProduct"}
         positive
-        content="Create Job"
-      />
+        content="Create Product"
+      /> */}
+
+
+
+
       {/* <Header
         icon={'calendar'}
         attached
@@ -53,11 +59,11 @@ const JobFilters = () => {
         content={'Select Date'}
       />
       <Calendar
-        onChange={date => setpredicateJob('startDate', date!)}
-        value={predicateJob.get('startDate') || new Date()}
+        onChange={date => setPredicateProduct('startDate', date!)}
+        value={predicateProduct.get('startDate') || new Date()}
       /> */}
     </Fragment>
   );
 };
 
-export default observer(JobFilters);
+export default observer(ProductFilters);

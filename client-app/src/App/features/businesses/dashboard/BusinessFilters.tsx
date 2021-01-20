@@ -5,33 +5,33 @@ import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 
-const JobFilters = () => {
+const BusinessFilters = () => {
   const rootStore = useContext(RootStoreContext);
-  const { predicateJob, setpredicateJob } = rootStore.jobStore;
+  const { predicateBusiness, setPredicateBusiness } = rootStore.businessStore;
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
         <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
         <Menu.Item
-          active={predicateJob.size === 0}
-          onClick={() => setpredicateJob('all', 'true')}
+          active={predicateBusiness.size === 0}
+          onClick={() => setPredicateBusiness('all', 'true')}
           color={'blue'}
           name={'all'}
-          content={'All Jobs'}
+          content={'All businesses'}
         />
         <Menu.Item
-          active={predicateJob.has('isApplied')}
-          onClick={() => setpredicateJob('isApplied', 'true')}
+          active={predicateBusiness.has('isLiked')}
+          onClick={() => setPredicateBusiness('isLiked', 'true')}
           color={'blue'}
           name={'username'}
-          content={"Applied Jobs"}
+          content={"My Liked Businesses"}
         />
         <Menu.Item
-          active={predicateJob.has('isHost')}
-          onClick={() => setpredicateJob('isHost', 'true')}
+          active={predicateBusiness.has('isHost')}
+          onClick={() => setPredicateBusiness('isHost', 'true')}
           color={'blue'}
           name={'host'}
-          content={"My Posted Jobs"}
+          content={"My Businesses"}
         />
       </Menu>
       <Header
@@ -42,9 +42,9 @@ const JobFilters = () => {
   />
       <Button
         as={NavLink}
-        to={"/createJob"}
+        to={"/createBusiness"}
         positive
-        content="Create Job"
+        content="Create Business"
       />
       {/* <Header
         icon={'calendar'}
@@ -53,11 +53,11 @@ const JobFilters = () => {
         content={'Select Date'}
       />
       <Calendar
-        onChange={date => setpredicateJob('startDate', date!)}
-        value={predicateJob.get('startDate') || new Date()}
+        onChange={date => setPredicateBusiness('startDate', date!)}
+        value={predicateBusiness.get('startDate') || new Date()}
       /> */}
     </Fragment>
   );
 };
 
-export default observer(JobFilters);
+export default observer(BusinessFilters);

@@ -3,6 +3,9 @@ import { IBlog, ILikedBlog } from "../../models/blog";
 import { IExperience } from "../../models/experience";
 import { IJob, IApplied } from "../../models/jobs";
 import {IBusiness, ILikedBusiness } from "../../models/business";
+import { ILikedPost, IPost } from "../../models/post";
+import { IMessage, IMyMessagesMessage } from "../../models/message";
+import { ILikedProduct, IProduct } from "../../models/product";
 // import { IExperience } from "../../models/profile";
 import { IUser } from "../../models/user";
 
@@ -107,11 +110,64 @@ export const createApplicant = (user: IUser): IApplied => {
   }
 
 }
-// export const createLikedExperience = (user: IUser): ILikedBlog => {
-//   return {
-//       displayName: user.displayName,
-//       isHost: false,
-//       username: user.username,
-//       image: user.image!
-//   }
-// }
+// edit to posts
+export const setPostProps = (post: IPost, user: IUser) => {
+  post.date = new Date(post.date);
+  post.isLiked = post.liked.some(
+    a => a.username === user.username
+  )
+  post.isHost = post.liked.some(
+    a => a.username === user.username && a.isHost
+  )
+  return post;
+}
+export const createLikedPost = (user: IUser): ILikedPost => {
+  return {
+      displayName: user.displayName,
+      isHost: false,
+      username: user.username,
+      image: user.image!
+  }
+}
+
+
+// edit to products
+export const setProductProps = (product: IProduct, user: IUser) => {
+  product.date = new Date(product.date);
+  product.isLiked = product.liked.some(
+    a => a.username === user.username
+  )
+  product.isHost = product.liked.some(
+    a => a.username === user.username && a.isHost
+  )
+  return product;
+}
+export const createLikedProduct = (user: IUser): ILikedProduct => {
+  return {
+      displayName: user.displayName,
+      isHost: false,
+      username: user.username,
+      image: user.image!
+  }
+}
+
+
+// edit to messages
+export const setMessageProps = (message: IMessage, user: IUser) => {
+  message.date = new Date(message.date);
+  message.isMessaged = message.myMessages.some(
+    a => a.username === user.username
+  )
+  message.isHost = message.myMessages.some(
+    a => a.username === user.username && a.isHost
+  )
+  return message;
+}
+export const createMyMessagesMessage = (user: IUser): IMyMessagesMessage => {
+  return {
+      displayName: user.displayName,
+      isHost: false,
+      username: user.username,
+      image: user.image!
+  }
+}

@@ -7,7 +7,11 @@ import { IActivity, IActivitiesEnvelope } from '../models/activity';
 import { IJob, IJobsEnvelope } from '../models/jobs';
 import { IBlog, IBlogsEnvelope } from '../models/blog';
 import { IExperience, IExperiencesEnvelope } from '../models/experience';
-import {IBusiness, IBusinesssEnvelope} from '../models/business';
+import {IBusiness, IBusinessesEnvelope} from '../models/business';
+import {IMessage, IMessagesEnvelope} from '../models/message';
+import {IProduct, IProductsEnvelope} from '../models/product';
+import {IPost, IPostsEnvelope} from '../models/post';
+
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(
@@ -117,7 +121,14 @@ const Profiles = {
   listBlogs: (username: string, predicate: string) =>
     requests.get(`/profiles/${username}/blogs?predicate=${predicate}`),
     listBusinesses: (username: string, predicate: string) =>
-    requests.get(`/profiles/${username}/businesses?predicate=${predicate}`)
+    requests.get(`/profiles/${username}/businesses?predicate=${predicate}`),
+    listMessages: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/messages?predicate=${predicate}`),
+    listPosts: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/posts?predicate=${predicate}`),
+    listProducts: (username: string, predicate: string) =>
+    requests.get(`/profiles/${username}/products?predicate=${predicate}`)
+
 
   // post message/id 
 
@@ -166,7 +177,7 @@ const Experiences = {
   unlike: (id: string) => requests.del(`/experiences/${id}/unlike`)
 };
 const Businesses = {
-  list: (params: URLSearchParams): Promise<IBusinesssEnvelope> =>
+  list: (params: URLSearchParams): Promise<IBusinessesEnvelope> =>
     axios.get('/businesses', { params: params }).then(responseBody),
   details: (id: string) => requests.get(`/businesses/${id}`),
   create: (business: IBusiness) => requests.post('/businesses', business),
@@ -174,6 +185,41 @@ const Businesses = {
   delete: (id: string) => requests.del(`/businesses/${id}`),
   like: (id: string) => requests.post(`/businesses/${id}/like`, {}),
   unlike: (id: string) => requests.del(`/businesses/${id}/unlike`)
+};
+// messages
+const Messages = {
+  list: (params: URLSearchParams): Promise<IMessagesEnvelope> =>
+    axios.get('/messages', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/messages/${id}`),
+  create: (message: IMessage) => requests.post('/messages', message),
+  update: (message: IMessage) => requests.put(`/messages/${message.id}`, message),
+  delete: (id: string) => requests.del(`/messages/${id}`),
+  sendmessage: (id: string) => requests.post(`/messages/${id}/sendmessage`, {}),
+  unsendmessage: (id: string) => requests.del(`/messages/${id}/unsendmessage`)
+};
+
+// posts
+const Posts = {
+  list: (params: URLSearchParams): Promise<IPostsEnvelope> =>
+    axios.get('/posts', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/posts/${id}`),
+  create: (post: IPost) => requests.post('/posts', post),
+  update: (post: IPost) => requests.put(`/posts/${post.id}`, post),
+  delete: (id: string) => requests.del(`/posts/${id}`),
+  like: (id: string) => requests.post(`/posts/${id}/like`, {}),
+  unlike: (id: string) => requests.del(`/posts/${id}/unlike`)
+};
+
+// products
+const Products = {
+  list: (params: URLSearchParams): Promise<IProductsEnvelope> =>
+    axios.get('/products', { params: params }).then(responseBody),
+  details: (id: string) => requests.get(`/products/${id}`),
+  create: (product: IProduct) => requests.post('/products', product),
+  update: (product: IProduct) => requests.put(`/products/${product.id}`, product),
+  delete: (id: string) => requests.del(`/products/${id}`),
+  like: (id: string) => requests.post(`/products/${id}/like`, {}),
+  unlike: (id: string) => requests.del(`/products/${id}/unlike`)
 };
 
 export default {
@@ -183,5 +229,8 @@ export default {
   Jobs,
   Blogs,
   Experiences,
-  Businesses
+  Businesses,
+  Products,
+  Posts,
+  Messages
 };

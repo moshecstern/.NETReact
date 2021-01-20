@@ -1,8 +1,10 @@
 import React, { Fragment, useContext } from 'react';
-import { Menu, Header } from 'semantic-ui-react';
-import { Calendar } from 'react-widgets';
+import { Menu, Header, Button, Icon } from 'semantic-ui-react';
+// import { Calendar } from 'react-widgets';
+
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
+import { NavLink } from 'react-router-dom';
 
 const BlogFilters = () => {
   const rootStore = useContext(RootStoreContext);
@@ -10,6 +12,7 @@ const BlogFilters = () => {
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
+       
         <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
         <Menu.Item
           active={predicateBlog.size === 0}
@@ -34,15 +37,27 @@ const BlogFilters = () => {
         />
       </Menu>
       <Header
+    icon={'add'}
+    attached
+    color={'teal'}
+    content={'Create'}
+  />
+      <Button
+        as={NavLink}
+        to={"/createBlog"}
+        positive
+        content="Create Blog"
+      />
+      {/* <Header
         icon={'calendar'}
         attached
         color={'teal'}
         content={'Select Date'}
-      />
-      <Calendar
+      /> */}
+      {/* <Calendar
         onChange={date => setPredicateBlog('startDate', date!)}
         value={predicateBlog.get('startDate') || new Date()}
-      />
+      /> */}
     </Fragment>
   );
 };

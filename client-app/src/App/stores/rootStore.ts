@@ -9,6 +9,9 @@ import JobStore from './jobStore';
 import BlogStore from './blogStore';
 import ExperienceStore from './experienceStore';
 import BusinessStore from './businessStore';
+import PostStore from './postStore';
+import MessageStore from './messageStore';
+import ProductStore from './productStore';
 
 configure({ enforceActions: "always" });
 
@@ -22,6 +25,9 @@ export class RootStore {
     blogStore: BlogStore;
     experienceStore: ExperienceStore;
     businessStore: BusinessStore;
+    postStore: PostStore;
+    messageStore: MessageStore;
+    productStore: ProductStore;
 
     constructor() {
         this.activityStore = new ActivityStore(this);
@@ -33,6 +39,9 @@ export class RootStore {
         this.blogStore = new BlogStore(this);
         this.experienceStore = new ExperienceStore(this);
         this.businessStore = new BusinessStore(this);
+        this.postStore = new PostStore(this);
+        this.productStore = new ProductStore(this);
+        this.messageStore = new MessageStore(this);
     }
 }
 export const RootStoreContext = createContext(new RootStore());

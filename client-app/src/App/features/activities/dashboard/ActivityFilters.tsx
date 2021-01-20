@@ -1,8 +1,9 @@
 import React, { Fragment, useContext } from 'react';
-import { Menu, Header } from 'semantic-ui-react';
+import { Menu, Header, Button } from 'semantic-ui-react';
 import { Calendar } from 'react-widgets';
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
+import { NavLink } from 'react-router-dom';
 
 const ActivityFilters = () => {
   const rootStore = useContext(RootStoreContext);
@@ -42,6 +43,18 @@ const ActivityFilters = () => {
       <Calendar
         onChange={date => setPredicate('startDate', date!)}
         value={predicate.get('startDate') || new Date()}
+      />
+            <Header
+    icon={'add'}
+    attached
+    color={'teal'}
+    content={'Create'}
+  />
+      <Button
+        as={NavLink}
+        to={"/createActivity"}
+        positive
+        content="Create Activity"
       />
     </Fragment>
   );
