@@ -16,20 +16,20 @@ const HomePage = () => {
   return (
     <Segment inverted textAlign="center" vertical className="masthead">
       <Container text>
-        <Header as="h1" inverted>
+        {/* <Header as="h1" inverted>
+          Lone Veterans
+        </Header> */}
           <Image
             size="massive"
-            src="/assets/logo.png"
+            src="/assets/loneVeterans/logoBigSharp.png"
             alt="logo"
             style={{ marginBottom: 12 }}
           />
-          Reactivities
-        </Header>
         {isLoggedIn && user && token ? (
           <Fragment>
             <Header as="h2" inverted content={`Welcome back ${user.displayName}`} />
             <Button as={Link} to="/activities" size="huge" inverted>
-          Go to Activities
+          Go to Events
         </Button>
         <Button as={Link} to="/blogs" size="huge" inverted>
           Go to Blogs
@@ -37,11 +37,20 @@ const HomePage = () => {
         <Button as={Link} to="/jobs" size="huge" inverted>
           Go to Jobs
         </Button>
+        <Button as={Link} to="/businesses" size="huge" inverted>
+          Go to Businesses
+        </Button>
+        <Button as={Link} to="/posts" size="huge" inverted>
+          Go to Posts
+        </Button>
+        <Button as={Link} to="/products" size="huge" inverted>
+          Go to Store
+        </Button>
           </Fragment>
         ) : (
 
           <Fragment>
-        <Header as="h2" inverted content="Welcome to Reactivities" />
+        <Header as="h2" inverted content="Welcome to Lone Veterans" />
         <Button onClick={() => openModal(<LoginForm />)} size="huge" inverted>
           Login
         </Button>

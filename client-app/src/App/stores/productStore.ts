@@ -123,7 +123,7 @@ export default class productStore {
   // } 
   @action createHubConnectionProduct = (productId: string) => {
     this.hubConnectionProduct = new HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_BLOGCHAT_URL!, {
+      .withUrl(process.env.REACT_APP_API_PRODUCTCHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)

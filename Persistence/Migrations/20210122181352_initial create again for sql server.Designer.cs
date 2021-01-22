@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210115191937_adding rest of backend")]
-    partial class addingrestofbackend
+    [Migration("20210122181352_initial create again for sql server")]
+    partial class initialcreateagainforsqlserver
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -44,6 +44,7 @@ const ActivityFilters = () => {
         onChange={date => setPredicate('startDate', date!)}
         value={predicate.get('startDate') || new Date()}
       />
+      <br />
             <Header
     icon={'add'}
     attached

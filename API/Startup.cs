@@ -53,7 +53,8 @@ namespace API
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseLazyLoadingProxies();
-                opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                // opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             ConfigureServices(services);
@@ -230,10 +231,11 @@ namespace API
                 endpoints.MapHub<ChatHubJob>("/jobchat");
                 endpoints.MapHub<ChatHubBlog>("/blogchat");
 
-                endpoints.MapHub<ChatHub>("/messagechat");
-                endpoints.MapHub<ChatHub>("/businesschat");
-                endpoints.MapHub<ChatHub>("/postchat");
-                endpoints.MapHub<ChatHub>("/productchat");
+                endpoints.MapHub<ChatHubMessage>("/messagechat");
+                endpoints.MapHub<ChatHubBusiness>("/businesschat");
+                endpoints.MapHub<ChatHubPost>("/postchat");
+                endpoints.MapHub<ChatHubProduct>("/productchat");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

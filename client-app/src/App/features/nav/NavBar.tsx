@@ -13,7 +13,7 @@ export const NavBar: React.FC = () => {
       <Container>
         <Menu.Item header as={NavLink} exact to={"/"}>
           <img
-            src="/assets/logo.png"
+            src="/assets/loneVeterans/logoSmallClose.png"
             alt="logo"
             style={{ marginRight: "10px" }}
           />
@@ -21,7 +21,7 @@ export const NavBar: React.FC = () => {
         </Menu.Item>
         <Menu.Item name="about" as={NavLink} to={"/about"} />
         <Menu.Item name="blogs" as={NavLink} to={"/blogs"} />
-        <Menu.Item name="activities" as={NavLink} to={"/activities"} />
+        <Menu.Item name="events" as={NavLink} to={"/activities"} />
         <Menu.Item name="jobs" as={NavLink} to={"/jobs"} />
         <Menu.Item name="businesses" as={NavLink} to={"/businesses"} />
         <Menu.Item name="posts" as={NavLink} to={"/posts"} />

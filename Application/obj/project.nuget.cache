@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EaC1Der27rydyE6iezjXPDYtVTi+Fn4O5rbugiJTQvLYxaiF1bbN3SErkmnzLgnnDzz2lyKJh1IF+1NJpEXPQQ==",
+  "dgSpecHash": "RO+qp/7k2FRvgHvLVRykFFNxuVTitiV9pJ7B/2gZcyjm4bQ/CZkm6CCjgKs131jjAAN1pb6iArHmFS8uU8h8jg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
   "expectedPackageFiles": [
@@ -51,11 +51,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\Moshe Stern\\.nuget\\packages\\mysqlconnector\\0.61.0\\mysqlconnector.0.61.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
-    "C:\\Users\\Moshe Stern\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.1.0-rc1.final\\pomelo.entityframeworkcore.mysql.3.1.0-rc1.final.nupkg.sha512",
-    "C:\\Users\\Moshe Stern\\.nuget\\packages\\pomelo.jsonobject\\2.2.1\\pomelo.jsonobject.2.2.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

@@ -26,12 +26,13 @@ namespace Infrastructure.Security
             };
 
             // generate signing credentials
+            // expires at var
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = creds
             };
 

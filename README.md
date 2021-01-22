@@ -176,7 +176,13 @@ cd API/  ,  dotnet user-secrets set "Cloudinary:CloudName" "varValue"
             dotnet user-secrets list      , (to view all user secrets in specified location)
 
 
+publishing to azure
 
+SQL Server
+
+Delete publish folder in API/
+create backend release; dotnet build
+dotnet publish -c Release -o publish --self-contained false .NETReact.sln
 
 
 

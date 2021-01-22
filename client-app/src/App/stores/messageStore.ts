@@ -123,7 +123,7 @@ export default class messageStore {
   // } 
   @action createHubConnectionMessage = (messageId: string) => {
     this.hubConnectionMessage = new HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_BLOGCHAT_URL!, {
+      .withUrl(process.env.REACT_APP_API_MESSAGECHAT_URL!, {
         accessTokenFactory: () => this.rootStore.commonStore.token!
       })
       .configureLogging(LogLevel.Information)

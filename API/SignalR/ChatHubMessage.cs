@@ -1,0 +1,51 @@
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Application.MessageComments;
+using MediatR;
+using Microsoft.AspNetCore.SignalR;
+
+namespace API.SignalR
+{
+    public class ChatHubMessage : Hub
+    {
+        private readonly IMediator _mediator;
+        public ChatHubMessage(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+        public async Task SendCommentMessage(Create.Command command)
+        {
+            string username = GetUserNameMessage();
+
+            command.Username = username;
+
+            var comment = await _mediator.Send(command);
+
+            await Clients.Group(command.MessageId.ToString()).SendAsync("ReceiveMessageComment", comment);
+        }
+
+        private string GetUserNameMessage()
+        {
+            return Context.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
+
+        public async Task AddToGroupMessage(string groupName)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+
+            var username = GetUserNameMessage();
+
+            await Clients.Group(groupName).SendAsync("SendMessage", $"{username} has joined the group");
+        }
+
+        public async Task RemoveFromGroupMessage(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+
+            var username = GetUserNameMessage();
+
+            await Clients.Group(groupName).SendAsync("SendMessage", $"{username} has left the group");
+        }
+    }
+}

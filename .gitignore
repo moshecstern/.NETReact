@@ -5,3 +5,4 @@ obj
 appsettings.json
 *.db
 wwwroot
+build

@@ -752,15 +752,6 @@
           }
         }
       },
-      "MySqlConnector/0.61.0": {
-        "type": "package",
-        "compile": {
-          "lib/netcoreapp3.0/MySqlConnector.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/MySqlConnector.dll": {}
-        }
-      },
       "NETStandard.Library/1.6.1": {
         "type": "package",
         "dependencies": {
@@ -845,33 +836,6 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
-      },
-      "Pomelo.EntityFrameworkCore.MySql/3.1.0-rc1.final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "3.1.0",
-          "MySqlConnector": "0.61.0",
-          "Pomelo.JsonObject": "2.2.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/Pomelo.EntityFrameworkCore.MySql.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Pomelo.EntityFrameworkCore.MySql.dll": {}
-        }
-      },
-      "Pomelo.JsonObject/2.2.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "Newtonsoft.Json": "11.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/Pomelo.JsonObject.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Pomelo.JsonObject.dll": {}
-        }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
@@ -2672,8 +2636,7 @@
           "Microsoft.EntityFrameworkCore": "5.0.0",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
-          "Microsoft.EntityFrameworkCore.Sqlite": "5.0.0",
-          "Pomelo.EntityFrameworkCore.MySql": "3.1.0-rc1.final"
+          "Microsoft.EntityFrameworkCore.Sqlite": "5.0.0"
         },
         "compile": {
           "bin/placeholder/Persistence.dll": {}
@@ -3848,34 +3811,6 @@
         "version.txt"
       ]
     },
-    "MySqlConnector/0.61.0": {
-      "sha512": "E01yibVzCkVOmhNsUb+B4amjQKfKFlGiR1huNd6Q8aTCqBrACo0I3JMKvJBMpZfYhAsR8bqB9496PwcGpr+LuQ==",
-      "type": "package",
-      "path": "mysqlconnector/0.61.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/MySqlConnector.dll",
-        "lib/net45/MySqlConnector.xml",
-        "lib/net461/MySqlConnector.dll",
-        "lib/net461/MySqlConnector.xml",
-        "lib/net471/MySqlConnector.dll",
-        "lib/net471/MySqlConnector.xml",
-        "lib/netcoreapp2.1/MySqlConnector.dll",
-        "lib/netcoreapp2.1/MySqlConnector.xml",
-        "lib/netcoreapp3.0/MySqlConnector.dll",
-        "lib/netcoreapp3.0/MySqlConnector.xml",
-        "lib/netstandard1.3/MySqlConnector.dll",
-        "lib/netstandard1.3/MySqlConnector.xml",
-        "lib/netstandard2.0/MySqlConnector.dll",
-        "lib/netstandard2.0/MySqlConnector.xml",
-        "lib/netstandard2.1/MySqlConnector.dll",
-        "lib/netstandard2.1/MySqlConnector.xml",
-        "logo.png",
-        "mysqlconnector.0.61.0.nupkg.sha512",
-        "mysqlconnector.nuspec"
-      ]
-    },
     "NETStandard.Library/1.6.1": {
       "sha512": "WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A==",
       "type": "package",
@@ -3943,31 +3878,6 @@
         "lib/netcoreapp3.1/NWebsec.AspNetCore.Middleware.xml",
         "nwebsec.aspnetcore.middleware.3.0.0.nupkg.sha512",
         "nwebsec.aspnetcore.middleware.nuspec"
-      ]
-    },
-    "Pomelo.EntityFrameworkCore.MySql/3.1.0-rc1.final": {
-      "sha512": "oUjodnlK+0nHE9m+BDwh2amfmDpbcpVJETQBGSy+1vr/UPAp0p5ktXM+EMRGpU0J3rWPDVGSkVi5+dRiarZmMQ==",
-      "type": "package",
-      "path": "pomelo.entityframeworkcore.mysql/3.1.0-rc1.final",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icon.png",
-        "lib/netstandard2.0/Pomelo.EntityFrameworkCore.MySql.dll",
-        "pomelo.entityframeworkcore.mysql.3.1.0-rc1.final.nupkg.sha512",
-        "pomelo.entityframeworkcore.mysql.nuspec"
-      ]
-    },
-    "Pomelo.JsonObject/2.2.1": {
-      "sha512": "VHPk3Yf7nDt+tZMC1M4oAoc3bgTYsOrap3VTjn//vd91b/nfquAbAeq1k0Lf7mPt8J7imLd9Pbzm50uB5euuZA==",
-      "type": "package",
-      "path": "pomelo.jsonobject/2.2.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Pomelo.JsonObject.dll",
-        "pomelo.jsonobject.2.2.1.nupkg.sha512",
-        "pomelo.jsonobject.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
