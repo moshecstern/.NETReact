@@ -180,8 +180,11 @@ publishing to azure
 
 SQL Server
 
-Delete publish folder in API/
 create backend release; dotnet build
+Make sure to run: cd client-app/, 'npm run build'
+then 
+
+Delete publish folder in API/
 dotnet publish -c Release -o publish --self-contained false .NETReact.sln
 
 
