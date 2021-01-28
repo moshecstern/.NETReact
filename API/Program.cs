@@ -15,12 +15,12 @@ namespace API
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                try 
-                
+                try
+
                 {
                     var context = services.GetRequiredService<DataContext>();
                     var userManager = services.GetRequiredService<UserManager<AppUser>>();
@@ -34,7 +34,7 @@ namespace API
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occured during migration");
                 }
-            host.Run();
+                host.Run();
             }
 
         }
@@ -44,7 +44,11 @@ namespace API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseKestrel(x => x.AddServerHeader = false);
+                    webBuilder.ConfigureKestrel(serverOptions =>
+                        {
+                            serverOptions.AddServerHeader = false;
+                        });
+                    // webBuilder.UseKestrel(x => x.AddServerHeader = false);
                 });
     }
 }

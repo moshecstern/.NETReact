@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KO5Ax7IwjiotNGu2rcVU5gKBDji1dpx01RXG6Sdd3Dpc/8DTBk6W2iz3Jm7xMpDVs+xCgSNTrSCpfGMfFovDpA==",
+  "dgSpecHash": "UWaTMsEBi/dqCLv0jNA0NWij0oFSA1moZlemNV0jX1Ga0R/R9jwBV7hZgwEqeLFKhtG2xvegmfXdAIa+4DStqQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Persistence\\Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.0\\microsoft.aspnetcore.cryptography.internal.5.0.0.nupkg.sha512",

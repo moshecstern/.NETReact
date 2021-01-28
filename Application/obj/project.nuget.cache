@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RO+qp/7k2FRvgHvLVRykFFNxuVTitiV9pJ7B/2gZcyjm4bQ/CZkm6CCjgKs131jjAAN1pb6iArHmFS8uU8h8jg==",
+  "dgSpecHash": "+ykkTRm12la8b/OcyBplAG3Iiq5es605g0CrnlQ8laSrZAdLrQp8dfdHTqi/EUFcyMnJlthPBd6jtEQZ+rZYyA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

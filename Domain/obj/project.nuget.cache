@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t5Qb8L+3n0bQf+eyc2nsB8513QGnvGG8BkoyWnd4ILeXvQGeQTWQblpa9d+SJLcVQgApWuzRMH73axvRvIETFA==",
+  "dgSpecHash": "XWuQmp3ObgiTRiEsVzU7T759W+WCy/JsWlPqKLQQYvKRHcR91S+VSK+exISexKaMCGK798mAiYhvPwkOhVt+8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.0\\microsoft.aspnetcore.cryptography.internal.5.0.0.nupkg.sha512",
     "C:\\Users\\Moshe Stern\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.0\\microsoft.aspnetcore.cryptography.keyderivation.5.0.0.nupkg.sha512",

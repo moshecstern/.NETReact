@@ -8392,11 +8392,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\API\\API.csproj",
+      "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Moshe Stern\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\API\\obj\\",
+      "outputPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -8416,11 +8416,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Application\\Application.csproj"
+            "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Application\\Application.csproj"
             },
-            "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\Udemy\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Moshe Stern\\Documents\\CodingMo\\activeClients\\loneVeterans\\.NETReact\\.NETReact\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
