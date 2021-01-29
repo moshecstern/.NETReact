@@ -11,7 +11,7 @@ import TextAreaInput from "../../../common/form/TextAreaInput";
 import SelectInput from "../../../common/form/SelectInput";
 import DateInput from "../../../common/form/DateInput";
 
-import { category } from "../../../common/options/categoryOptions";
+import { categoryPrograms } from "../../../common/options/categoryOptions";
 import { combineDateAndTime } from "../../../common/util/util";
 import {combineValidators, isRequired, composeValidators, hasLengthGreaterThan} from 'revalidate';
 import { RootStoreContext } from "../../../stores/rootStore";
@@ -23,8 +23,8 @@ const validate = combineValidators({
     isRequired('Description'),
     hasLengthGreaterThan(4)({message: 'Description nneds to be at least 5 charectors'})
   )(),
-  city: isRequired('City'),
-  venue: isRequired('Venue'),
+  // city: isRequired('City'),
+  // venue: isRequired('Venue'),
   date: isRequired('Date'),
   time: isRequired('Time'),
 })
@@ -40,7 +40,7 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const {
-    createpost,
+    createProgram,
     editpost,
     submittingPost,
     loadpost,
@@ -69,7 +69,7 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
         ...post,
         id: uuid(),
       };
-      createpost(newpost);
+      createProgram(newpost);
     } else {
       editpost(post);
     }
@@ -101,7 +101,7 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 <Field
                   name="category"
                   placeholder="Category"
-                  options={category}
+                  options={categoryPrograms}
                   value={post.category}
                   component={SelectInput}
                 />
@@ -142,7 +142,7 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   content="Submit"
                 />
                 <Button
-                  onClick={post.id ? () => history.push(`/posts/${post.id}`) : () => history.push("/posts")}
+                  onClick={post.id ? () => history.push(`/programs/${post.id}`) : () => history.push("/programs")}
                   disabled={loading}
                   floated="right"
                   type="button"

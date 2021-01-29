@@ -16,7 +16,7 @@ const PostListItem: React.FC<{ post: IPost }> = ({ post }) => {
         <Item>
           <Item.Image size="tiny" circular src={host.image || "/assets/user.png"} />
           <Item.Content>
-            <Item.Header as={Link} to={`/posts/${post.id}`}>{post.title}</Item.Header>
+            <Item.Header as={Link} to={`/programs/${post.id}`}>{post.title}</Item.Header>
             <Item.Description>
             Hosted By 
             <Link to={`/profile/${host.username}`}>
@@ -60,7 +60,7 @@ const PostListItem: React.FC<{ post: IPost }> = ({ post }) => {
           <span>{post.description}</span>
           <Button
                 as={Link}
-                to={`/posts/${post.id}`}
+                to={`/programs/${post.id}`}
                 floated="right"
                 content="View"
                 color="blue"

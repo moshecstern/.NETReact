@@ -12,7 +12,7 @@ const SocialLogin: React.FC<IProps> = ({fbCallback, loading}) => {
     return (
         <div>
             <FacebookLogin 
-                appId="527841264733284"
+                appId="844689916379777"
                 fields="name,email,picture"
                 callback={fbCallback}
                 render={(renderProps: any) => {

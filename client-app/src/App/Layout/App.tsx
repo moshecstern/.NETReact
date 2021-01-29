@@ -110,11 +110,11 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path={["/createProduct", "/product/manage/:id"]}
                   component={ProductForm}
                 />
-                <PrivateRoute exact path="/posts" component={PostDashboard} />
-                <PrivateRoute path="/posts/:id" component={PostDetails} />
+                <PrivateRoute exact path="/programs" component={PostDashboard} />
+                <PrivateRoute path="/programs/:id" component={PostDetails} />
                 <PrivateRoute
                   key={location.key}
-                  path={["/createPost", "/post/manage/:id"]}
+                  path={["/createProgram", "/program/manage/:id"]}
                   component={PostForm}
                 />
                 <PrivateRoute

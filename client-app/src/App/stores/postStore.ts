@@ -36,6 +36,7 @@ export default class postStore {
   @observable postCount = 0;
   @observable pagePost = 0;
   @observable predicatePost = new Map();
+  @observable currentCatagory = '';
 
   @action setPredicatePost = (predicate: string, value: string | Date) => {
     this.predicatePost.clear();
@@ -194,6 +195,7 @@ export default class postStore {
     );
   }
 
+
   @action loadPosts = async () => {
     this.loadingInitialPost = true;
     try {
@@ -247,7 +249,7 @@ export default class postStore {
     return this.postRegistry.get(id);
   };
 
-  @action createpost = async (post: IPost) => {
+  @action createProgram = async (post: IPost) => {
     this.submittingPost = true;
     try {
       await agent.Posts.create(post);
@@ -261,7 +263,7 @@ export default class postStore {
         this.postRegistry.set(post.id, post);
         this.submittingPost = false;
       });
-      history.push(`/posts/${post.id}`);
+      history.push(`/programs/${post.id}`);
     } catch (error) {
       runInAction(() => {
         this.submittingPost = false;
@@ -280,7 +282,7 @@ export default class postStore {
         this.post = post;
         this.submittingPost = false;
       });
-      history.push(`/posts/${post.id}`);
+      history.push(`/programs/${post.id}`);
     } catch (error) {
       runInAction(() => {
         this.submittingPost = false;

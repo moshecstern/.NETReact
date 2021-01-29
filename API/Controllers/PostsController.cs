@@ -11,10 +11,10 @@ namespace API.Controllers
     {
         [HttpGet]
         public async Task<ActionResult<List.PostsEnvelope>> List(int? limit,
-                  int? offset, bool isLiked, bool isHost, DateTime? startDate)
+                  int? offset, bool isLiked, bool isHost, DateTime? startDate, string myCat)
         {
             return await Mediator.Send(new List.Query(limit,
-                offset, isLiked, isHost, startDate));
+                offset, isLiked, isHost, startDate, myCat));
         }
 
         [HttpGet("{id}")]

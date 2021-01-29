@@ -6,3 +6,8 @@ export const category = [
   { key: 'music', text: 'Music', value: 'music' },
   { key: 'travel', text: 'Travel', value: 'travel' }
 ];
+export const categoryPrograms = [
+  {key: 'suicideprevention', text: 'suicideprevention', value: 'suicideprevention'},
+  {key: 'reserveduty', text: 'reserveduty', value: 'reserveduty'},
+
+]

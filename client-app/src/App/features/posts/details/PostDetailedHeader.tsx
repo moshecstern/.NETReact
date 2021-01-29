@@ -50,7 +50,7 @@ const PostDetailedHeader: React.FC<{post: IPost}> = ({post}) => {
           </Segment>
           <Segment clearing attached='bottom'>
             {post.isHost ? (
-              <Button as={Link} to={`/post/manage/${post.id}`} color='orange' floated='right'>
+              <Button as={Link} to={`/program/manage/${post.id}`} color='orange' floated='right'>
               Manage Event
             </Button>
               ) : post.isLiked ? (

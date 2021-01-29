@@ -89,6 +89,7 @@ export default class UserStore {
         this.loading = false;
       })
       history.push('/activities');
+      // edit above to home
     } catch (error) {
       this.loading = false;
       throw error;

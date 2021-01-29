@@ -1,13 +1,16 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Menu, Header, Button } from 'semantic-ui-react';
 // import { Calendar } from 'react-widgets';
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
+import {categoryPrograms} from '../../../common/options/categoryOptions';
+import ProgramCard from '../details/ProgramCard';
 
 const PostFilters = () => {
   const rootStore = useContext(RootStoreContext);
   const { predicatePost, setPredicatePost } = rootStore.postStore;
+  const [myCatagory, setMyCatagory] = useState('');
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
@@ -35,15 +38,32 @@ const PostFilters = () => {
         />
       </Menu>
 
-      <Header
-    icon={'add'}
-    attached
-    color={'teal'}
-    content={'Create'}
-  />
+{/* add categoryPrograms in card here as filter */}
+
+<Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
+        <Header icon={'filter'} attached color={'teal'} content={'Programs'} />
+        {categoryPrograms.map((cat => (
+
+          <Menu.Item
+          key={cat.key}
+          active={predicatePost.has('myCat')}
+          onClick={() => setPredicatePost('myCat', cat.value)}          color={'blue'}
+          name={cat.text}
+          content={cat.text}
+          // add donate link
+          />
+          )))}
+        </Menu>
+
+<Header
+icon={'add'}
+attached
+color={'teal'}
+content={'Create'}
+/>
       <Button
         as={NavLink}
-        to={"/createPost"}
+        to={"/createProgram"}
         positive
         content="Create Post"
       />
