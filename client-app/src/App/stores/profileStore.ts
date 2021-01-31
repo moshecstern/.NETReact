@@ -1,6 +1,6 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed, reaction } from 'mobx';
-import { IProfile, IPhoto, IUserActivity, IUserExperience, IUserJob, IUserBlog } from '../models/profile';
+import { IProfile, IPhoto, IUserActivity, IUserExperience, IUserJob, IUserBlog, IUserBusiness } from '../models/profile';
 
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
@@ -38,6 +38,8 @@ export default class ProfileStore {
   @observable loadingBlogs = false;
   @observable userExperiences: IUserExperience[] = [];
   @observable loadingExperiences = false;
+  @observable userBusinesses: IUserBusiness[] = [];
+  @observable loadingBusinesses = false;
 
   @computed get isCurrentUser() {
     if (this.rootStore.userStore.user && this.profile) {
@@ -261,6 +263,22 @@ export default class ProfileStore {
       toast.error('Problem loading Experiences')
       runInAction(() => {
         this.loadingExperiences = false;
+      })
+    }
+  }
+
+  @action loadUserBusinesses = async (username: string, predicate?: string) => {
+    this.loadingBusinesses = true;
+    try {
+      const business = await agent.Profiles.listBusinesses(username, predicate!);
+      runInAction(() => {
+        this.userBusinesses = business;
+        this.loadingBusinesses = false;
+      })
+    } catch (error) {
+      toast.error('Problem loading Business')
+      runInAction(() => {
+        this.loadingBusinesses = false;
       })
     }
   }

@@ -25,8 +25,8 @@ const validate = combineValidators({
   )(),
   city: isRequired('City'),
   // venue: isRequired('Venue'),
-  date: isRequired('Date'),
-  time: isRequired('Time'),
+  // date: isRequired('Date'),
+  // time: isRequired('Time'),
 })
 
 
@@ -44,6 +44,7 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editJob,
     submittingJob,
     loadJob,
+    deletejob
   } = rootStore.jobStore;
 
   const [job, setJob] = useState(new JobFormValues());
@@ -61,8 +62,11 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
 
   const handleFinalFormSubmit = (values: any) => {
     const dateAndTime = combineDateAndTime(values.date, values.time);
+    // const dateAndTime = combineDateAndTime( new Date(Date.now()),new Date(Date.now()));
     const { date, time, ...job } = values;
+    // const {...job} = values;
     job.date = dateAndTime;
+    // job.date = new Date(Date.now());
 
     if (!job.id) {
       let newJob = {
@@ -114,9 +118,9 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     date={true}
                   />
                   <Field
-                    name="date"
+                    name="timr"
                     placeholder="Time"
-                    value={job.date}
+                    value={job.time}
                     component={DateInput}
                     time={true}
                   />
@@ -148,6 +152,16 @@ const JobForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="button"
                   content="Cancel"
                 />
+                    {job.id && 
+                <Button
+                 onClick={(e)=>deletejob(e,job.id!).then(()=> history.push('/jobs'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
               </Form>
             )}
           />

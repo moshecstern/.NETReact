@@ -37,6 +37,11 @@ export class PostFormValues implements IPostFormValues {
     description: string = "";
     date?: Date = undefined;
     time?: Date = undefined;
+    main?: string = '';
+    main2?: string = '';
+    image?: string = '';
+    link?: string = '';
+
 
     constructor(init?: IPostFormValues) {
         if (init && init.date){

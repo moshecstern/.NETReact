@@ -21,10 +21,10 @@ const validate = combineValidators({
   category: isRequired('Category'),
   description: composeValidators(
     isRequired('Description'),
-    hasLengthGreaterThan(4)({message: 'Description nneds to be at least 5 charectors'})
+    hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 charectors'})
   )(),
   city: isRequired('City'),
-  venue: isRequired('Venue'),
+  // venue: isRequired('Venue'),
   date: isRequired('Date'),
   time: isRequired('Time'),
 })
@@ -44,16 +44,17 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editbusiness,
     submittingBusiness,
     loadbusiness,
+    deletebusiness
   } = rootStore.businessStore;
 
-  const [Business, setBusiness] = useState(new BusinessFormValues());
+  const [business, setBusiness] = useState(new BusinessFormValues());
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (match.params.id) {
       setLoading(true);
       loadbusiness(match.params.id)
-        .then(Business => {
-          setBusiness(new BusinessFormValues(Business));
+        .then(business => {
+          setBusiness(new BusinessFormValues(business));
         })
         .finally(() => setLoading(false));
     }
@@ -61,17 +62,21 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
 
   const handleFinalFormSubmit = (values: any) => {
     const dateAndTime = combineDateAndTime(values.date, values.time);
-    const { date, time, ...Business } = values;
-    Business.date = dateAndTime;
+    // const dateAndTime = combineDateAndTime( Date,Date;
+    const { date, time, ...business } = values;
+    business.date = dateAndTime;
+    // const {...business } = values;
+    // business.date = new Date(Date.now());
+    // Business.isService = false;
 
-    if (!Business.id) {
+    if (!business.id) {
       let newBusiness = {
-        ...Business,
+        ...business,
         id: uuid(),
       };
       createbusiness(newBusiness);
     } else {
-      editbusiness(Business);
+      editbusiness(business);
     }
   };
 
@@ -81,20 +86,20 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
         <Segment clearing>
           <FinalForm
           validate={validate}
-            initialValues={Business}
+            initialValues={business}
             onSubmit={handleFinalFormSubmit}
             render={({ handleSubmit, invalid, pristine }) => (
               <Form onSubmit={handleSubmit} loading={loading}>
                 <Field
                   name="title"
                   placeholder="Title"
-                  value={Business.title}
+                  value={business.title}
                   component={TextInput}
                 />
                 <Field
                   name="description"
                   placeholder="Description"
-                  value={Business.description}
+                  value={business.description}
                   rows={3}
                   component={TextAreaInput}
                 />
@@ -102,21 +107,53 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   name="category"
                   placeholder="Category"
                   options={category}
-                  value={Business.category}
+                  value={business.category}
                   component={SelectInput}
                 />
                 <Form.Group width="equal">
                   <Field
+                    name="street"
+                    placeholder="Street"
+                    value={business.street}
+                    component={TextInput}
+                  />
+                     <Field
+                    name="city"
+                    placeholder="City"
+                    value={business.city}
+                    component={TextInput}
+                  />
+                  <Field
+                    name="state"
+                    placeholder="State"
+                    value={business.state}
+                    component={TextInput}
+                  />
+                </Form.Group>
+                <Field
+                    name="website"
+                    placeholder="Website"
+                    value={business.website}
+                    component={TextInput}
+                  />
+                   <Field
+                    name="image"
+                    placeholder="Image"
+                    value={business.image}
+                    component={TextInput}
+                  />
+                <Form.Group width="equal">
+                  <Field
                     name="date"
                     placeholder="Date"
-                    value={Business.time}
+                    value={business.date}
                     component={DateInput}
                     date={true}
                   />
                   <Field
-                    name="date"
+                    name="time"
                     placeholder="Time"
-                    value={Business.date}
+                    value={business.time}
                     component={DateInput}
                     time={true}
                   />
@@ -133,6 +170,20 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={Business.venue}
                   component={TextInput}
                 /> */}
+                         <Field
+                  name="hours"
+                  placeholder="Hours"
+                  value={business.hours}
+                  rows={2}
+                  component={TextAreaInput}
+                />
+                    <Field
+                  name="featuredPost"
+                  placeholder="FeaturedPost"
+                  value={business.featuredPost}
+                  rows={3}
+                  component={TextAreaInput}
+                />
                 <Button
                   loading={submittingBusiness}
                   disabled={loading || invalid || pristine}
@@ -142,12 +193,22 @@ const BusinessForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   content="Submit"
                 />
                 <Button
-                  onClick={Business.id ? () => history.push(`/businesses/${Business.id}`) : () => history.push("/businesses")}
+                  onClick={business.id ? () => history.push(`/businesses/${business.id}`) : () => history.push("/businesses")}
                   disabled={loading}
                   floated="right"
                   type="button"
                   content="Cancel"
                 />
+                    {business.id && 
+                <Button
+                 onClick={(e)=>deletebusiness(e,business.id!).then(()=> history.push('/businesses'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
               </Form>
             )}
           />

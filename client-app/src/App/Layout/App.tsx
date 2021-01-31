@@ -32,7 +32,7 @@ import ProductDashboard from "../features/products/dashboard/ProductDashboard";
 import BusinessForm from "../features/businesses/form/BusinessForm";
 import BusinessDetails from "../features/businesses/details/BusinessDetails";
 import BusinessDashboard from "../features/businesses/dashboard/BusinessDashboard";
-
+import ExperienceDetails from "../features/experiences/details/ExperienceDetails";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
@@ -130,6 +130,10 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   key={location.key}
                   path={["/createBusiness", "/business/manage/:id"]}
                   component={BusinessForm}
+                />
+                 <PrivateRoute
+                  path="/experiences/:id"
+                  component={ExperienceDetails}
                 />
                 <PrivateRoute
                   key={location.key}

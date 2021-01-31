@@ -36,7 +36,7 @@ export default class postStore {
   @observable postCount = 0;
   @observable pagePost = 0;
   @observable predicatePost = new Map();
-  @observable currentCatagory = '';
+  @observable currentCategory = '';
 
   @action setPredicatePost = (predicate: string, value: string | Date) => {
     this.predicatePost.clear();

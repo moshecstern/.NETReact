@@ -42,6 +42,14 @@ export class BusinessFormValues implements IBusinessFormValues {
     description: string = "";
     date?: Date = undefined;
     time?: Date = undefined;
+    featuredPost?: string = "";
+    image?: string = "";
+    state?: string = "";
+    street?: string = "";
+    city?: string = "";
+    website?: string = "";
+    hours?: string = "";
+
 
     constructor(init?: IBusinessFormValues) {
         if (init && init.date){

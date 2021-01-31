@@ -42,6 +42,12 @@ export interface IProfile {
     category: string;
     date: Date;
   }
+  export interface IUserBusiness {
+    id: string;
+    title: string;
+    category: string;
+    date: Date;
+  }
 
   export interface IUserExperience {
     id: string;

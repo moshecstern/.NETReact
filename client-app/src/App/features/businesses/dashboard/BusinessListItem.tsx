@@ -48,7 +48,7 @@ const BusinessListItem: React.FC<{ Business: IBusiness }> = ({ Business }) => {
           </Item.Group>
       </Segment>
       <Segment>
-          <Icon name='clock' /> {format(Business.date, 'H:mm a')}
+          <Icon name='clock' /> {format(new Date(Business.date), 'H:mm a')}
           {/* <Icon name='marker' /> {Business.venue}, {Business.city} */}
       </Segment>
       <Segment secondary>

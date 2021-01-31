@@ -222,7 +222,19 @@ const Products = {
   unlike: (id: string) => requests.del(`/products/${id}/unlike`)
 };
 
-export default {
+// export default {
+//   Activities,
+//   User,
+//   Profiles,
+//   Jobs,
+//   Blogs,
+//   Experiences,
+//   Businesses,
+//   Products,
+//   Posts,
+//   Messages
+// };
+const agent = {
   Activities,
   User,
   Profiles,
@@ -233,4 +245,5 @@ export default {
   Products,
   Posts,
   Messages
-};
+}
+export default agent;

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-import { Menu, Header, Button, Icon } from 'semantic-ui-react';
+import { Menu, Header, Button } from 'semantic-ui-react';
 // import { Calendar } from 'react-widgets';
 
 import { RootStoreContext } from '../../../stores/rootStore';

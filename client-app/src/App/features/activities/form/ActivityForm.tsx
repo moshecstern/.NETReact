@@ -44,6 +44,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editActivity,
     submitting,
     loadActivity,
+    deleteActivity
   } = rootStore.activityStore;
 
   const [activity, setActivity] = useState(new ActivityFormValues());
@@ -61,6 +62,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
 
   const handleFinalFormSubmit = (values: any) => {
     const dateAndTime = combineDateAndTime(values.date, values.time);
+    // const dateAndTime = values.date + values.time;
     const { date, time, ...activity } = values;
     activity.date = dateAndTime;
 
@@ -109,14 +111,14 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   <Field
                     name="date"
                     placeholder="Date"
-                    value={activity.time}
+                    value={activity.date}
                     component={DateInput}
                     date={true}
                   />
                   <Field
-                    name="date"
+                    name="time"
                     placeholder="Time"
-                    value={activity.date}
+                    value={activity.time}
                     component={DateInput}
                     time={true}
                   />
@@ -148,6 +150,17 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="button"
                   content="Cancel"
                 />
+                {activity.id && 
+                <Button
+                 onClick={(e)=>deleteActivity(e,activity.id!).then(()=> history.push('/activities'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
+               
               </Form>
             )}
           />

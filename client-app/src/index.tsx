@@ -11,6 +11,7 @@ import ScrollToTop from './App/Layout/ScrollToTop';
 import dateFnsLocalizer from 'react-widgets-date-fns';
 import * as serviceWorker from './serviceWorker';
 import './App/Layout/styles.css';
+import 'mobx-react-lite/batchingForReactDom';
 
 dateFnsLocalizer();
 

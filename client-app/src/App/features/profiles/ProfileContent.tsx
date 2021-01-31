@@ -7,8 +7,9 @@ import ProfileActivities from './ProfileActivities';
 import ProfileBlogs from './ProfileBlogs';
 import ProfileExperience from './ProfileExperience';
 import ProfileAppliedJobs from './ProfileAppliedJobs';
-import ProfilePostedJobs from './ProfilePostedJobs';
+// import ProfilePostedJobs from './ProfilePostedJobs';
 import ProfileMessages from './ProfileMessages';
+import ProfileBusinesses from './ProfileBusinesses'
 
 
 const panes = [
@@ -22,8 +23,8 @@ const panes = [
   // { menuItem: 'MyStore', render: () => <ProfileStore /> }
   { menuItem: 'Jobs ', render: () => <ProfileAppliedJobs /> },
   // { menuItem: 'Posted Jobs ', render: () => <ProfilePostedJobs /> },
-  { menuItem: 'Messages ', render: () => <ProfileMessages /> }
-  // { menuItem: 'Businesses ', render: () => <ProfileBusinesses /> }
+  { menuItem: 'Messages ', render: () => <ProfileMessages /> },
+  { menuItem: 'Businesses ', render: () => <ProfileBusinesses /> }
   // { menuItem: 'Posts ', render: () => <ProfilePosts /> }
   // { menuItem: 'Products ', render: () => <ProfileProducts /> }
   // { menuItem: 'Cart ', render: () => <ProfileCarts /> }

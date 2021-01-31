@@ -48,7 +48,7 @@ const BlogListItem: React.FC<{ blog: IBlog }> = ({ blog }) => {
           </Item.Group>
       </Segment>
       <Segment>
-          <Icon name='clock' /> {format(blog.date, 'H:mm a')}
+          <Icon name='clock' /> {format(new Date(blog.date), 'H:mm a')}
           {/* <Icon name='marker' /> {blog.venue}, {blog.city} */}
       </Segment>
       <Segment secondary>

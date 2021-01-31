@@ -12,6 +12,7 @@ using FluentValidation.AspNetCore;
 using Infrastructure.Email;
 using Infrastructure.Photos;
 using Infrastructure.Security;
+using Infrastructure.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -87,7 +88,12 @@ namespace API
             .AddFluentValidation(cfg =>
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
-            });
+            })
+            // .AddJsonOptions(options => 
+            // {
+            //     options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+            // })
+            ;
 
             var builder = services.AddIdentityCore<AppUser>(options => 
             {

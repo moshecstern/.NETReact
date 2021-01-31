@@ -4,6 +4,7 @@ import { Card, Grid, Header, Tab, Image, TabProps, Button } from 'semantic-ui-re
 import { RootStoreContext } from '../../stores/rootStore';
 import {IUserExperience} from '../../models/profile';
 import { format } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 
 const panes = [
     { menuItem: 'Future Events', pane: { key: 'futureEvents' } },
@@ -70,7 +71,7 @@ const ProfileExperience = () => {
             {userExperiences.map((experience: IUserExperience) => (
               <Card
                 as={Link}
-                to={`/activities/${experience.id}`}
+                to={`/experiences/${experience.id}`}
                 key={experience.id}
               >
                 <Image
@@ -93,4 +94,4 @@ const ProfileExperience = () => {
     )
 }
 
-export default ProfileExperience
+export default observer(ProfileExperience);

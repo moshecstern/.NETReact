@@ -48,7 +48,7 @@ const PostListItem: React.FC<{ post: IPost }> = ({ post }) => {
           </Item.Group>
       </Segment>
       <Segment>
-          <Icon name='clock' /> {format(post.date, 'H:mm a')}
+          <Icon name='clock' /> {format(new Date(post.date), 'H:mm a')}
           {/* <Icon name='marker' /> {post.venue}, {post.city} */}
       </Segment>
       <Segment secondary>

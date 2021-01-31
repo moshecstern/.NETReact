@@ -2,9 +2,10 @@ import React, { useEffect, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Tab, Grid, Header, Card, Image, TabProps, Button } from 'semantic-ui-react';
 import { Link, NavLink } from 'react-router-dom';
-import { IUserActivity } from '../../models/profile';
+import { IUserBusiness } from '../../models/profile';
 import { format } from 'date-fns';
 import { RootStoreContext } from '../../stores/rootStore';
+
 
 const panes = [
   { menuItem: 'Future Events', pane: { key: 'futureEvents' } },
@@ -12,19 +13,19 @@ const panes = [
   { menuItem: 'Hosting', pane: { key: 'hosted' } }
 ];
 
-const ProfileEvents = () => {
+const ProfileBusinesses = () => {
   const rootStore = useContext(RootStoreContext);
   const {
-    loadUserActivities,
+    loadUserBusinesses,
     profile,
+    loadingBusinesses,
     isCurrentUser,
-    loadingActivities,
-    userActivities
+    userBusinesses
   } = rootStore.profileStore!;
 
   useEffect(() => {
-    loadUserActivities(profile!.username);
-  }, [loadUserActivities, profile]);
+    loadUserBusinesses(profile!.username);
+  }, [loadUserBusinesses, profile]);
 
   const handleTabChange = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -42,24 +43,23 @@ const ProfileEvents = () => {
         predicate = 'future';
         break;
     }
-    loadUserActivities(profile!.username, predicate);
+    loadUserBusinesses(profile!.username, predicate);
   };
 
   return (
-    <Tab.Pane loading={loadingActivities}>
+    <Tab.Pane loading={loadingBusinesses}>
       <Grid>
         <Grid.Column width={16}>
-          <Header floated='left' icon='calendar' content={'Activities'} />
-       {isCurrentUser && (
+          <Header floated='left' icon='calendar' content={'Businesses'} />
+          {isCurrentUser && (
                    <Button
                    as={NavLink}
-                   to={"/createActivity"}
+                   to={"/createJob"}
                    basic
                    floated='right'
-                   content="Create Activity"
+                   content="Create Job"
                  />
-       )}
-       
+          )}
         </Grid.Column>
         <Grid.Column width={16}>
           <Tab
@@ -69,21 +69,21 @@ const ProfileEvents = () => {
           />
           <br />
           <Card.Group itemsPerRow={4}>
-            {userActivities.map((activity: IUserActivity) => (
+            {userBusinesses.map((business: IUserBusiness) => (
               <Card
                 as={Link}
-                to={`/activities/${activity.id}`}
-                key={activity.id}
+                to={`/businesses/${business.id}`}
+                key={business.id}
               >
                 <Image
-                  src={`/assets/categoryImages/${activity.category}.jpg`}
+                  src={`/assets/categoryImages/${business.category}.jpg`}
                   style={{ minHeight: 100, objectFit: 'cover' }}
                 />
                 <Card.Content>
-                  <Card.Header textAlign='center'>{activity.title}</Card.Header>
+                  <Card.Header textAlign='center'>{business.title}</Card.Header>
                   <Card.Meta textAlign='center'>
-                    <div>{format(new Date(activity.date), 'do LLL')}</div>
-                    <div>{format(new Date(activity.date), 'h:mm a')}</div>
+                    <div>{format(new Date(business.date), 'do LLL')}</div>
+                    <div>{format(new Date(business.date), 'h:mm a')}</div>
                   </Card.Meta>
                 </Card.Content>
               </Card>
@@ -95,4 +95,4 @@ const ProfileEvents = () => {
   );
 };
 
-export default observer(ProfileEvents);
+export default observer(ProfileBusinesses);

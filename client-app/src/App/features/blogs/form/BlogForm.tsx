@@ -9,7 +9,7 @@ import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../common/form/TextInput";
 import TextAreaInput from "../../../common/form/TextAreaInput";
 import SelectInput from "../../../common/form/SelectInput";
-import DateInput from "../../../common/form/DateInput";
+// import DateInput from "../../../common/form/DateInput";
 
 import { category } from "../../../common/options/categoryOptions";
 import { combineDateAndTime } from "../../../common/util/util";
@@ -23,10 +23,10 @@ const validate = combineValidators({
     isRequired('Description'),
     hasLengthGreaterThan(4)({message: 'Description nneds to be at least 5 charectors'})
   )(),
-  city: isRequired('City'),
-  venue: isRequired('Venue'),
-  date: isRequired('Date'),
-  time: isRequired('Time'),
+  // city: isRequired('City'),
+  // venue: isRequired('Venue'),
+  // date: isRequired('Date'),
+  // time: isRequired('Time'),
 })
 
 
@@ -44,6 +44,7 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editblog,
     submittingBlog,
     loadblog,
+    deleteblog
   } = rootStore.blogStore;
 
   const [blog, setBlog] = useState(new BlogFormValues());
@@ -60,9 +61,13 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
   }, [loadblog, match.params.id]);
 
   const handleFinalFormSubmit = (values: any) => {
-    const dateAndTime = combineDateAndTime(values.date, values.time);
+    // const dateAndTime = combineDateAndTime(values.date, values.time);
+    const dateAndTime = combineDateAndTime( new Date(Date.now()),new Date(Date.now()));
+
     const { date, time, ...blog } = values;
     blog.date = dateAndTime;
+    // const {...blog} = values;
+    // blog.date = new Date(Date.now());
 
     if (!blog.id) {
       let newBlog = {
@@ -91,6 +96,20 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={blog.title}
                   component={TextInput}
                 />
+                   <Field
+                  name="main"
+                  placeholder="Main"
+                  value={blog.main}
+                  rows={3}
+                  component={TextAreaInput}
+                />
+                   <Field
+                  name="main2"
+                  placeholder="Main2"
+                  value={blog.main2}
+                  rows={3}
+                  component={TextAreaInput}
+                />
                 <Field
                   name="description"
                   placeholder="Description"
@@ -105,14 +124,14 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={blog.category}
                   component={SelectInput}
                 />
-                <Form.Group width="equal">
-                  <Field
-                    name="date"
-                    placeholder="Date"
-                    value={blog.time}
-                    component={DateInput}
-                    date={true}
-                  />
+                {/* <Form.Group width="equal">
+                  // <Field
+                  //   name="date"
+                  //   placeholder="Date"
+                  //   value={blog.time}
+                  //   component={DateInput}
+                  //   date={true}
+                  // />
                   <Field
                     name="date"
                     placeholder="Time"
@@ -120,7 +139,7 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     component={DateInput}
                     time={true}
                   />
-                </Form.Group>
+                </Form.Group> */}
                 {/* <Field
                   name="city"
                   component={TextInput}
@@ -148,6 +167,16 @@ const BlogForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="button"
                   content="Cancel"
                 />
+                    {blog.id && 
+                <Button
+                 onClick={(e)=>deleteblog(e,blog.id!).then(()=> history.push('/blogs'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
               </Form>
             )}
           />

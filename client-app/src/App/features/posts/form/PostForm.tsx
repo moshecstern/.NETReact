@@ -44,6 +44,7 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editpost,
     submittingPost,
     loadpost,
+    deletepost
   } = rootStore.postStore;
 
   const [post, setpost] = useState(new PostFormValues());
@@ -61,8 +62,11 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
 
   const handleFinalFormSubmit = (values: any) => {
     const dateAndTime = combineDateAndTime(values.date, values.time);
+    // const dateAndTime = combineDateAndTime( new Date(Date.now()),new Date(Date.now()));
     const { date, time, ...post } = values;
     post.date = dateAndTime;
+    // const {...post} =values;
+    // post.date = new Date(Date.now());
 
     if (!post.id) {
       let newpost = {
@@ -99,12 +103,38 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   component={TextAreaInput}
                 />
                 <Field
+                  name="main"
+                  placeholder="Main"
+                  value={post.main}
+                  rows={3}
+                  component={TextAreaInput}
+                />
+                   <Field
+                  name="main2"
+                  placeholder="Main2"
+                  value={post.main2}
+                  rows={3}
+                  component={TextAreaInput}
+                />
+                <Field
                   name="category"
                   placeholder="Category"
                   options={categoryPrograms}
                   value={post.category}
                   component={SelectInput}
                 />
+                    <Field
+                    name="image"
+                    placeholder="Image"
+                    value={post.image}
+                    component={TextInput}
+                  />
+                     <Field
+                    name="link"
+                    placeholder="Link"
+                    value={post.link}
+                    component={TextInput}
+                  />
                 <Form.Group width="equal">
                   <Field
                     name="date"
@@ -114,9 +144,9 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     date={true}
                   />
                   <Field
-                    name="date"
+                    name="time"
                     placeholder="Time"
-                    value={post.date}
+                    value={post.time}
                     component={DateInput}
                     time={true}
                   />
@@ -148,6 +178,16 @@ const PostForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="button"
                   content="Cancel"
                 />
+                    {post.id && 
+                <Button
+                 onClick={(e)=>deletepost(e,post.id!).then(()=> history.push('/posts'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
               </Form>
             )}
           />

@@ -1,16 +1,16 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext} from 'react';
 import { Menu, Header, Button } from 'semantic-ui-react';
 // import { Calendar } from 'react-widgets';
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import {categoryPrograms} from '../../../common/options/categoryOptions';
-import ProgramCard from '../details/ProgramCard';
+// import ProgramCard from '../details/ProgramCard';
 
 const PostFilters = () => {
   const rootStore = useContext(RootStoreContext);
   const { predicatePost, setPredicatePost } = rootStore.postStore;
-  const [myCatagory, setMyCatagory] = useState('');
+  // const [myCategory, setMyCategory] = useState('');
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>

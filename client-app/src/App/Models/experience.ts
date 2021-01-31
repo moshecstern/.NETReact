@@ -21,6 +21,7 @@ export interface IExperience {
     link1Name: string;
     link2: string;
     link2Name: string;
+    skills: string;
     image: string;
 }
 
@@ -43,6 +44,17 @@ export class experienceFormValues implements IExperienceFormValues {
     description: string = "";
     date?: Date = undefined;
     time?: Date = undefined;
+    city?: string = '';
+    image?: string = '';
+    main2?: string = '';
+    main?: string = '';
+    link1?: string = '';
+    link1Name?: string = '';
+    link2?: string = '';
+    link2Name?: string = '';
+    skills?: string = '';
+    dateEnded?: Date = undefined;
+    dateStarted?: Date = undefined;
 
     constructor(init?: IExperienceFormValues) {
         if (init && init.date){

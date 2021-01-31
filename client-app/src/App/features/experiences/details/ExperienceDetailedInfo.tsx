@@ -1,10 +1,10 @@
 import React from 'react'
 import { Segment, Grid, Icon } from 'semantic-ui-react'
-import { IPost } from '../../../models/post'
+import { IExperience } from '../../../models/experience'
 import {format} from 'date-fns'
 
 
-const PostDetailedInfo: React.FC<{post: IPost}> = ({post}) => {
+const ExperienceDetailedInfo: React.FC<{Experience: IExperience}> = ({Experience}) => {
     return (
         <div>
             <Segment.Group>
@@ -14,8 +14,8 @@ const PostDetailedInfo: React.FC<{post: IPost}> = ({post}) => {
                         <Icon size='large' color='teal' name='info' />
                       </Grid.Column>
                       <Grid.Column width={15}>
-                        <p>{post.description}</p>
-                        <p>{post.main}</p>
+                        <p>{Experience.main}</p>
+                        <p>{Experience.main2}</p>
                         
                       </Grid.Column>
                     </Grid>
@@ -27,7 +27,8 @@ const PostDetailedInfo: React.FC<{post: IPost}> = ({post}) => {
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <span>
-                          {format(new Date(post.date), 'eeee do MMMM')} at {format(new Date(post.date), 'h:mm a')}
+                          {format(new Date(Experience.date), 'eeee do MMMM')} 
+                          at {format(new Date(Experience.date), 'h:mm a')}
                         </span>
                       </Grid.Column>
                     </Grid>
@@ -38,7 +39,7 @@ const PostDetailedInfo: React.FC<{post: IPost}> = ({post}) => {
                         <Icon name='marker' size='large' color='teal' />
                       </Grid.Column>
                       <Grid.Column width={11}>
-                        <span>{post.main2}</span>
+                        <span>{Experience.link1}</span>
                       </Grid.Column>
                     </Grid>
                   </Segment>
@@ -47,4 +48,4 @@ const PostDetailedInfo: React.FC<{post: IPost}> = ({post}) => {
     )
 }
 
-export default PostDetailedInfo
+export default ExperienceDetailedInfo

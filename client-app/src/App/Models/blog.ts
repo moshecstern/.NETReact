@@ -35,6 +35,8 @@ export class BlogFormValues implements IBlogFormValues {
     title: string = '';
     category: string = "";
     description: string = "";
+    main: string = '';
+    main2: string = '';
     date?: Date = undefined;
     time?: Date = undefined;
 

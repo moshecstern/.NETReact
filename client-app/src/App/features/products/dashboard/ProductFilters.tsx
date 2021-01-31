@@ -1,9 +1,9 @@
 import React, { Fragment, useContext } from 'react';
-import { Menu, Header, Button } from 'semantic-ui-react';
-import { Calendar } from 'react-widgets';
+import { Menu, Header } from 'semantic-ui-react';
+// import { Calendar } from 'react-widgets';
 import { RootStoreContext } from '../../../stores/rootStore';
 import { observer } from 'mobx-react-lite';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 const ProductFilters = () => {
   const rootStore = useContext(RootStoreContext);

@@ -44,6 +44,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editproduct,
     submittingProduct,
     loadproduct,
+    deleteproduct
   } = rootStore.productStore;
 
   const [product, setproduct] = useState(new ProductFormValues());
@@ -61,6 +62,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
 
   const handleFinalFormSubmit = (values: any) => {
     const dateAndTime = combineDateAndTime(values.date, values.time);
+    // const dateAndTime = combineDateAndTime( new Date(Date.now()),new Date(Date.now()));
     const { date, time, ...product } = values;
     product.date = dateAndTime;
 
@@ -114,9 +116,9 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     date={true}
                   />
                   <Field
-                    name="date"
+                    name="time"
                     placeholder="Time"
-                    value={product.date}
+                    value={product.time}
                     component={DateInput}
                     time={true}
                   />
@@ -148,6 +150,16 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="button"
                   content="Cancel"
                 />
+                    {product.id && 
+                <Button
+                 onClick={(e)=>deleteproduct(e,product.id!).then(()=> history.push('/products'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
               </Form>
             )}
           />

@@ -22,6 +22,9 @@ export const combineDateAndTime = (date: Date, time: Date) => {
 
     return new Date(dateString + 'T' + timeString);
 }
+export const onlyDate = (date: Date) => {
+  return new Date(date)
+}
 
 export const setActivityProps = (activity: IActivity, user: IUser) => {
     activity.date = new Date(activity.date);

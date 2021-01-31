@@ -36,7 +36,7 @@ const PostDetailedHeader: React.FC<{post: IPost}> = ({post}) => {
                       content={post.title}
                       style={{ color: 'white' }}
                     />
-                    <p>{format(post.date, 'eeee do MMMM')}</p>
+                    <p>{format(new Date(post.date), 'eeee do MMMM')}</p>
                     <p>
                     Hosted by {' '}
                     <Link to={`/profile/${host.username}`}>

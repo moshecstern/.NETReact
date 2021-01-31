@@ -24,8 +24,8 @@ const validate = combineValidators({
     )(),
     city: isRequired('City'),
     // venue: isRequired('Venue'),
-    // date: isRequired('Date'),
-    // time: isRequired('Time'),
+    date: isRequired('Date'),
+    time: isRequired('Time'),
   })
 
   interface DetailParams {
@@ -42,6 +42,7 @@ const validate = combineValidators({
       editExperience,
       submitting,
       loadExperience,
+      deleteExperience
     } = rootStore.experienceStore;
   
     const [experience, setExperience] = useState(new experienceFormValues());
@@ -96,6 +97,28 @@ const validate = combineValidators({
                     rows={3}
                     component={TextAreaInput}
                   />
+                    <Field
+                    name="main"
+                    placeholder="Main"
+                    value={experience.main}
+                    rows={3}
+                    component={TextAreaInput}
+                  />
+                     <Field
+                    name="main2"
+                    placeholder="Main2"
+                    value={experience.main2}
+                    rows={3}
+                    component={TextAreaInput}
+                  />
+                     <Field
+                    name="skills"
+                    placeholder="Skills"
+                    value={experience.skills}
+                    rows={3}
+                    component={TextAreaInput}
+                  />
+                  
                   <Field
                     name="category"
                     placeholder="Category"
@@ -107,30 +130,77 @@ const validate = combineValidators({
                     <Field
                       name="date"
                       placeholder="Date"
-                      value={experience.time}
+                      value={experience.date}
                       component={DateInput}
                       date={true}
                     />
                     <Field
-                      name="date"
+                      name="time"
                       placeholder="Time"
-                      value={experience.date}
+                      value={experience.time}
                       component={DateInput}
                       time={true}
                     />
                   </Form.Group>
-                  {/* <Field
+                  <Form.Group width="equal">
+                  <Field
+                    name="link1"
+                    placeholder="Link1"
+                    value={experience.link1}
+                    component={TextInput}
+                  />
+                   <Field
+                    name="link1Name"
+                    placeholder="Link1Name"
+                    value={experience.link1Name}
+                    component={TextInput}
+                  />
+                  </Form.Group>
+                  <Form.Group width="equal">
+                  <Field
+                    name="link2"
+                    placeholder="Link2"
+                    value={experience.link2}
+                    component={TextInput}
+                  />
+                   <Field
+                    name="link2Name"
+                    placeholder="Link2Name"
+                    value={experience.link2Name}
+                    component={TextInput}
+                  />
+                  </Form.Group>
+                  <Form.Group width="equal">
+                  <Field
+                      name="dateStarted"
+                      placeholder="DateStarted"
+                      value={experience.dateStarted}
+                      component={DateInput}
+                      date={true}
+                    />
+                     <Field
+                      name="dateEnded"
+                      placeholder="DateEnded"
+                      value={experience.dateEnded}
+                      component={DateInput}
+                      date={true}
+                    />
+                    </Form.Group>
+
+
+
+                  <Field
                     name="city"
                     component={TextInput}
                     placeholder="City"
                     value={experience.city}
-                  /> */}
-                  {/* <Field
-                    name="venue"
-                    placeholder="Venue"
-                    value={experience.venue}
+                  />
+                  <Field
+                    name="image"
+                    placeholder="Image"
+                    value={experience.image}
                     component={TextInput}
-                  /> */}
+                  />
                   <Button
                     loading={submitting}
                     disabled={loading || invalid || pristine}
@@ -146,6 +216,16 @@ const validate = combineValidators({
                     type="button"
                     content="Cancel"
                   />
+                      {experience.id && 
+                <Button
+                 onClick={(e)=>deleteExperience(e,experience.id!).then(()=> history.push('/experiences'))}
+                 
+                 disabled={loading}
+                 floated="right"
+                 type="button"
+                 content="Delete"
+                />
+                }
                 </Form>
               )}
             />

@@ -6,7 +6,7 @@ import { history } from '../..';
 import { toast } from 'react-toastify';
 import { RootStore } from './rootStore';
 import { createLikedBusiness, setBusinessProps } from '../common/util/util';
-import {HubConnection, HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 const LIMIT = 2;
 
@@ -91,7 +91,7 @@ export default class businessStore {
   //   } else if(this.hubConnectionBusiness!.state === 'Connected'){
   //     this.hubConnectionBusiness!.invoke('AddToGroup', businessId);
   //   }
-  
+
   //   this.hubConnectionBusiness.on('ReceiveBusinessComment', comment => {
   //     runInAction(() => {
   //       this.business!.comments.push(comment)
@@ -137,7 +137,7 @@ export default class businessStore {
         this.hubConnectionBusiness!.invoke('AddToGroupBusiness', businessId)
       })
       .catch(error => console.log('Error establishing connection: ', error));
-// below 'RecieveComment' is related to API.SignalR.HubCOnnection line40
+    // below 'RecieveComment' is related to API.SignalR.HubCOnnection line40
     this.hubConnectionBusiness.on('ReceiveBusinessComment', comment => {
       console.log(comment)
       runInAction(() => {
@@ -167,7 +167,7 @@ export default class businessStore {
     } catch (error) {
       console.log(error);
     }
-  } 
+  }
 
 
   @computed get BusinessesByDate() {
@@ -175,19 +175,24 @@ export default class businessStore {
       Array.from(this.businessRegistry.values())
     );
   }
+  groupBusinessesByName(businesses: IBusiness[]){
 
-  groupBusinessesByDate(Businesses: IBusiness[]) {
-    const sortedBusinesses = Businesses.sort(
+  }
+  groupBusinessesByDate(businesses: IBusiness[]) {
+    const sortedBusinesses = businesses.sort(
       (a, b) => a.date.getTime() - b.date.getTime()
+      // (a, b) => a.date.getDate() - b.date.getDate()
     );
     return Object.entries(
       sortedBusinesses.reduce(
-        (Businesses, business) => {
+        (businesses, business) => {
+          // const date = business.date.toISOString().split('T')[0] || business.date.toUTCString();
+          // const date = business.date;
           const date = business.date.toISOString().split('T')[0];
-          Businesses[date] = Businesses[date]
-            ? [...Businesses[date], business]
+          businesses[date] = businesses[date]
+            ? [...businesses[date], business]
             : [business];
-          return Businesses;
+          return businesses;
         },
         {} as { [key: string]: IBusiness[] }
       )
@@ -198,7 +203,7 @@ export default class businessStore {
     this.loadingInitialBusiness = true;
     try {
       const BusinessesEnvelope = await agent.Businesses.list(this.axiosParamsBusiness);
-      const {businesses, businessCount} = BusinessesEnvelope;
+      const { businesses, businessCount } = BusinessesEnvelope;
       runInAction(() => {
         businesses.forEach(business => {
           setBusinessProps(business, this.rootStore.userStore.user!);
