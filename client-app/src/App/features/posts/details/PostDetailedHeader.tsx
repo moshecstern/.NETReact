@@ -56,7 +56,7 @@ const PostDetailedHeader: React.FC<{post: IPost}> = ({post}) => {
               ) : post.isLiked ? (
                 <Button loading={loadingPost} onClick={unlikePost}>Cancel attendance</Button>
                 ) : (
-                <Button loading={loadingPost} onClick={likePost} color='teal'>Join post</Button>
+                <Button loading={loadingPost} onClick={likePost} color='grey'>Join post</Button>
               )}
           </Segment>
         </Segment.Group>

@@ -17,7 +17,7 @@ const BusinessDetailedSidebar: React.FC<IProps> = ({ attendees }) => {
         attached="top"
         secondary
         inverted
-        color="teal"
+        color="grey"
       >
         {attendees.length} {attendees.length === 1 ? "Person" : "People"} Going
       </Segment>

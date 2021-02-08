@@ -63,7 +63,7 @@ const BlogListItem: React.FC<{ blog: IBlog }> = ({ blog }) => {
                 to={`/blogs/${blog.id}`}
                 floated="right"
                 content="View"
-                color="blue"
+                color="black"
               />
       </Segment>
     </Segment.Group>

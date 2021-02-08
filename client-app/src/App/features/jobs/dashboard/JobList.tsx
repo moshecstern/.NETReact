@@ -16,7 +16,7 @@ const JobList: React.FC = () => {
     <Fragment>
       {jobsByDate.map(([group, jobs]) => (
         <Fragment key={group}>
-          <Label  size="large" color="blue">
+          <Label  size="large" color="black">
             {format(new Date(group), 'eeee do MMMM')}
           </Label>
             <Item.Group divided>

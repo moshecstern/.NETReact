@@ -38,7 +38,7 @@ const LoginForm = () => {
           <Header
             as="h2"
             content="Login to Our App"
-            color="teal"
+            color="grey"
             textAlign="center"
           />
           <Field name="email" component={TextInput} placeholder="Email" />
@@ -59,7 +59,7 @@ const LoginForm = () => {
           {/* <br /> */}
              <Button
             disabled={(invalid && !dirtyFieldsSinceLastSubmit) || pristine}
-            color="teal"
+            color="grey"
             fluid
             loading={submitting}
             content="Login"

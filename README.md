@@ -185,7 +185,7 @@ Make sure to run: cd client-app/, 'npm run build'
 then 
 
 Delete publish folder in API/
-dotnet publish -c Release -o publish --self-contained false .NETReact.sln
+dotnet publish -c Release -o API/publish --self-contained false .NETReact.sln
 
 
 

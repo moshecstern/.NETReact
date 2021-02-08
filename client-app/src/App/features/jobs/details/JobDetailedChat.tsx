@@ -29,7 +29,7 @@ const JobDetailedChat = () => {
         textAlign="center"
         attached="top"
         inverted
-        color="teal"
+        color="grey"
         style={{ border: "none" }}
       >
         <Header>Chat about this event</Header>

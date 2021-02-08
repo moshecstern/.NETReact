@@ -63,7 +63,7 @@ const JobListItem: React.FC<{ job: IJob }> = ({ job }) => {
                 to={`/jobs/${job.id}`}
                 floated="right"
                 content="View"
-                color="blue"
+                color="black"
               />
       </Segment>
     </Segment.Group>

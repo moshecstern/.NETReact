@@ -5,9 +5,12 @@ body {
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(
     135deg,
-    rgb(24, 42, 115) 0%,
+    #18191A 0%,
+    #242526 69%,
+    #3A3B3C 89%
+    /* rgb(24, 42, 115) 0%,
     rgb(33, 138, 174) 69%,
-    rgb(32, 167, 172) 89%
+    rgb(32, 167, 172) 89% */
   ) !important;
 }
 /*home page styles*/
@@ -16,11 +19,17 @@ body {
   display: flex;
   align-items: center;
   background-image: linear-gradient(
+    135deg,
+    #18191A 0%,
+    #242526 69%,
+    #3A3B3C 89%
+) !important;
+  /* background-image: linear-gradient(
           135deg,
           rgb(24, 42, 115) 0%,
           rgb(33, 138, 174) 69%,
           rgb(32, 167, 172) 89%
-  ) !important;
+  ) !important; */
   height: 100vh;
 }
 

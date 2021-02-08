@@ -11,25 +11,25 @@ const BusinessFilters = () => {
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
-        <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Filters'} />
         <Menu.Item
           active={predicateBusiness.size === 0}
           onClick={() => setPredicateBusiness('all', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'all'}
           content={'All businesses'}
         />
         <Menu.Item
           active={predicateBusiness.has('isLiked')}
           onClick={() => setPredicateBusiness('isLiked', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'username'}
           content={"My Liked Businesses"}
         />
         <Menu.Item
           active={predicateBusiness.has('isHost')}
           onClick={() => setPredicateBusiness('isHost', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'host'}
           content={"My Businesses"}
         />
@@ -37,7 +37,7 @@ const BusinessFilters = () => {
       <Header
     icon={'add'}
     attached
-    color={'teal'}
+    color={'grey'}
     content={'Create'}
   />
       <Button
@@ -49,7 +49,7 @@ const BusinessFilters = () => {
       {/* <Header
         icon={'calendar'}
         attached
-        color={'teal'}
+        color={'grey'}
         content={'Select Date'}
       />
       <Calendar

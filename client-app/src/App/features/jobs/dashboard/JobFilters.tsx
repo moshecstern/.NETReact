@@ -11,25 +11,25 @@ const JobFilters = () => {
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
-        <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Filters'} />
         <Menu.Item
           active={predicateJob.size === 0}
           onClick={() => setpredicateJob('all', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'all'}
           content={'All Jobs'}
         />
         <Menu.Item
           active={predicateJob.has('isApplied')}
           onClick={() => setpredicateJob('isApplied', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'username'}
           content={"Applied Jobs"}
         />
         <Menu.Item
           active={predicateJob.has('isHost')}
           onClick={() => setpredicateJob('isHost', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'host'}
           content={"My Posted Jobs"}
         />
@@ -37,7 +37,7 @@ const JobFilters = () => {
       <Header
     icon={'add'}
     attached
-    color={'teal'}
+    color={'grey'}
     content={'Create'}
   />
       <Button
@@ -49,7 +49,7 @@ const JobFilters = () => {
       {/* <Header
         icon={'calendar'}
         attached
-        color={'teal'}
+        color={'grey'}
         content={'Select Date'}
       />
       <Calendar

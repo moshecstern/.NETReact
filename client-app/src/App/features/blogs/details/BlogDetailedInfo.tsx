@@ -11,7 +11,7 @@ const BlogDetailedInfo: React.FC<{blog: IBlog}> = ({blog}) => {
                   <Segment attached='top'>
                     <Grid>
                       <Grid.Column width={1}>
-                        <Icon size='large' color='teal' name='info' />
+                        <Icon size='large' color='grey' name='info' />
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <p>{blog.description}</p>
@@ -23,7 +23,7 @@ const BlogDetailedInfo: React.FC<{blog: IBlog}> = ({blog}) => {
                   <Segment attached>
                     <Grid verticalAlign='middle'>
                       <Grid.Column width={1}>
-                        <Icon name='calendar' size='large' color='teal' />
+                        <Icon name='calendar' size='large' color='grey' />
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <span>
@@ -35,7 +35,7 @@ const BlogDetailedInfo: React.FC<{blog: IBlog}> = ({blog}) => {
                   <Segment attached>
                     <Grid verticalAlign='middle'>
                       <Grid.Column width={1}>
-                        <Icon name='marker' size='large' color='teal' />
+                        <Icon name='marker' size='large' color='grey' />
                       </Grid.Column>
                       <Grid.Column width={11}>
                         <span>{blog.main2}</span>

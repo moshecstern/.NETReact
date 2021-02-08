@@ -63,7 +63,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
                 to={`/products/${product.id}`}
                 floated="right"
                 content="View"
-                color="blue"
+                color="black"
               />
       </Segment>
     </Segment.Group>

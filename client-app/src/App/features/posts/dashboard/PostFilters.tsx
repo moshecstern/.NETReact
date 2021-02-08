@@ -14,25 +14,25 @@ const PostFilters = () => {
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
-        <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Filters'} />
         <Menu.Item
           active={predicatePost.size === 0}
           onClick={() => setPredicatePost('all', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'all'}
           content={'All posts'}
         />
         <Menu.Item
           active={predicatePost.has('isLiked')}
           onClick={() => setPredicatePost('isLiked', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'username'}
           content={"My Liked Posts"}
         />
         <Menu.Item
           active={predicatePost.has('isHost')}
           onClick={() => setPredicatePost('isHost', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'host'}
           content={"My Posts"}
         />
@@ -41,13 +41,13 @@ const PostFilters = () => {
 {/* add categoryPrograms in card here as filter */}
 
 <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
-        <Header icon={'filter'} attached color={'teal'} content={'Programs'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Programs'} />
         {categoryPrograms.map((cat => (
 
           <Menu.Item
           key={cat.key}
           active={predicatePost.has('myCat')}
-          onClick={() => setPredicatePost('myCat', cat.value)}          color={'blue'}
+          onClick={() => setPredicatePost('myCat', cat.value)}          color={'black'}
           name={cat.text}
           content={cat.text}
           // add donate link
@@ -58,7 +58,7 @@ const PostFilters = () => {
 <Header
 icon={'add'}
 attached
-color={'teal'}
+color={'grey'}
 content={'Create'}
 />
       <Button
@@ -71,7 +71,7 @@ content={'Create'}
       {/* <Header
         icon={'calendar'}
         attached
-        color={'teal'}
+        color={'grey'}
         content={'Select Date'}
       />
       <Calendar

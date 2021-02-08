@@ -11,25 +11,25 @@ const ActivityFilters = () => {
   return (
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
-        <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Filters'} />
         <Menu.Item
           active={predicate.size === 0}
           onClick={() => setPredicate('all', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'all'}
           content={'All Activities'}
         />
         <Menu.Item
           active={predicate.has('isGoing')}
           onClick={() => setPredicate('isGoing', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'username'}
           content={"I'm Going"}
         />
         <Menu.Item
           active={predicate.has('isHost')}
           onClick={() => setPredicate('isHost', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'host'}
           content={"I'm hosting"}
         />
@@ -37,7 +37,7 @@ const ActivityFilters = () => {
       <Header
         icon={'calendar'}
         attached
-        color={'teal'}
+        color={'grey'}
         content={'Select Date'}
       />
       <Calendar
@@ -48,7 +48,7 @@ const ActivityFilters = () => {
             <Header
     icon={'add'}
     attached
-    color={'teal'}
+    color={'grey'}
     content={'Create'}
   />
       <Button

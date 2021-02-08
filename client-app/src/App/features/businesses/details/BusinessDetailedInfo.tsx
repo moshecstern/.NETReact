@@ -11,7 +11,7 @@ const BusinessDetailedInfo: React.FC<{Business: IBusiness}> = ({Business}) => {
                   <Segment attached='top'>
                     <Grid>
                       <Grid.Column width={1}>
-                        <Icon size='large' color='teal' name='info' />
+                        <Icon size='large' color='grey' name='info' />
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <p>{Business.description}</p>
@@ -23,7 +23,7 @@ const BusinessDetailedInfo: React.FC<{Business: IBusiness}> = ({Business}) => {
                   <Segment attached>
                     <Grid verticalAlign='middle'>
                       <Grid.Column width={1}>
-                        <Icon name='calendar' size='large' color='teal' />
+                        <Icon name='calendar' size='large' color='grey' />
                       </Grid.Column>
                       <Grid.Column width={15}>
                         <span>
@@ -35,7 +35,7 @@ const BusinessDetailedInfo: React.FC<{Business: IBusiness}> = ({Business}) => {
                   <Segment attached>
                     <Grid verticalAlign='middle'>
                       <Grid.Column width={1}>
-                        <Icon name='marker' size='large' color='teal' />
+                        <Icon name='marker' size='large' color='grey' />
                       </Grid.Column>
                       <Grid.Column width={11}>
                         <span>{Business.website}</span>

@@ -17,7 +17,7 @@ const JobDetailedSidebar: React.FC<IProps> = ({ applicants }) => {
         attached="top"
         secondary
         inverted
-        color="teal"
+        color="grey"
       >
         {applicants.length} {applicants.length === 1 ? "Person" : "People"} Applying
       </Segment>

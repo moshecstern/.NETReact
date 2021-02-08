@@ -58,7 +58,7 @@ const ExperienceDetailedHeader: React.FC<{Experience: IExperience}> = ({Experien
             {/* //   ) : Experience.isLiked ? ( */}
                 {/* // <Button loading={loadingExperience} onClick={unlikeExperience}>Cancel attendance</Button> */}
                 {/* // ) : ( */}
-                {/* // <Button loading={loadingExperience} onClick={likeExperience} color='teal'>Join Experience</Button> */}
+                {/* // <Button loading={loadingExperience} onClick={likeExperience} color='grey'>Join Experience</Button> */}
             {/* //   )} */}
           </Segment>
         </Segment.Group>

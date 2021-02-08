@@ -56,7 +56,7 @@ const BusinessDetailedHeader: React.FC<{Business: IBusiness}> = ({Business}) => 
               ) : Business.isLiked ? (
                 <Button loading={loadingBusiness} onClick={unlikeBusiness}>Cancel attendance</Button>
                 ) : (
-                <Button loading={loadingBusiness} onClick={likeBusiness} color='teal'>Join Business</Button>
+                <Button loading={loadingBusiness} onClick={likeBusiness} color='grey'>Join Business</Button>
               )}
           </Segment>
         </Segment.Group>

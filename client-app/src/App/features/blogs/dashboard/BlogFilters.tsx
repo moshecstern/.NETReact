@@ -13,25 +13,25 @@ const BlogFilters = () => {
     <Fragment>
       <Menu vertical size={'large'} style={{ width: '100%', marginTop: 50 }}>
        
-        <Header icon={'filter'} attached color={'teal'} content={'Filters'} />
+        <Header icon={'filter'} attached color={'grey'} content={'Filters'} />
         <Menu.Item
           active={predicateBlog.size === 0}
           onClick={() => setPredicateBlog('all', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'all'}
           content={'All Blogs'}
         />
         <Menu.Item
           active={predicateBlog.has('isLiked')}
           onClick={() => setPredicateBlog('isLiked', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'username'}
           content={"I Liked this blog"}
         />
         <Menu.Item
           active={predicateBlog.has('isHost')}
           onClick={() => setPredicateBlog('isHost', 'true')}
-          color={'blue'}
+          color={'black'}
           name={'host'}
           content={"I'm hosting"}
         />
@@ -39,7 +39,7 @@ const BlogFilters = () => {
       <Header
     icon={'add'}
     attached
-    color={'teal'}
+    color={'grey'}
     content={'Create'}
   />
       <Button
@@ -51,7 +51,7 @@ const BlogFilters = () => {
       {/* <Header
         icon={'calendar'}
         attached
-        color={'teal'}
+        color={'grey'}
         content={'Select Date'}
       /> */}
       {/* <Calendar

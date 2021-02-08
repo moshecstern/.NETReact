@@ -56,7 +56,7 @@ const JobDetailedHeader: React.FC<{job: IJob}> = ({job}) => {
               ) : job.isApplied ? (
                 <Button loading={loadingJob} onClick={unlikeJob}>Cancel application</Button>
                 ) : (
-                <Button loading={loadingJob} onClick={applyjob} color='teal'>Apply</Button>
+                <Button loading={loadingJob} onClick={applyjob} color='grey'>Apply</Button>
               )}
           </Segment>
         </Segment.Group>

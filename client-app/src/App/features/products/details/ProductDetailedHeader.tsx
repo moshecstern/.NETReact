@@ -56,7 +56,7 @@ const ProductDetailedHeader: React.FC<{product: IProduct}> = ({product}) => {
               ) : product.isLiked ? (
                 <Button loading={loadingProduct} onClick={unlikeProduct}>Cancel attendance</Button>
                 ) : (
-                <Button loading={loadingProduct} onClick={likeProduct} color='teal'>Join product</Button>
+                <Button loading={loadingProduct} onClick={likeProduct} color='grey'>Join product</Button>
               )}
           </Segment>
         </Segment.Group>

@@ -63,7 +63,7 @@ const BusinessListItem: React.FC<{ Business: IBusiness }> = ({ Business }) => {
                 to={`/businesses/${Business.id}`}
                 floated="right"
                 content="View"
-                color="blue"
+                color="black"
               />
       </Segment>
     </Segment.Group>

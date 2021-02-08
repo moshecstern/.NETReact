@@ -16,7 +16,7 @@ const PostList: React.FC = () => {
     <Fragment>
       {PostsByDate.map(([group, posts]) => (
         <Fragment key={group}>
-          <Label  size="large" color="blue">
+          <Label  size="large" color="black">
             {format(new Date(group), 'eeee do MMMM')}
           </Label>
             <Item.Group divided>

@@ -16,7 +16,7 @@ const ProductList: React.FC = () => {
     <Fragment>
       {ProductsByDate.map(([group, products]) => (
         <Fragment key={group}>
-          <Label  size="large" color="blue">
+          <Label  size="large" color="black">
             {format(new Date(group), 'eeee do MMMM')}
           </Label>
             <Item.Group divided>

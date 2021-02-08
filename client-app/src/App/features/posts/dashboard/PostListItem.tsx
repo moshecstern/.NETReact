@@ -63,7 +63,7 @@ const PostListItem: React.FC<{ post: IPost }> = ({ post }) => {
                 to={`/programs/${post.id}`}
                 floated="right"
                 content="View"
-                color="blue"
+                color="black"
               />
       </Segment>
     </Segment.Group>

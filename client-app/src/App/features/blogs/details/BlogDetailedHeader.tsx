@@ -56,7 +56,7 @@ const BlogDetailedHeader: React.FC<{blog: IBlog}> = ({blog}) => {
               ) : blog.isLiked ? (
                 <Button loading={loadingBlog} onClick={unlikeBlog}>Cancel attendance</Button>
                 ) : (
-                <Button loading={loadingBlog} onClick={likeBlog} color='teal'>Join Blog</Button>
+                <Button loading={loadingBlog} onClick={likeBlog} color='grey'>Join Blog</Button>
               )}
           </Segment>
         </Segment.Group>
