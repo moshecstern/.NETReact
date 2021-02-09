@@ -1,0 +1,25 @@
+{
+  "short_name": "Lone Veterans App",
+  "name": "Lone Veterans social media app",
+  "icons": [
+    {
+      "src": "loneVeterans/logoSmallClose.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "loneVeterans/logoSmallClose.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "loneVeterans/logoSmallClose.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

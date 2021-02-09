@@ -180,7 +180,8 @@ publishing to azure
 
 SQL Server
 
-create backend release; dotnet build
+delete wwwroot,
+create backend release of frontend; dotnet build
 Make sure to run: cd client-app/, 'npm run build'
 then 
 
