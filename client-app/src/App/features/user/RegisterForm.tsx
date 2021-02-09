@@ -15,6 +15,7 @@ const validate = combineValidators({
   password: isRequired("Password"),
 });
 
+
 const RegisterForm = () => {
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
@@ -47,7 +48,7 @@ const RegisterForm = () => {
           <Field
             name="password"
             component={TextInput}
-            placeholder="Password"
+            placeholder="Password needs a number, uppercase, undercase and a special character"
             type="password"
           />
           {submitError && !dirtyFieldsSinceLastSubmit && (
