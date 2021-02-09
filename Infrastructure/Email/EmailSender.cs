@@ -19,7 +19,7 @@ namespace Infrastructure.Email
               var client = new SendGridClient(_settings.Value.Key);
             var msg = new SendGridMessage
             {
-                From = new EmailAddress("trycatchlearn@outlook.com", _settings.Value.User),
+                From = new EmailAddress("loneveterans@gmail.com", _settings.Value.User),
                 Subject = emailSubject,
                 PlainTextContent = message,
                 HtmlContent = message
