@@ -48,13 +48,13 @@ const RegisterForm = () => {
           <Field
             name="password"
             component={TextInput}
-            placeholder="Password needs a number, uppercase, undercase and a special character"
+            placeholder="Password"
             type="password"
           />
           {submitError && !dirtyFieldsSinceLastSubmit && (
             <ErrorMessage
                 error={submitError}
-                text='Invalid email or password'
+                text='Invalid email or password, Password must contain a lowercase & uppercase letter as well as a number and special character'
             />
             // )}
             // <Label color="red" basic content={submitError.statusText} />

@@ -43,7 +43,7 @@ import PrivateRoute from "./PrivateRoute";
 import RegisterSuccess from "../features/user/RegisterSuccess";
 import VerifyEmail from "../features/user/VerifyEmail";
 import AboutPage from "../features/about/AboutPage";
-
+import '@stripe/stripe-js';
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { setAppLoaded, token, appLoaded } = rootStore.commonStore;
