@@ -1,11 +1,14 @@
 import React from 'react'
 import { Grid, Header } from "semantic-ui-react";
 import Payment from './Payment';
+import AbouLeft from './AboutLeft';
+import AboutLeft from './AboutLeft';
 const AboutPage = () => {
     return (
         <Grid>
             <Grid.Column width={10}>
-           <h2>About Us</h2> 
+            <Header size='large' textAlign='center'>About Us</Header>
+            <AboutLeft />
             </Grid.Column>
             <Grid.Column width={6}>
                 <Header size='large' textAlign='center'>Donate Today</Header>
