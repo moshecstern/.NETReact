@@ -1,5 +1,5 @@
 import { observable, computed, action, runInAction } from 'mobx';
-import { IUser, IUserFormValues } from '../models/user';
+import { IMessageUserFormValues, IUser, IUserFormValues } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
 import { history } from '../..';
@@ -41,6 +41,16 @@ export default class UserStore {
       history.push(`/user/registerSuccess?email=${values.email}`)
     } catch (error) {
       throw error;
+    }
+  }
+
+  @action sendMessage = async (values: IMessageUserFormValues) => {
+    try{
+      await agent.User.sendMessage(values);
+      // history.push('about')
+      console.log(values);
+    } catch (error) {
+      throw error
     }
   }
 
@@ -88,7 +98,7 @@ export default class UserStore {
         this.rootStore.modalStore.closeModal();
         this.loading = false;
       })
-      history.push('/activities');
+      history.push('/about');
       // edit above to home
     } catch (error) {
       this.loading = false;

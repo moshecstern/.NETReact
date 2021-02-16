@@ -43,6 +43,7 @@ import PrivateRoute from "./PrivateRoute";
 import RegisterSuccess from "../features/user/RegisterSuccess";
 import VerifyEmail from "../features/user/VerifyEmail";
 import AboutPage from "../features/about/AboutPage";
+import Contact from "../features/about/Contact";
 import '@stripe/stripe-js';
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -149,6 +150,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path="/profile/:username"
                   component={ProfilePage}
                 />
+                <Route path="/contact" component={Contact} />
                 <Route
                   path="/user/registerSuccess"
                   component={RegisterSuccess}

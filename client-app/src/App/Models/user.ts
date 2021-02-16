@@ -11,3 +11,9 @@ export interface IUserFormValues {
     displayName?: string;
     username?: string;
 }
+
+export interface IMessageUserFormValues {
+    title: string;
+    message: string;
+    email: string;
+}

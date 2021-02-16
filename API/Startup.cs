@@ -169,6 +169,10 @@ namespace API
                             && (path.StartsWithSegments("/chat")) 
                             && (path.StartsWithSegments("/blogchat"))
                             && (path.StartsWithSegments("/jobchat"))
+                            && (path.StartsWithSegments("/messagechat"))
+                            && (path.StartsWithSegments("/businesschat"))
+                            && (path.StartsWithSegments("/postchat"))
+                            && (path.StartsWithSegments("/productchat"))
                             )
                         {
                             context.Token = accessToken;

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { history } from '../..';
 import { toast } from 'react-toastify';
-import { IUser, IUserFormValues } from '../models/user';
+import { IMessageUserFormValues, IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
 import { IActivity, IActivitiesEnvelope } from '../models/activity';
 import { IJob, IJobsEnvelope } from '../models/jobs';
@@ -95,7 +95,9 @@ const User = {
   verifyEmail: (token: string, email: string): Promise<void> =>
     requests.post(`/user/verifyEmail`, { token, email }),
   resendVerifyEmailConfirm: (email: string): Promise<void> =>
-    requests.get(`/user/resendEmailVerification?email=${email}`)
+    requests.get(`/user/resendEmailVerification?email=${email}`),
+    sendMessage: (message: IMessageUserFormValues) : Promise<void> => 
+      requests.post(`/user/sendmessage`, message)
 };
 
 const Profiles = {

@@ -28,6 +28,15 @@ namespace API.Controllers
             return Ok("Registration successful - please check your email");
         }
 
+        [AllowAnonymous]
+        [HttpPost("sendmessage")]
+        public async Task<ActionResult> SendMessage(SendMessage.Command command)
+        {
+            await Mediator.Send(command);
+            return Ok("Sent Message, Thank you");
+     
+        }
+
         [HttpGet]
         public async Task<ActionResult<User>> CurrentUser()
         {
