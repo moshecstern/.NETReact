@@ -26,14 +26,14 @@ const BlogFilters = () => {
           onClick={() => setPredicateBlog('isLiked', 'true')}
           color={'black'}
           name={'username'}
-          content={"I Liked this blog"}
+          content={"Liked Blogs"}
         />
         <Menu.Item
           active={predicateBlog.has('isHost')}
           onClick={() => setPredicateBlog('isHost', 'true')}
           color={'black'}
           name={'host'}
-          content={"I'm hosting"}
+          content={"My Blogs"}
         />
       </Menu>
       <Header

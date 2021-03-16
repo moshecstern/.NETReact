@@ -28,7 +28,7 @@ export default class UserStore {
       this.rootStore.commonStore.setToken(user.token);
       this.startRefreshTokenTimer(user);
       this.rootStore.modalStore.closeModal();
-      history.push('/activities');
+      history.push('/about');
     } catch (error) {
       throw error;
     }
